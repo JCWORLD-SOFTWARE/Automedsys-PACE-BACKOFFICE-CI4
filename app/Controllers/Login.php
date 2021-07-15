@@ -5,7 +5,7 @@ namespace App\Controllers;
 use CodeIgniter\API\ResponseTrait;
 use GuzzleHttp\Client as HTTPClient;
 use Config\Services;
-use Exception;
+use GuzzleHttp\Exception\BadResponseException;
 
 class Login extends BaseController
 {
@@ -24,12 +24,25 @@ class Login extends BaseController
 	public function initiateGoogleOauth2()
     {
         $client = new HTTPClient();
-        $response = $client->request('GET', 'https://dev-api.automedsys.net/emrapi/v1/identity/providers');
+        try {
+            $response = $client->request(
+                'GET',
+                'https://dev-api.automedsys.net/emrapi/v1/identity/providers'
+            );
+        } catch (BadResponseException $exception) {
+            echo $exception->getMessage();
+        }
+
         $responseData = json_decode($response->getBody());
 
         $provider = $responseData->ResponseData[0]->ClientGrantUrls[0];
-        // $authenticationUri = str_replace('{redirect_uri}', base_url(route_to('google_oauth_callback')), $provider->Url);
-        $authenticationUri = str_replace('{redirect_uri}', 'http://localhost:8888/automedsys-pace-admin/oauth', $provider->Url);
+        
+        $authenticationUri = str_replace(
+            '{redirect_uri}',
+            'http://localhost:8888/automedsys-pace-admin/oauth',
+            // base_url(route_to('google_oauth_callback')),
+            $provider->Url
+        );
         
         return redirect()->to($authenticationUri);
     }
@@ -50,11 +63,16 @@ class Login extends BaseController
         ];
 
         $client = new HTTPClient();
-        $response = $client->request(
-            'POST',
-            'https://dev-api.automedsys.net/emrapi/v1/identity/oauthx/token',
-            ['json' => $data]
-        );
+
+        try {
+            $response = $client->request(
+                'POST',
+                'https://dev-api.automedsys.net/emrapi/v1/identity/oauthx/token',
+                ['json' => $data]
+            );
+        } catch (BadResponseException $exception) {
+            echo $exception->getMessage();
+        }
 
         $responseData = json_decode($response->getBody());
 
