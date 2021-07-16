@@ -32,11 +32,10 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+$routes->get('/', 'Home::index', ['filter' => 'auth', 'as' => 'home']);
 $routes->get('/auth/login', 'Login::showLoginPage', ['as' => 'login']);
 $routes->get('/auth/logout', 'Login::logout', ['as' => 'logout']);
-$routes->get('/auth/login/success', 'Login::showLoginSuccessPage', ['filter' => 'auth', 'as' => 'login_success']);
-$routes->get('/auth/login/google/oauth2', 'Login::initiateGoogleOauth2');
+$routes->get('/auth/login/google/oauth2', 'Login::initiateGoogleOauth2', ['as' => 'initiate_google_oauth']);
 $routes->get('/auth/login/google/oauth2/callback', 'Login::handleGoogleOauth2Callback', ['as' => 'google_oauth_callback']);
 
 /*

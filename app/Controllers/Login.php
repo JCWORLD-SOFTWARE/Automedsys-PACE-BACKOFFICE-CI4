@@ -23,12 +23,7 @@ class Login extends BaseController
 
     public function showLoginPage()
     {
-        return "Login Page";
-    }
-
-    public function showLoginSuccessPage()
-    {
-        return "Login Success Page";
+        return view('Auth/SignIn');
     }
 
 	public function initiateGoogleOauth2()
@@ -90,11 +85,11 @@ class Login extends BaseController
             'lastName' => $userInformation->LastName,
             'sessionId' => $userInformation->MiscField1,
             'email' => $userInformation->Email,
-            'picture' => $userInformation->Picture,
+            'profilePicture' => $userInformation->Picture,
             'role' => $userInformation->Role,
         ]);
 
-        return redirect()->route('login_success');
+        return redirect()->route('home');
     }
 
     public function logout()
@@ -104,10 +99,10 @@ class Login extends BaseController
             'lastName',
             'sessionId',
             'email',
-            'picture',
+            'profilePicture',
             'role'
         ]);
 
-        return redirect()->route('login_success');
+        return redirect()->route('home');
     }
 }
