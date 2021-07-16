@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use CodeIgniter\API\ResponseTrait;
+use Config\ApiEndpoints;
 use GuzzleHttp\Client as HTTPClient;
 use Config\Services;
 use GuzzleHttp\Exception\BadResponseException;
@@ -10,6 +11,15 @@ use GuzzleHttp\Exception\BadResponseException;
 class Login extends BaseController
 {
     use ResponseTrait;
+
+    public ApiEndpoints $apiEndpoints;
+    public HTTPClient $client;
+
+    public function __construct()
+    {
+        $this->apiEndpoints = new ApiEndpoints();
+        $this->client = new HTTPClient();
+    }
 
     public function showLoginPage()
     {
@@ -23,14 +33,13 @@ class Login extends BaseController
 
 	public function initiateGoogleOauth2()
     {
-        $client = new HTTPClient();
         try {
-            $response = $client->request(
+            $response = $this->client->request(
                 'GET',
-                'https://dev-api.automedsys.net/emrapi/v1/identity/providers'
+                "{$this->apiEndpoints->baseUrl}/emrapi/v1/identity/providers"
             );
         } catch (BadResponseException $exception) {
-            echo $exception->getMessage();
+            die($exception->getMessage());
         }
 
         $responseData = json_decode($response->getBody());
@@ -62,16 +71,14 @@ class Login extends BaseController
             'RedirectUrl' => 'http://localhost:8888/automedsys-pace-admin/oauth',
         ];
 
-        $client = new HTTPClient();
-
         try {
-            $response = $client->request(
+            $response = $this->client->request(
                 'POST',
-                'https://dev-api.automedsys.net/emrapi/v1/identity/oauthx/token',
+                "{$this->apiEndpoints->baseUrl}/emrapi/v1/identity/oauthx/token",
                 ['json' => $data]
             );
         } catch (BadResponseException $exception) {
-            echo $exception->getMessage();
+            die($exception->getMessage());
         }
 
         $responseData = json_decode($response->getBody());
