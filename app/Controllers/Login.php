@@ -23,7 +23,7 @@ class Login extends BaseController
 
     public function showLoginPage()
     {
-        return view('Auth/SignIn');
+        return view('auth/signin');
     }
 
 	public function initiateGoogleOauth2()

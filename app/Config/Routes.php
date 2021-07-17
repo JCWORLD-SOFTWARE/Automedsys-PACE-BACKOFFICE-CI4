@@ -37,6 +37,8 @@ $routes->get('/auth/login', 'Login::showLoginPage', ['as' => 'login']);
 $routes->get('/auth/logout', 'Login::logout', ['as' => 'logout']);
 $routes->get('/auth/login/google/oauth2', 'Login::initiateGoogleOauth2', ['as' => 'initiate_google_oauth']);
 $routes->get('/auth/login/google/oauth2/callback', 'Login::handleGoogleOauth2Callback', ['as' => 'google_oauth_callback']);
+$routes->get('/servers', 'Server::index', ['filter' => 'auth', 'as' => 'server_index']);
+$routes->get('/practice-requests', 'PracticeRequest::index', ['filter' => 'auth', 'as' => 'practice_request_index']);
 
 /*
  * --------------------------------------------------------------------
