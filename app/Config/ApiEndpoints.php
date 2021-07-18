@@ -16,4 +16,19 @@ class ApiEndpoints extends BaseConfig
 	 * @var string
 	 */
 	public $baseUrl = '';
+
+
+	/**
+	 * --------------------------------------------------------------------------
+	 * Client Credentials
+	 * --------------------------------------------------------------------------
+	 *
+	 * Client credentials
+	 *
+	 * @var string
+	 */
+	public $clientCredentials = [
+		'username' => '',
+		'password' => ''
+	];
 }

@@ -81,7 +81,7 @@
                                     <td class="center"><?= $pr["status"] ?></td>
                                     <td class="server-db-name" colspan="2"><?= $pr["Server"] ?> / <?= $pr["DBName"] ?></td>
                                     <td>
-                                        <a class="btn btn-sm green-jungle" href="#" onclick="return confirm('Are you sure you want to approve this practice?')">Approve Practice</a>
+                                        <a class="btn btn-sm green-jungle" href="<?= base_url(route_to('practice_request_show', $pr["PracticeCode"])); ?>" onclick="return confirm('Are you sure you want to approve this practice?')">Approve Practice</a>
                                     </td>
                                     <td>
                                         <a class="btn btn-sm red" href="#" onclick="return confirm('Are you sure you want to delete this application?')">Delete</a>

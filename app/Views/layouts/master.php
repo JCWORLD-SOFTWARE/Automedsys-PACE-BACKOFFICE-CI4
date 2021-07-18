@@ -239,6 +239,8 @@
         <!-- BEGIN THEME LAYOUT SCRIPTS -->
         <script src="<?= base_url(); ?>/assets/layouts/layout/scripts/layout.min.js" type="text/javascript"></script>
         <!-- END THEME LAYOUT SCRIPTS -->
+
+        <?= $this->renderSection('scripts') ?>
     </body>
 
 </html>
