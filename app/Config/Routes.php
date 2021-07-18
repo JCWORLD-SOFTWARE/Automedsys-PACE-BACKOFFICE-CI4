@@ -41,6 +41,7 @@ $routes->get('/servers', 'Server::index', ['filter' => 'auth', 'as' => 'server_i
 $routes->get('/practice-requests', 'PracticeRequest::index', ['filter' => 'auth', 'as' => 'practice_request_index']);
 $routes->get('/practice-requests/(:alphanum)', 'PracticeRequest::show/$1', ['filter' => 'auth', 'as' => 'practice_request_show']);
 $routes->get('/practice-requests/validate-npi/(:alphanum)', 'PracticeRequest::showNpiData/$1', ['filter' => 'auth', 'as' => 'npi_validate']);
+$routes->get('/practice-requests/approve/(:alphanum)', 'PracticeRequest::approve/$1', ['filter' => 'auth', 'as' => 'practice_request_approve']);
 
 /*
  * --------------------------------------------------------------------

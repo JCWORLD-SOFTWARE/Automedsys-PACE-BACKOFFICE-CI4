@@ -94,16 +94,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($serverTemplates as $st) : ?>
+                        <?php foreach ($databaseServerTemplates as $dst) : ?>
                             <tr>
-                                <td><?= $st['ID'] ?></td>
-                                <td><?= $st['server_id'] ?></td>
-                                <td><?= $st['template_id'] ?></td>
-                                <td><?= $st['server_name'] ?></td>
-                                <td><?= $st['server_status'] ?></td>
-                                <td><?= $st['template_name'] ?> <?= $st['template_description'] ?></td>
-                                <td><?= $st['template_status'] ?></td>
-                                <td><?= date_format(date_create($st['created_dt']), "Y/m/d H:i a") ?></td>
+                                <td><?= $dst['ID'] ?></td>
+                                <td><?= $dst['server_id'] ?></td>
+                                <td><?= $dst['template_id'] ?></td>
+                                <td><?= $dst['server_name'] ?></td>
+                                <td><?= $dst['server_status'] ?></td>
+                                <td><?= $dst['template_name'] ?> <?= $dst['template_description'] ?></td>
+                                <td><?= $dst['template_status'] ?></td>
+                                <td><?= date_format(date_create($dst['created_dt']), "Y/m/d H:i a") ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

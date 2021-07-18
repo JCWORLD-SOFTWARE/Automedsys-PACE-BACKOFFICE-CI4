@@ -121,30 +121,49 @@
                     <span class="caption-subject bold">Deployment</span>
                 </div>
             </div>
-            <div class="portlet-body">
-                <button id="validate-npi-button" type="button" class="btn green-jungle">
-                    Validate NPI <i class="fa fa-database icon-black"></i>
-                </button>
-
-                <div class="row  margin-top-20">
-                    <div class="col-md-6">
-                        <div class="note note-info">
-                            <h4 class="block">Practice NPI (<?= $application['NPI'] ?>)</h4>
-                            <p>
-                            <pre id="practice-npi-data" class="npi-data-output">N/A</pre>
-                            </p>
+            <div class="portlet-body form">
+                <form action="#" class="horizontal-form">
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                <div class="form-group">
+                                    <label>Database Server & Template</label>
+                                    <select name="template" class="form-control">
+                                        <option value="">Please select...</option>
+                                        <?php foreach ($databaseServerTemplates as $dst) : ?>
+                                            <option value="<?= $dst['ID'] ?>">
+                                                <?= "{$dst['server_name']} => {$dst['template_name']} => {$dst['template_description']}" ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Server</label>
+                                    <select name="server" class="form-control">
+                                        <option value="">Please select...</option>
+                                        <?php foreach ($servers as $s) : ?>
+                                            <option value="<?= $dst['ID'] ?>">
+                                                <?= "{$s['name']} => {$s['endpoint_address']} => {$s['host_address']}" ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="col-md-6">
-                        <div class="note note-info">
-                            <h4 class="block"> Provider NPI (<?= $application['provider_NPI'] ?>)</h4>
-                            <p>
-                            <pre id="provider-npi-data" class="npi-data-output">N/A</pre>
-                            </p>
-                        </div>
+                    <div class="form-actions">
+                        <button id="deploy-button" type="submit" class="btn green-jungle">
+                            Deploy <i class="fa fa-cloud-upload"></i>
+                        </button>
+                        <button type="button" class="btn red">
+                            Cancel <i class="fa fa-times"></i>
+                        </button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -201,6 +220,19 @@
         var validateNpiButton = $('#validate-npi-button');
         var practiceNpiDataContainer = $('#practice-npi-data');
         var providerNpiDataContainer = $('#provider-npi-data');
+        var templateSelect = $('select[name=template]');
+        var serverSelect = $('select[name=server]');
+        var deployButton = $('#deploy-button');
+
+        function validateDeploymentOptions () {
+            let isValidOptions = templateSelect.val() === "" || serverSelect.val() === "";
+            deployButton.prop("disabled", isValidOptions);
+        }
+
+        validateDeploymentOptions();
+
+        templateSelect.on('change', validateDeploymentOptions)
+        serverSelect.on('change', validateDeploymentOptions)
 
         validateNpiButton.on('click', function() {
             validateNpiButton.html("Validating NPI...").prop("disabled", true);
