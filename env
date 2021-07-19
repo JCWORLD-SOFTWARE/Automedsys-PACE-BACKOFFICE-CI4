@@ -123,3 +123,24 @@
 #--------------------------------------------------------------------
 
 # logger.threshold = 4
+
+#--------------------------------------------------------------------
+# API ENDPOINTS
+#--------------------------------------------------------------------
+
+apiendpoints.baseUrl = 'https://dev-api.automedsys.net'
+apiendpoints.clientCredentials.username = 'usernamehere'
+apiendpoints.clientCredentials.password = 'passwordhere'
+
+#--------------------------------------------------------------------
+# EMAIL
+#--------------------------------------------------------------------
+
+email.SMTPHost = 'smtp.gmail.com'
+email.protocol = 'smtp'
+email.SMTPUser = 'demo@automedsys.com'
+email.SMTPPass = '*********'
+email.SMTPPort = '587'
+email.mailType = 'html'
+email.fromEmail = 'support@automedsys.com'
+email.fromName = 'AutoMedSys Support'

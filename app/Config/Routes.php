@@ -22,7 +22,7 @@ $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
-$routes->setAutoRoute(true);
+$routes->setAutoRoute(false);
 
 /*
  * --------------------------------------------------------------------
@@ -41,7 +41,8 @@ $routes->get('/servers', 'Server::index', ['filter' => 'auth', 'as' => 'server_i
 $routes->get('/practice-requests', 'PracticeRequest::index', ['filter' => 'auth', 'as' => 'practice_request_index']);
 $routes->get('/practice-requests/(:alphanum)', 'PracticeRequest::show/$1', ['filter' => 'auth', 'as' => 'practice_request_show']);
 $routes->get('/practice-requests/validate-npi/(:alphanum)', 'PracticeRequest::showNpiData/$1', ['filter' => 'auth', 'as' => 'npi_validate']);
-$routes->get('/practice-requests/approve/(:alphanum)', 'PracticeRequest::approve/$1', ['filter' => 'auth', 'as' => 'practice_request_approve']);
+$routes->post('/practice-requests/approve/(:alphanum)/(:alphanum)', 'PracticeRequest::approve/$1/$2', ['filter' => 'auth', 'as' => 'practice_request_approve']);
+$routes->get('/practice-requests/approve/(:segment)/success', 'PracticeRequest::showApprovalSuccess/$1', ['filter' => 'auth', 'as' => 'practice_request_approve_success_show']);
 
 /*
  * --------------------------------------------------------------------

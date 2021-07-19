@@ -22,6 +22,12 @@
 
 <h3 class="page-title">Server Management</h3>
 
+<?php if (session()->getFlashdata('error')) : ?>
+    <div class="alert alert-danger">
+        <?= session()->getFlashdata('error'); ?>
+    </div>
+<?php endif; ?>
+
 <div class="row">
     <div class="col-md-12">
         <div class="portlet light">

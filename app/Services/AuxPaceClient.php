@@ -117,5 +117,15 @@ class AuxPaceClient
 		if (property_exists($approvePracticeResponse->ApprovePracticeResult, 'ErrorMessage')) {
 			throw new Exception($approvePracticeResponse->ApprovePracticeResult->ErrorMessage);
 		}
+
+		$approvePracticeXmlprocessor = new XmlProcessor(
+			$approvePracticeResponse->ApprovePracticeResult->MiscField1
+		);
+
+		$approvePracticeData = $approvePracticeXmlprocessor
+			->toArray()
+			->get()['diffgrdiffgram']['mydata']['PACEDataTable'];
+
+		return $approvePracticeData;
 	}
 }
