@@ -30,64 +30,48 @@
 <!-- END PAGE HEADER-->
 <!-- BEGIN DASHBOARD STATS 1-->
 <div class="row">
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
         <div class="dashboard-stat blue">
             <div class="visual">
-                <i class="fa fa-comments"></i>
+                <i class="fa fa-briefcase fa-icon-medium"></i>
             </div>
             <div class="details">
                 <div class="number">
-                    <span data-counter="counterup" data-value="1349">0</span>
+                    <a class="font-white" href="<?= base_url(route_to('practice_request_index')); ?>">Applications</a>
                 </div>
-                <div class="desc"> New Feedbacks </div>
+                <div class="desc">Manage Applications</div>
             </div>
-            <a class="more" href="javascript:;"> View more
+            <a class="more" href="<?= base_url(route_to('practice_request_index')); ?>"> View more
                 <i class="m-icon-swapright m-icon-white"></i>
             </a>
         </div>
     </div>
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
         <div class="dashboard-stat red">
-            <div class="visual">
-                <i class="fa fa-bar-chart-o"></i>
-            </div>
-            <div class="details">
-                <div class="number">
-                    <span data-counter="counterup" data-value="12,5">0</span>M$
-                </div>
-                <div class="desc"> Total Profit </div>
-            </div>
-            <a class="more" href="javascript:;"> View more
-                <i class="m-icon-swapright m-icon-white"></i>
-            </a>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="dashboard-stat green">
             <div class="visual">
                 <i class="fa fa-shopping-cart"></i>
             </div>
             <div class="details">
                 <div class="number">
-                    <span data-counter="counterup" data-value="549">0</span>
+                    <a class="font-white" href="<?= base_url(route_to('server_index')); ?>">Servers</a>
                 </div>
-                <div class="desc"> New Orders </div>
+                <div class="desc">Manage Servers</div>
             </div>
-            <a class="more" href="javascript:;"> View more
+            <a class="more" href="<?= base_url(route_to('server_index')); ?>"> View more
                 <i class="m-icon-swapright m-icon-white"></i>
             </a>
         </div>
     </div>
-    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-        <div class="dashboard-stat purple">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        <div class="dashboard-stat green">
             <div class="visual">
-                <i class="fa fa-globe"></i>
+                <i class="fa fa-group fa-icon-medium"></i>
             </div>
             <div class="details">
-                <div class="number"> +
-                    <span data-counter="counterup" data-value="89"></span>%
+                <div class="number">
+                    <a class="font-white" href="javascript:;">Registrations</a>
                 </div>
-                <div class="desc"> Brand Popularity </div>
+                <div class="desc">Practice Registrations</div>
             </div>
             <a class="more" href="javascript:;"> View more
                 <i class="m-icon-swapright m-icon-white"></i>

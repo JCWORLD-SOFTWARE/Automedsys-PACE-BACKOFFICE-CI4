@@ -70,13 +70,12 @@ class PracticeRequest extends BaseController
 		return $this->respond($data);
 	}
 
-	public function approve(string $practiceId, string $practiceCode)
+	public function approve(string $practiceId)
 	{
 		try {
-			list($practiceRequests) = AuxPaceClient::getPracticeRequestList(1, 0, $practiceCode);
 			$databaseServerTemplates = AuxPaceClient::getDatabaseServerTemplateList();
 
-			$databaseServerTemplate = current(array_filter($databaseServerTemplates, function($dst) {
+			$databaseServerTemplate = current(array_filter($databaseServerTemplates, function ($dst) {
 				return (string) $dst['ID'] === $this->request->getPost('template');
 			}));
 
@@ -85,7 +84,7 @@ class PracticeRequest extends BaseController
 				return redirect()->back();
 			}
 
-			AuxPaceClient::approvePractice([
+			$approvePractice = AuxPaceClient::approvePractice([
 				'PracticeId' => $practiceId,
 				'ServerId' => $this->request->getPost('server'),
 				'ParentTenantId' => '0',
@@ -97,12 +96,12 @@ class PracticeRequest extends BaseController
 			return redirect()->back();
 		}
 
-		EmailNotifier::providerDeploymentSuccess($practiceRequests[0]);
+		EmailNotifier::providerDeploymentSuccess($approvePractice);
 
 		session()->setFlashdata('success', 'Practice deployed successfully');
 
 		return redirect()->route('practice_request_approve_success_show', [
-			base64_encode(json_encode($practiceRequests[0]))
+			base64_encode(json_encode($approvePractice))
 		]);
 	}
 

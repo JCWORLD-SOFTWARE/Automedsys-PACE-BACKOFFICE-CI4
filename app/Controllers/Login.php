@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use CodeIgniter\API\ResponseTrait;
-use Config\ApiEndpoints;
 use GuzzleHttp\Client as HTTPClient;
 use Config\Services;
 use GuzzleHttp\Exception\BadResponseException;
@@ -12,12 +11,10 @@ class Login extends BaseController
 {
     use ResponseTrait;
 
-    public ApiEndpoints $apiEndpoints;
     public HTTPClient $client;
 
     public function __construct()
     {
-        $this->apiEndpoints = new ApiEndpoints();
         $this->client = new HTTPClient();
     }
 
@@ -26,33 +23,32 @@ class Login extends BaseController
         return view('auth/signin');
     }
 
-	public function initiateGoogleOauth2()
+    public function initiateGoogleOauth2()
     {
+        $apiEndpoints = config('ApiEndpoints');
+        $providerEndpoint = $apiEndpoints->baseUrl . '/emrapi/v1/identity/providers';
+
         try {
-            $response = $this->client->request(
-                'GET',
-                "{$this->apiEndpoints->baseUrl}/emrapi/v1/identity/providers"
-            );
+            $response = $this->client->request('GET', $providerEndpoint);
         } catch (BadResponseException $exception) {
             die($exception->getMessage());
         }
 
         $responseData = json_decode($response->getBody());
 
-        $provider = $responseData->ResponseData[0]->ClientGrantUrls[0];
-        
-        $authenticationUri = str_replace(
-            '{redirect_uri}',
-            'http://localhost:8888/automedsys-pace-admin/oauth',
-            // base_url(route_to('google_oauth_callback')),
-            $provider->Url
-        );
-        
+        $clientGrantUrl = $responseData->ResponseData[0]->ClientGrantUrls[0]->Url;
+        $redirectUrl = 'http://localhost:8888/automedsys-pace-admin/oauth';
+        // $redirectUrl =  base_url(route_to('google_oauth_callback'));
+        $authenticationUri = str_replace('{redirect_uri}', $redirectUrl, $clientGrantUrl);
+
         return redirect()->to($authenticationUri);
     }
 
-	public function handleGoogleOauth2Callback()
+    public function handleGoogleOauth2Callback()
     {
+        $apiEndpoints = config('ApiEndpoints');
+        $oauthxTokenEndpoint = $apiEndpoints->baseUrl . '/emrapi/v1/identity/oauthx/token';
+
         $state = explode('|', urldecode($this->request->getVar('state')));
         $identityProvider = $state[0];
         $clientId = $state[1];
@@ -67,11 +63,7 @@ class Login extends BaseController
         ];
 
         try {
-            $response = $this->client->request(
-                'POST',
-                "{$this->apiEndpoints->baseUrl}/emrapi/v1/identity/oauthx/token",
-                ['json' => $data]
-            );
+            $response = $this->client->request('POST', $oauthxTokenEndpoint, ['json' => $data]);
         } catch (BadResponseException $exception) {
             die($exception->getMessage());
         }

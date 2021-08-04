@@ -128,7 +128,7 @@
                 </div>
             </div>
             <div class="portlet-body form">
-                <form action="<?= base_url(route_to('practice_request_approve', $application['ID'], $application['PracticeCode'])) ?>" method="POST" class="horizontal-form">
+                <form action="<?= base_url(route_to('practice_request_approve', $application['ID'])) ?>" method="POST" class="horizontal-form">
                     <div class="form-body">
                         <div class="row">
                             <div class="col-md-12 ">

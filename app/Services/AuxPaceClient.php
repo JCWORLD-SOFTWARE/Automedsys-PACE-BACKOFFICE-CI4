@@ -118,14 +118,6 @@ class AuxPaceClient
 			throw new Exception($approvePracticeResponse->ApprovePracticeResult->ErrorMessage);
 		}
 
-		$approvePracticeXmlprocessor = new XmlProcessor(
-			$approvePracticeResponse->ApprovePracticeResult->MiscField1
-		);
-
-		$approvePracticeData = $approvePracticeXmlprocessor
-			->toArray()
-			->get()['diffgrdiffgram']['mydata']['PACEDataTable'];
-
-		return $approvePracticeData;
+		return json_decode($approvePracticeResponse->ApprovePracticeResult->MiscField1, true);
 	}
 }
