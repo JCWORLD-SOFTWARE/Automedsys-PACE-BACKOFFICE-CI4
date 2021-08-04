@@ -17,8 +17,8 @@ class ClientAuthenticator
         $client = new HTTPClient();
 
         $response = $client->request(
-			'POST',
-			"{$baseUrl}/emrapi/v1/identity/connect/otoken",
+            'POST',
+            "{$baseUrl}/emrapi/v1/identity/connect/otoken",
             [
                 'auth' => [$username, $password],
                 'header' => [
@@ -26,8 +26,8 @@ class ClientAuthenticator
                     'Media-Type' => 'application/json',
                 ],
                 'json' => ['grant_type' => 'client_credentials']
-			]
-		);
+            ]
+        );
 
         $response = json_decode($response->getBody(), true);
 

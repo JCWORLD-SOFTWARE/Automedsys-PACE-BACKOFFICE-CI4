@@ -10,8 +10,8 @@ class NpiClient
 	{
 		$token = ClientAuthenticator::getToken();
 		$client = new HTTPClient();
-        $apiEndpointsConfig = config('ApiEndpoints');
-        
+		$apiEndpointsConfig = config('ApiEndpoints');
+
 		$response = $client->request(
 			'GET',
 			"{$apiEndpointsConfig->baseUrl}/emrapi/v1/npiregisry/providers/{$npi}",

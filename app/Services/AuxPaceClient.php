@@ -34,7 +34,7 @@ class AuxPaceClient
 		$practiceRequests = $practiceRequestListXmlprocessor->base64Decode()->gzDecode()->jsonToArray()->get();
 		$practiceRequestCount = $practiceRequestListResponse->PracticeRequestListResult->MiscField2;
 
-        return [$practiceRequests, $practiceRequestCount];
+		return [$practiceRequests, $practiceRequestCount];
 	}
 
 	public static function getPracticeServerList(int $perPage = 10, int $offset = 0)
@@ -61,19 +61,19 @@ class AuxPaceClient
 			->toArray()
 			->get()['diffgrdiffgram']['mydata']['PACEDataTable'];
 
-        return (array) $servers;
+		return (array) $servers;
 	}
 
 	public static function getDatabaseServerTemplateList(int $perPage = 10, int $offset = 0)
 	{
 		$databaseServerTemplateListResponse =  self::$soapClient
 			->__soapCall('PracticeDatabaseServerTemplateList', [
-			[
-				'limit' => $perPage,
-				'offset' => $offset,
-				'sessionid' => session('sessionId')
-			]
-		]);
+				[
+					'limit' => $perPage,
+					'offset' => $offset,
+					'sessionid' => session('sessionId')
+				]
+			]);
 
 		if (property_exists($databaseServerTemplateListResponse
 			->PracticeDatabaseServerTemplateListResult, 'ErrorMessage')) {
@@ -94,7 +94,7 @@ class AuxPaceClient
 			->jsonToArray()
 			->get();
 
-        return (array) $databaseServerTemplates;
+		return (array) $databaseServerTemplates;
 	}
 
 	public static function approvePractice(array $options = [])
