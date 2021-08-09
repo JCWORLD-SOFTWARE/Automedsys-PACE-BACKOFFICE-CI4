@@ -158,6 +158,12 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url(route_to('user_registration_index')); ?>">
+                            <i class="icon-users"></i>
+                            <span class="title">User Registrations</span>
+                        </a>
+                    </li>
                 </ul>
                 <!-- END SIDEBAR MENU -->
                 <!-- END SIDEBAR MENU -->
