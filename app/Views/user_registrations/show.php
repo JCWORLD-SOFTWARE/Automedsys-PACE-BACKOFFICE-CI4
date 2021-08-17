@@ -148,13 +148,9 @@
             $.ajax({
                     method: "POST",
                     url: "/user-registrations/resend-notification/<?= $user['UniqueId'] ?>",
-                    data: {
-                        UniqueIds: ["<?= $user['UniqueId'] ?>"]
-                    }
                 })
                 .done(function(data) {
-                    resendNotificationResponseContainer.html(data);
-                    resendNotificationResponseContainer.html(`<span class="font-green-jungle">${data.responseText}</span>`);
+                    resendNotificationResponseContainer.html(`<span class="font-green-jungle">Notification resent successfully!</span>`);
                 })
                 .fail(function(error) {
                     resendNotificationResponseContainer.html(`<span class="font-red">${error.responseJSON.error}</span>`);

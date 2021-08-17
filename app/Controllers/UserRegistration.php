@@ -61,7 +61,7 @@ class UserRegistration extends BaseController
 			);
 		} catch (Exception $exception) {
 			session()->setFlashdata('error', "<pre>{$exception->getMessage()}</pre>");
-			return redirect()->back();
+			return redirect()->route('user_registration_index');
 		}
 
 		$response = json_decode($response->getBody(), true);
@@ -83,7 +83,7 @@ class UserRegistration extends BaseController
 				"{$apiEndpointsConfig->baseUrl}/paceapi/v1/signup/{$id}/resend-notification",
 				[
 					'headers' => ['Authorization' => "Bearer {$token}"],
-					'json' => ['UniqueIds' => [$id]]
+					'query' => ['RequestUrl' => "http://dev.automedsys.com/signup/"]
 				]
 			);
 		} catch (Exception $exception) {
