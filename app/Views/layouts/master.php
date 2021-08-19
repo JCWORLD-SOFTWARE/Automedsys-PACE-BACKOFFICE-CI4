@@ -134,15 +134,15 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= base_url(route_to('server_index')); ?>">
-                            <i class="icon-cloud-upload"></i>
-                            <span class="title">Servers</span>
+                        <a href="<?= base_url(route_to('user_registration_index')); ?>">
+                            <i class="icon-users"></i>
+                            <span class="title">Signup</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="icon-diamond"></i>
-                            <span class="title">Applications</span>
+                            <span class="title">Practice Applications</span>
                             <span class="arrow"></span>
                         </a>
                         <ul class="sub-menu">
@@ -159,10 +159,59 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= base_url(route_to('user_registration_index')); ?>">
-                            <i class="icon-users"></i>
-                            <span class="title">User Registrations</span>
+                        <a href="#">
+                            <i class="icon-cloud-upload"></i>
+                            <span class="title">Active Clients</span>
                         </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#">
+                            <i class="icon-cloud-upload"></i>
+                            <span class="title">Billing</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="icon-cloud-upload"></i>
+                            <span class="title">System Administration</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <a href="<?= base_url(route_to('server_index')); ?>" class="nav-link ">
+                                    <span class="title">Deployment Server</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url(route_to('server_index')); ?>" class="nav-link ">
+                                    <span class="title">Database Template</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="icon-diamond"></i>
+                            <span class="title">API Management</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <a href="<?= base_url(route_to('practice_request_index')); ?>" class="nav-link ">
+                                    <span class="title">Developer Onboarding</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link ">
+                                    <span class="title">Application Management</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link ">
+                                    <span class="title">API Onboarding</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
                 <!-- END SIDEBAR MENU -->

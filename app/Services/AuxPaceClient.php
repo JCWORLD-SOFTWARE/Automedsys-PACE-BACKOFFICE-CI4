@@ -118,6 +118,6 @@ class AuxPaceClient
 			throw new Exception($approvePracticeResponse->ApprovePracticeResult->ErrorMessage);
 		}
 
-		return json_decode($approvePracticeResponse->ApprovePracticeResult->MiscField1, true);
+		return json_decode($approvePracticeResponse->ApprovePracticeResult->MiscField1, true)[0];
 	}
 }

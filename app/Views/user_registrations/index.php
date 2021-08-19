@@ -50,7 +50,7 @@
                     <span class="caption-subject bold">Sign Ups</span>
                 </div>
                 <div class="actions">
-                    <a href="javascript:;" class="btn green-jungle pull-right">
+                    <a href="<?= base_url(route_to('user_registration_create')); ?>" class="btn green-jungle pull-right">
                         New Sign Up <i class="fa fa-plus icon-black"></i>
                     </a>
                 </div>
