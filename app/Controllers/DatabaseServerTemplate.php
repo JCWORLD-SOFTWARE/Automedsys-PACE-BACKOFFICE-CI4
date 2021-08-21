@@ -6,7 +6,7 @@ use App\Controllers\BaseController;
 use App\Services\AuxPaceClient;
 use CodeIgniter\API\ResponseTrait;
 
-class Server extends BaseController
+class DatabaseServerTemplate extends BaseController
 {
 	use ResponseTrait;
 
@@ -17,8 +17,8 @@ class Server extends BaseController
 
 	public function index()
 	{
-		return view('servers/index', [
-			'servers' => AuxPaceClient::getPracticeServerList(),
+		return view('database_server_templates/index', [
+			'databaseServerTemplates' => AuxPaceClient::getDatabaseServerTemplateList()
 		]);
 	}
 }

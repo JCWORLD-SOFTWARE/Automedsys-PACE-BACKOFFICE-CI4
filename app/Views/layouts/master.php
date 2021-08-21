@@ -43,6 +43,12 @@
             margin: 0;
         }
 
+        .page-content-white .page-title {
+            margin: 25px 0;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
         .logo-default {
             height: 50px;
         }
@@ -183,7 +189,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?= base_url(route_to('server_index')); ?>" class="nav-link ">
+                                <a href="<?= base_url(route_to('database_server_template_index')); ?>" class="nav-link ">
                                     <span class="title">Database Template</span>
                                 </a>
                             </li>
