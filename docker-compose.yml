@@ -1,0 +1,19 @@
+version: "3.7"
+services:
+    automedsys-backoffice_app:
+        build:
+            context: .
+        restart: unless-stopped
+        environment:
+            CI_ENVIRONMENT: production
+        volumes:
+            - ./:/var/www/app
+            - /var/www/app/vendor
+        ports:
+            - "8003:80"
+        networks:
+            - automedsys-backoffice_vpc
+
+networks:
+    automedsys-backoffice_vpc:
+        external: true
