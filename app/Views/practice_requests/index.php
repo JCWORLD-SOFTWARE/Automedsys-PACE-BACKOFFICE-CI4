@@ -36,11 +36,6 @@
                 <div class="caption font-green-jungle">
                     <span class="caption-subject bold">Applications</span>
                 </div>
-                <div class="actions">
-                    <a href="javascript:;" class="btn green-jungle pull-right">
-                        Add Application <i class="fa fa-plus icon-black"></i>
-                    </a>
-                </div>
             </div>
             <div class="portlet-body">
                 <div class="table-responsive">
@@ -72,18 +67,18 @@
                                     <td><?= $pr["contact_email"] ?><br />(<?= $pr["contact_firstname"] . ' ' . $pr["contact_firstname"] ?>)</td>
                                     <td class="center" nowrap=""><?= str_replace(' ', '<br/>', strtok($pr["created_dt"], '.')) ?></td>
                                     <td>
-                                        <a class="btn btn-sm green" href="/crud/applicationupdate?id=2">Edit</a>
+                                        <a class="btn btn-sm btn-block green" href="/crud/applicationupdate?id=2">Edit</a>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3"><?= "{$pr['Street1']} {$pr['Street2']}, {$pr['City']}, {$pr['State']}, {$pr['ZipCode']}, {$pr['Country']}" ?></td>
+                                    <td colspan="3"><?= "{$pr["Street1"]} {$pr["Street2"]}, {$pr["City"]}, {$pr["State"]}, {$pr["ZipCode"]}, {$pr["Country"]}" ?></td>
                                     <td class="center"><?= $pr["status"] ?></td>
                                     <td class="server-db-name" colspan="2"><?= $pr["Server"] ?> / <?= $pr["DBName"] ?></td>
                                     <td>
-                                        <a class="btn btn-sm green-jungle" href="<?= base_url(route_to('practice_request_show', $pr["PracticeCode"])); ?>" onclick="return confirm('Are you sure you want to approve this practice?')">Approve Practice</a>
+                                        <a class="btn btn-sm btn-block green-jungle" href="<?= base_url(route_to('practice_request_show', $pr["PracticeCode"])); ?>" onclick="return confirm('Are you sure you want to approve this practice?')">Approve Practice</a>
                                     </td>
                                     <td>
-                                        <a class="btn btn-sm red" href="#" onclick="return confirm('Are you sure you want to delete this application?')">Delete</a>
+                                        <a class="btn btn-sm btn-block red" href="#" onclick="return confirm('Are you sure you want to delete this application?')">Delete</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

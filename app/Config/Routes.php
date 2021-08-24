@@ -54,6 +54,10 @@ $routes->get('/user-registrations/show/(:segment)', 'UserRegistration::show/$1',
 $routes->post('/user-registrations/resend-notification/(:segment)', 'UserRegistration::resendNotification/$1', ['filter' => 'auth', 'as' => 'user_registration_notification_resend']);
 $routes->get('/user-registrations/delete/(:segment)', 'UserRegistration::delete/$1', ['filter' => 'auth', 'as' => 'user_registration_delete']);
 
+$routes->get('/active-practices', 'ActivePractice::index', ['filter' => 'auth', 'as' => 'active_practice_index']);
+$routes->get('/prospective-practices', 'ProspectivePractice::index', ['filter' => 'auth', 'as' => 'prospective_practice_index']);
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

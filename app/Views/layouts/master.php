@@ -158,17 +158,16 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="ui_general.html" class="nav-link ">
-                                    <span class="title">New Applications</span>
+                                <a href="<?= base_url(route_to('active_practice_index')); ?>" class="nav-link ">
+                                    <span class="title">Active Practices</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url(route_to('prospective_practice_index')); ?>" class="nav-link ">
+                                    <span class="title">Prospective Practices</span>
                                 </a>
                             </li>
                         </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#">
-                            <i class="icon-cloud-upload"></i>
-                            <span class="title">Active Clients</span>
-                        </a>
                     </li>
                     <li class="nav-item">
                         <a href="#">
