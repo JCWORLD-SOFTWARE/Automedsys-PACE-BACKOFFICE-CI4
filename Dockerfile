@@ -31,6 +31,41 @@ RUN apt-get update && \
     php7.4-xmlwriter \
     php7.4-xmlreader \
     php7.4-iconv \
+    php7.4-opcache \
+    php7.4-pdo \
+    php7.4-xml \
+    php7.4-bcmath \
+    php7.4-calendar \
+    php7.4-ctype \
+    php7.4-curl \
+    php7.4-dom \
+    php7.4-exif \
+    php7.4-ffi \
+    php7.4-fileinfo \
+    php7.4-ftp \
+    php7.4-gd \
+    php7.4-gettext \
+    php7.4-gmp \
+    php7.4-iconv \
+    php7.4-igbinary \
+    php7.4-json \
+    php7.4-mbstring \
+    php7.4-phar \
+    php7.4-posix \
+    php7.4-readline \
+    php7.4-redis \
+    php7.4-shmop \
+    php7.4-simplexml \
+    php7.4-sockets \
+    php7.4-sysvmsg \
+    php7.4-sysvsem \
+    php7.4-sysvshm \
+    php7.4-tokenizer \
+    php7.4-xmlreader \
+    php7.4-xmlwriter \
+    php7.4-xsl \
+    php7.4-zip \
+    php7.4-intl \
     curl \
     zip \
     mcrypt \
@@ -53,7 +88,7 @@ ADD ./docker/nginx /etc/nginx
 
 ADD . .
 RUN composer validate
-RUN composer install --optimize-autoloader --prefer-dist --no-progress
+RUN composer install --optimize-autoloader --prefer-dist --no-progress --no-dev
 
 RUN chown -R www-data:www-data /var/www/app
 

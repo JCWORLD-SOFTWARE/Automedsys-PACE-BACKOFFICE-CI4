@@ -79,7 +79,7 @@
                                     <td><?= $user["UsernameEmail"] ?></td>
                                     <td><?= $user["Telephone"] ?></td>
                                     <td><?= $user["ProviderNPI"] ? $user["ProviderNPI"] : "N/A" ?></td>
-                                    <td nowrap=""><?= date("d/m/Y h:i a", strtotime($user["created_dt"])) ?> || <?= $user["created_dt"] ?></td>
+                                    <td nowrap=""><?= date("d/m/Y h:i a", strtotime($user["created_dt"])) ?></td>
                                     <td>
                                         <a class="btn btn-sm blue" href="<?= base_url(route_to('user_registration_show', $user["UniqueId"])); ?>">View</a>
                                         <a class="btn btn-sm green" href="/crud/applicationupdate?id=2">Edit</a>
