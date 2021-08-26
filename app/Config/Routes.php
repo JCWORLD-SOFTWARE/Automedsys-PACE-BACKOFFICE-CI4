@@ -47,6 +47,8 @@ $routes->get('/practice-requests/validate-npi/(:alphanum)', 'PracticeRequest::sh
 $routes->post('/practice-requests/approve/(:alphanum)', 'PracticeRequest::approve/$1', ['filter' => 'auth', 'as' => 'practice_request_approve']);
 $routes->get('/practice-requests/approve/(:segment)/success', 'PracticeRequest::showApprovalSuccess/$1', ['filter' => 'auth', 'as' => 'practice_request_approve_success_show']);
 
+$routes->get('/deployed-practices/filter/(:segment)', 'DeployedPractice::indexFiltered/$1', ['filter' => 'auth', 'as' => 'deployed_practice_index_filtered']);
+
 $routes->get('/user-registrations', 'UserRegistration::index', ['filter' => 'auth', 'as' => 'user_registration_index']);
 $routes->get('/user-registrations/create', 'UserRegistration::create', ['filter' => 'auth', 'as' => 'user_registration_create']);
 $routes->post('/user-registrations/create', 'UserRegistration::store', ['filter' => 'auth', 'as' => 'user_registration_store']);

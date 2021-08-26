@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Services\AuxPaceClient;
 use App\Services\ClientAuthenticator;
 use CodeIgniter\API\ResponseTrait;
 use GuzzleHttp\Client as HTTPClient;
@@ -36,8 +35,6 @@ class ActivePractice extends BaseController
 		);
 
 		$response = json_decode($response->getBody(), true);
-
-		// return $this->respond(json_encode($response));
 
 		$pager = service('pager');
 		$pager->setPath(route_to('active_practice_index'));

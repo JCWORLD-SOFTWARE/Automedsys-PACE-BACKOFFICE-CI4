@@ -120,4 +120,33 @@ class AuxPaceClient
 
 		return json_decode($approvePracticeResponse->ApprovePracticeResult->MiscField1, true)[0];
 	}
+
+	public static function getPracticeDeployList(
+		int $compact = 0,
+		string $param = '',
+		int $limit = 0,
+		int $offset = 0
+	) {
+		$practiceDeployListResponse =  self::$soapClient->__soapCall('PracticeDeployList', [
+			[
+				'compact' => $compact,
+				'param' => $param,
+				'limit' => $limit,
+				'offset' => $offset,
+				'sessionid' => session('sessionId'),
+			]
+		]);
+
+		if (property_exists($practiceDeployListResponse->PracticeDeployListResult, 'ErrorMessage')) {
+			throw new Exception($practiceDeployListResponse->PracticeDeployListResult->ErrorMessage);
+		}
+
+		$practiceListXmlprocessor = new XmlProcessor($practiceDeployListResponse->PracticeDeployListResult->MiscField1);
+		$rangeListXmlprocessor = new XmlProcessor($practiceDeployListResponse->PracticeDeployListResult->MiscField2);
+
+		$practices = $practiceListXmlprocessor->jsonToArray()->get();
+		$ranges = $rangeListXmlprocessor->jsonToArray()->get();
+
+		return [$practices, $ranges];
+	}
 }
