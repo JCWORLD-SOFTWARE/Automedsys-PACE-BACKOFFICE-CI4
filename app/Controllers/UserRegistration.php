@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Services\ClientAuthenticator;
 use CodeIgniter\API\ResponseTrait;
+use Config\Services;
 use Exception;
 use GuzzleHttp\Client as HTTPClient;
 
@@ -57,6 +58,24 @@ class UserRegistration extends BaseController
 		$token = ClientAuthenticator::getToken();
 		$client = new HTTPClient();
 		$apiEndpointsConfig = config('ApiEndpoints');
+
+		$validation =  Services::validation();
+
+		$validation->setRules([
+			'first_name' => 'required|min_length[2]',
+			'last_name' => 'required|min_length[2]',
+			'npi' => 'required|exact_length[10]',
+			'email_address' => 'required|valid_email',
+			'phone_number' => 'required|numeric',
+			'password' => 'required|min_length[5]',
+			'g-recaptcha-response' => 'required',
+		]);
+
+		if (!$validation->withRequest($this->request)->run()) {
+			return redirect()->back()
+				->withInput()
+				->with('errors', $validation->getErrors());
+		}
 
 		try {
 			$client->request(
