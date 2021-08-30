@@ -4,8 +4,6 @@ services:
         build:
             context: .
         restart: unless-stopped
-        environment:
-            CI_ENVIRONMENT: production
         volumes:
             - ./:/var/www/app
             - /var/www/app/vendor
