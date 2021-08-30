@@ -39,6 +39,7 @@ $routes->get('/auth/login/google/oauth2', 'Login::initiateGoogleOauth2', ['as' =
 $routes->get('/auth/login/google/oauth2/callback', 'Login::handleGoogleOauth2Callback', ['as' => 'google_oauth_callback']);
 
 $routes->get('/servers', 'Server::index', ['filter' => 'auth', 'as' => 'server_index']);
+$routes->get('/database-server-templates', 'DatabaseServerTemplate::index', ['filter' => 'auth', 'as' => 'database_server_template_index']);
 
 $routes->get('/practice-requests', 'PracticeRequest::index', ['filter' => 'auth', 'as' => 'practice_request_index']);
 $routes->get('/practice-requests/(:alphanum)', 'PracticeRequest::show/$1', ['filter' => 'auth', 'as' => 'practice_request_show']);
@@ -46,10 +47,20 @@ $routes->get('/practice-requests/validate-npi/(:alphanum)', 'PracticeRequest::sh
 $routes->post('/practice-requests/approve/(:alphanum)', 'PracticeRequest::approve/$1', ['filter' => 'auth', 'as' => 'practice_request_approve']);
 $routes->get('/practice-requests/approve/(:segment)/success', 'PracticeRequest::showApprovalSuccess/$1', ['filter' => 'auth', 'as' => 'practice_request_approve_success_show']);
 
+$routes->get('/deployed-practices/filter/(:segment)', 'DeployedPractice::indexFiltered/$1', ['filter' => 'auth', 'as' => 'deployed_practice_index_filtered']);
+
 $routes->get('/user-registrations', 'UserRegistration::index', ['filter' => 'auth', 'as' => 'user_registration_index']);
-$routes->get('/user-registrations/(:segment)', 'UserRegistration::show/$1', ['filter' => 'auth', 'as' => 'user_registration_show']);
+$routes->get('/user-registrations/create', 'UserRegistration::create', ['filter' => 'auth', 'as' => 'user_registration_create']);
+$routes->post('/user-registrations/create', 'UserRegistration::store', ['filter' => 'auth', 'as' => 'user_registration_store']);
+$routes->get('/user-registrations/show/(:segment)', 'UserRegistration::show/$1', ['filter' => 'auth', 'as' => 'user_registration_show']);
+$routes->get('/user-registrations/edit/(:segment)', 'UserRegistration::edit/$1', ['filter' => 'auth', 'as' => 'user_registration_edit']);
+$routes->post('/user-registrations/edit/(:segment)', 'UserRegistration::update/$1', ['filter' => 'auth', 'as' => 'user_registration_update']);
 $routes->post('/user-registrations/resend-notification/(:segment)', 'UserRegistration::resendNotification/$1', ['filter' => 'auth', 'as' => 'user_registration_notification_resend']);
 $routes->get('/user-registrations/delete/(:segment)', 'UserRegistration::delete/$1', ['filter' => 'auth', 'as' => 'user_registration_delete']);
+
+$routes->get('/active-practices', 'ActivePractice::index', ['filter' => 'auth', 'as' => 'active_practice_index']);
+$routes->get('/prospective-practices', 'ProspectivePractice::index', ['filter' => 'auth', 'as' => 'prospective_practice_index']);
+
 
 /*
  * --------------------------------------------------------------------

@@ -26,9 +26,11 @@
     <link href="<?= base_url(); ?>/assets/global/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
     <link href="<?= base_url(); ?>/assets/global/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css" />
     <link href="<?= base_url(); ?>/assets/global/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url(); ?>/assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?= base_url(); ?>/assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN THEME GLOBAL STYLES -->
-    <link href="<?= base_url(); ?>/assets/global/css/components-rounded.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="<?= base_url(); ?>/assets/global/css/components-rounded.min.css" rel="stylesheet" type="text/css" />
     <link href="<?= base_url(); ?>/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
     <!-- END THEME GLOBAL STYLES -->
     <!-- BEGIN THEME LAYOUT STYLES -->
@@ -41,6 +43,12 @@
     <style>
         .page-header.navbar .page-logo .logo-default {
             margin: 0;
+        }
+
+        .page-content-white .page-title {
+            margin: 25px 0;
+            font-size: 22px;
+            font-weight: 600;
         }
 
         .logo-default {
@@ -134,15 +142,15 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= base_url(route_to('server_index')); ?>">
-                            <i class="icon-cloud-upload"></i>
-                            <span class="title">Servers</span>
+                        <a href="<?= base_url(route_to('user_registration_index')); ?>">
+                            <i class="icon-users"></i>
+                            <span class="title">Signup</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="icon-diamond"></i>
-                            <span class="title">Applications</span>
+                            <span class="title">Practice Applications</span>
                             <span class="arrow"></span>
                         </a>
                         <ul class="sub-menu">
@@ -152,17 +160,65 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="ui_general.html" class="nav-link ">
-                                    <span class="title">New Applications</span>
+                                <a href="<?= base_url(route_to('active_practice_index')); ?>" class="nav-link ">
+                                    <span class="title">Active Practices</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url(route_to('prospective_practice_index')); ?>" class="nav-link ">
+                                    <span class="title">Prospective Practices</span>
                                 </a>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= base_url(route_to('user_registration_index')); ?>">
-                            <i class="icon-users"></i>
-                            <span class="title">User Registrations</span>
+                        <a href="#">
+                            <i class="icon-cloud-upload"></i>
+                            <span class="title">Billing</span>
                         </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="icon-cloud-upload"></i>
+                            <span class="title">System Administration</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <a href="<?= base_url(route_to('server_index')); ?>" class="nav-link ">
+                                    <span class="title">Deployment Server</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url(route_to('database_server_template_index')); ?>" class="nav-link ">
+                                    <span class="title">Database Template</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="icon-diamond"></i>
+                            <span class="title">API Management</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <a href="<?= base_url(route_to('practice_request_index')); ?>" class="nav-link ">
+                                    <span class="title">Developer Onboarding</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link ">
+                                    <span class="title">Application Management</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link ">
+                                    <span class="title">API Onboarding</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
                 <!-- END SIDEBAR MENU -->
@@ -228,12 +284,14 @@
     <script src="<?= base_url(); ?>/assets/global/plugins/flot/jquery.flot.categories.min.js" type="text/javascript"></script>
     <script src="<?= base_url(); ?>/assets/global/plugins/jquery-easypiechart/jquery.easypiechart.min.js" type="text/javascript"></script>
     <script src="<?= base_url(); ?>/assets/global/plugins/jquery.sparkline.min.js" type="text/javascript"></script>
+    <script src="<?= base_url(); ?>/assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN THEME GLOBAL SCRIPTS -->
     <script src="<?= base_url(); ?>/assets/global/scripts/app.min.js" type="text/javascript"></script>
     <!-- END THEME GLOBAL SCRIPTS -->
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <script src="<?= base_url(); ?>/assets/pages/scripts/dashboard.min.js" type="text/javascript"></script>
+    <script src="<?= base_url(); ?>/assets/pages/scripts/components-select2.min.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL SCRIPTS -->
     <!-- BEGIN THEME LAYOUT SCRIPTS -->
     <script src="<?= base_url(); ?>/assets/layouts/layout/scripts/layout.min.js" type="text/javascript"></script>

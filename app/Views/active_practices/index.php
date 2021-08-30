@@ -16,7 +16,7 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <span>User Registration Management</span>
+            <span>Practice Management</span>
         </li>
     </ul>
     <div class="page-toolbar">
@@ -28,7 +28,7 @@
     </div>
 </div>
 
-<h3 class="page-title">User Registration Management</h3>
+<h3 class="page-title">Practice Management</h3>
 
 <?php if (session()->getFlashdata('success')) : ?>
     <div class="alert alert-success">
@@ -47,44 +47,41 @@
         <div class="portlet light">
             <div class="portlet-title">
                 <div class="caption font-green-jungle">
-                    <span class="caption-subject bold">Sign Ups</span>
-                </div>
-                <div class="actions">
-                    <a href="<?= base_url(route_to('user_registration_create')); ?>" class="btn green-jungle pull-right">
-                        New Sign Up <i class="fa fa-plus icon-black"></i>
-                    </a>
+                    <span class="caption-subject bold">Active Practices</span>
                 </div>
             </div>
             <div class="portlet-body">
                 <div class="table-responsive">
                     <?= $pager->links() ?>
 
-                    <table class="table table-bordered" style="font-size: 12px;">
+                    <table class="table table-bordered table-striped" style="font-size: 12px;">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Full Name</th>
-                                <th>Email Address</th>
-                                <th>Telephone</th>
-                                <th>Provider NPI</th>
+                                <th>Practice Name<br>(Username)</th>
+                                <th>Tax ID</th>
+                                <th>Practice NPI<br>(Code)</th>
+                                <th>Contact Email<br>(Name)</th>
                                 <th>Created</th>
-                                <th>Edit / Delete</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($userRegistrations as $user) : ?>
+                            <?php foreach ($activePractices as $practice) : ?>
                                 <tr>
-                                    <td><?= $user["Id"] ?></td>
-                                    <td><?= $user["FirstName"] ?> <?= $user["LastName"] ?></td>
-                                    <td><?= $user["UsernameEmail"] ?></td>
-                                    <td><?= $user["Telephone"] ?></td>
-                                    <td><?= $user["ProviderNPI"] ? $user["ProviderNPI"] : "N/A" ?></td>
-                                    <td nowrap=""><?= date("d/m/Y h:i a", strtotime($user["created_dt"])) ?></td>
-                                    <td>
-                                        <a class="btn btn-sm blue" href="<?= base_url(route_to('user_registration_show', $user["UniqueId"])); ?>">View</a>
-                                        <a class="btn btn-sm green" href="<?= base_url(route_to('user_registration_edit', $user["UniqueId"])); ?>">Edit</a>
-                                        <a class="btn btn-sm red" href="<?= base_url(route_to('user_registration_delete', $user["UniqueId"])); ?>" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
+                                    <td rowspan="2"><?= $practice["ID"] ?></td>
+                                    <td><?= $practice["PracticeName"] ?> (<?= $practice["PracticeCode"] ?>)</td>
+                                    <td><?= $practice["TaxID"] ?></td>
+                                    <td><?= $practice["NPI"] ?><br />(<?= $practice["PracticeCode"] ?>)</td>
+                                    <td><?= $practice["contact_email"] ?><br />(<?= $practice["contact_firstname"] . ' ' . $practice["contact_firstname"] ?>)</td>
+                                    <td class="center" nowrap=""><?= str_replace(' ', '<br/>', strtok($practice["created_dt"], '.')) ?></td>
+                                    <td nowrap="">
+                                        <a class="btn btn-sm blue" href="#">View</a>
+                                        <a class="btn btn-sm green" href="/crud/applicationupdate?id=2">Edit</a>
                                     </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6"><?= "{$practice['Street1']} {$practice['Street2']}, {$practice['City']}, {$practice['State']}, {$practice['ZipCode']}, {$practice['Country']}" ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

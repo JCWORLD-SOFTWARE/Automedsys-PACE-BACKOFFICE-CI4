@@ -26,7 +26,7 @@
         <div class="portlet light">
             <div class="portlet-title">
                 <div class="caption font-green-jungle">
-                    <span class="caption-subject bold">Servers</span>
+                    <span class="caption-subject bold">Database Server Templates</span>
                 </div>
             </div>
             <div class="portlet-body flip-scroll">
@@ -34,28 +34,26 @@
                     <thead class="flip-content">
                         <tr>
                             <th>ID</th>
-                            <th>Name</th>
-                            <th>Host Address</th>
-                            <th>Port</th>
-                            <th>Binding</th>
-                            <th>Status</th>
+                            <th>Server ID</th>
+                            <th>Template ID</th>
+                            <th>Server Name</th>
+                            <th>Server Status</th>
+                            <th>Template Name / Template Description</th>
+                            <th>Template Status</th>
                             <th>Created</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($servers as $s) : ?>
+                        <?php foreach ($databaseServerTemplates as $dst) : ?>
                             <tr>
-                                <td><?= $s['ID'] ?></td>
-                                <td><?= $s['name'] ?></td>
-                                <td><?= $s['host_address'] ?></td>
-                                <td><?= $s['port_no'] ?></td>
-                                <td><?= $s['binding'] ?></td>
-                                <td><?= $s['status'] ?></td>
-                                <td><?= date_format(date_create($s['created_dt']), "Y/m/d H:i a") ?></td>
-                                <td><a href="#" class="btn btn-sm blue-sharp">Edit</a></td>
-                                <td><a href="#" class="btn btn-sm red">Delete</a></td>
+                                <td><?= $dst['ID'] ?></td>
+                                <td><?= $dst['server_id'] ?></td>
+                                <td><?= $dst['template_id'] ?></td>
+                                <td><?= $dst['server_name'] ?></td>
+                                <td><?= $dst['server_status'] ?></td>
+                                <td><?= $dst['template_name'] ?> <?= $dst['template_description'] ?></td>
+                                <td><?= $dst['template_status'] ?></td>
+                                <td><?= date_format(date_create($dst['created_dt']), "Y/m/d H:i a") ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

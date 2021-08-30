@@ -133,6 +133,21 @@
                         <div class="row">
                             <div class="col-md-12 ">
                                 <div class="form-group">
+                                    <label>Deployment Type</label>
+                                    <div class="radio-list">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="deployment_type" value="dedicated_server" checked>Dedicated Server
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="deployment_type" value="co_tenant">Co-tenant
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="database-form-section" class="row">
+                            <div class="col-md-12 ">
+                                <div class="form-group">
                                     <label>Database Server & Template</label>
                                     <select name="template" class="form-control">
                                         <option value="">Please select...</option>
@@ -145,7 +160,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div id="servers-form-section" class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Server</label>
@@ -156,6 +171,30 @@
                                                 <?= "{$s['name']} => {$s['endpoint_address']} => {$s['host_address']}" ?>
                                             </option>
                                         <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="stamps-form-section" class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Attach to tenant (Overrides Server)</label>
+                                    <select name="stamp" class="form-control">
+                                        <option value="">No parent tenant (must select Server)</option>
+                                        <?php foreach ($stamps as $name => $stamp) : ?>
+                                            <option value="<?= $name ?>">
+                                                <?= "{$name} =>  (Deployments: {$stamp['Deployments']}) =>  ({$stamp['name']})" ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="parent-practices-form-section" class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <select name="parent_practice" class="form-control">
+                                        <option value="" selected="selected">No parent tenant (set primary, must select Server)</option>
                                     </select>
                                 </div>
                             </div>
@@ -226,19 +265,81 @@
         var validateNpiButton = $('#validate-npi-button');
         var practiceNpiDataContainer = $('#practice-npi-data');
         var providerNpiDataContainer = $('#provider-npi-data');
+        var deploymentTypeInput = $('input[name=deployment_type]');
         var templateSelect = $('select[name=template]');
         var serverSelect = $('select[name=server]');
+        var stampSelect = $('select[name=stamp]');
+        var parentPracticeSelect = $('select[name=parent_practice]');
+        var dedicatedServerFormSections = $('#database-form-section, #servers-form-section');
+        var coTenantFormSections = $('#stamps-form-section, #parent-practices-form-section');
         var deployButton = $('#deploy-button');
 
+        var selectedParentPractice = "";
+
         function validateDeploymentOptions() {
-            let isValidOptions = templateSelect.val() === "" || serverSelect.val() === "";
+            let isValidOptions = false;
+
+            var selectedDeploymentType = $('input[name=deployment_type]:checked').val();
+
+            if (selectedDeploymentType === "dedicated_server") {
+                isValidOptions = templateSelect.val() === "" || serverSelect.val() === ""
+            } else if (selectedDeploymentType === "co_tenant") {
+                isValidOptions = stampSelect.val() === "" || parentPracticeSelect.val() === ""
+            }
+
             deployButton.prop("disabled", isValidOptions);
         }
 
+        function setPracticesSelectOption(practices) {
+            parentPracticeSelect.empty();
+            parentPracticeSelect.append('<option value="">No parent tenant (set primary, must select Server)</option>');
+
+            practices.forEach(function(practice) {
+                var option = $('<option />');
+                option.attr('value', practice.ID)
+                    .text(`${practice.PracticeConfig_ID} (${practice.name})`);
+
+                if (practice.id == selectedParentPractice) {
+                    option.attr('selected', 'selected');
+                }
+
+                parentPracticeSelect.append(option);
+            });
+        }
+
+        function handleOnChangeStamp() {
+            validateDeploymentOptions();
+
+            var stamp = stampSelect.val();
+
+            if (!stamp) return false;
+
+            $.getJSON(`/deployed-practices/filter/${stamp}`)
+                .done(setPracticesSelectOption);
+        }
+
+        function handleOnChangeDeploymentType() {
+            var selectedDeploymentType = $('input[name=deployment_type]:checked').val();
+
+            if (selectedDeploymentType === "dedicated_server") {
+                parentPracticeSelect.add(stampSelect).val("").change();
+                dedicatedServerFormSections.show();
+                coTenantFormSections.hide();
+            } else if (selectedDeploymentType === "co_tenant") {
+                serverSelect.add(templateSelect).val("").change();
+                dedicatedServerFormSections.hide();
+                coTenantFormSections.show();
+            }
+        }
+
+        handleOnChangeDeploymentType();
         validateDeploymentOptions();
 
-        templateSelect.on('change', validateDeploymentOptions)
-        serverSelect.on('change', validateDeploymentOptions)
+        deploymentTypeInput.on('change', handleOnChangeDeploymentType);
+        templateSelect.on('change', validateDeploymentOptions);
+        serverSelect.on('change', validateDeploymentOptions);
+        stampSelect.on('change', handleOnChangeStamp);
+        parentPracticeSelect.on('change', validateDeploymentOptions);
 
         validateNpiButton.on('click', function() {
             validateNpiButton.html("Validating NPI...").prop("disabled", true);

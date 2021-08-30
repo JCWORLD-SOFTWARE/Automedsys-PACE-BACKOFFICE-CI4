@@ -14,6 +14,7 @@ class PracticeRequest extends BaseController
 {
 	use ResponseTrait;
 
+	const COMPACT_TYPE = 2;
 	const PER_PAGE = 10;
 
 	public function __construct()
@@ -46,6 +47,7 @@ class PracticeRequest extends BaseController
 	{
 		try {
 			list($practiceRequests) = AuxPaceClient::getPracticeRequestList(1, 0, $practiceCode);
+			list(, $ranges) = AuxPaceClient::getPracticeDeployList(self::COMPACT_TYPE);
 		} catch (Exception $exception) {
 			session()->setFlashdata('error', $exception->getMessage());
 			return redirect()->to(route_to('practice_request_index'));
@@ -59,8 +61,31 @@ class PracticeRequest extends BaseController
 		return view('practice_requests/show', [
 			'application' => $practiceRequests[0],
 			'servers' => $servers,
-			'databaseServerTemplates' => AuxPaceClient::getDatabaseServerTemplateList()
+			'databaseServerTemplates' => AuxPaceClient::getDatabaseServerTemplateList(),
+			'stamps' => $this->getGroupedDeploymentRanges((array) $ranges),
 		]);
+	}
+
+	public function getGroupedDeploymentRanges(array $ranges): array
+	{
+		$stamps = [];
+
+		foreach ((array) $ranges as $range) {
+			unset($range['PracticeServer_ID']);
+			unset($range['binding']);
+			unset($range['endpoint_address']);
+
+			if (!isset($stamps[$range['Stamp']])) {
+				$stamps[$range['Stamp']] = $range;
+			} else {
+				$stamps[$range['Stamp']]['Deployments'] += $range['Deployments'];
+				$stamps[$range['Stamp']]['name'] .= ", {$range['name']}";
+			}
+		}
+
+		krsort($stamps);
+
+		return $stamps;
 	}
 
 	public function showNpiData(string $npi)
@@ -73,21 +98,35 @@ class PracticeRequest extends BaseController
 	public function approve(string $practiceId)
 	{
 		try {
+			$deploymentType = $this->request->getPost('deployment_type');
 			$databaseServerTemplates = AuxPaceClient::getDatabaseServerTemplateList();
 
-			$databaseServerTemplate = current(array_filter($databaseServerTemplates, function ($dst) {
-				return (string) $dst['ID'] === $this->request->getPost('template');
-			}));
+			$serverId = "0";
+			$parentTenantId = "0";
+			$databaseServerTemplate = ['server_id' => "0", 'template_id' => "0"];
 
-			if (!$databaseServerTemplate) {
-				session()->setFlashdata('error', "Error fetching database server template");
-				return redirect()->back();
+			if ($deploymentType === "dedicated_server") {
+				$databaseServerTemplate = current(array_filter($databaseServerTemplates, function ($dst) {
+					return (string) $dst['ID'] === $this->request->getPost('template');
+				}));
+
+				if (!$databaseServerTemplate) {
+					session()->setFlashdata('error', "Error fetching database server template");
+					return redirect()->back();
+				}
+			}
+
+
+			if ($deploymentType === "dedicated_server") {
+				$serverId = $this->request->getPost('server');
+			} elseif ($deploymentType === "co_tenant") {
+				$parentTenantId = $this->request->getPost('parent_practice');
 			}
 
 			$approvePractice = AuxPaceClient::approvePractice([
 				'PracticeId' => $practiceId,
-				'ServerId' => $this->request->getPost('server'),
-				'ParentTenantId' => '0',
+				'ServerId' => $serverId,
+				'ParentTenantId' => $parentTenantId,
 				'DatabaseServerId' => $databaseServerTemplate['server_id'],
 				'DatabaseTemplateId' => $databaseServerTemplate['template_id']
 			]);

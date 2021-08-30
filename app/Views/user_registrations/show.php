@@ -23,13 +23,6 @@
             <span>User Registration Management</span>
         </li>
     </ul>
-    <div class="page-toolbar">
-        <div id="dashboard-report-range" class="pull-right tooltips btn btn-sm" data-container="body" data-placement="bottom" data-original-title="Change dashboard date range">
-            <i class="icon-calendar"></i>&nbsp;
-            <span class="thin uppercase hidden-xs"></span>&nbsp;
-            <i class="fa fa-angle-down"></i>
-        </div>
-    </div>
 </div>
 
 <h3 class="page-title">User Registration Management</h3>
@@ -148,13 +141,9 @@
             $.ajax({
                     method: "POST",
                     url: "/user-registrations/resend-notification/<?= $user['UniqueId'] ?>",
-                    data: {
-                        UniqueIds: ["<?= $user['UniqueId'] ?>"]
-                    }
                 })
                 .done(function(data) {
-                    resendNotificationResponseContainer.html(data);
-                    resendNotificationResponseContainer.html(`<span class="font-green-jungle">${data.responseText}</span>`);
+                    resendNotificationResponseContainer.html(`<span class="font-green-jungle">Notification resent successfully!</span>`);
                 })
                 .fail(function(error) {
                     resendNotificationResponseContainer.html(`<span class="font-red">${error.responseJSON.error}</span>`);

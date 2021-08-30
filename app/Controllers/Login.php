@@ -37,8 +37,7 @@ class Login extends BaseController
         $responseData = json_decode($response->getBody());
 
         $clientGrantUrl = $responseData->ResponseData[0]->ClientGrantUrls[0]->Url;
-        $redirectUrl = 'http://localhost:8888/automedsys-pace-admin/oauth';
-        // $redirectUrl =  base_url(route_to('google_oauth_callback'));
+        $redirectUrl =  base_url(route_to('google_oauth_callback'));
         $authenticationUri = str_replace('{redirect_uri}', $redirectUrl, $clientGrantUrl);
 
         return redirect()->to($authenticationUri);
@@ -58,8 +57,7 @@ class Login extends BaseController
             'IdentityProvider' =>  $identityProvider,
             'ClientId' =>  $clientId,
             'TokenRequestType' => '0',
-            // 'RedirectUrl' => base_url(route_to('google_oauth_callback')),
-            'RedirectUrl' => 'http://localhost:8888/automedsys-pace-admin/oauth',
+            'RedirectUrl' => base_url(route_to('google_oauth_callback')),
         ];
 
         try {

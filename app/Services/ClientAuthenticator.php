@@ -21,7 +21,7 @@ class ClientAuthenticator
             "{$baseUrl}/emrapi/v1/identity/connect/otoken",
             [
                 'auth' => [$username, $password],
-                'header' => [
+                'headers' => [
                     'Content-Type' => 'application/json',
                     'Media-Type' => 'application/json',
                 ],
