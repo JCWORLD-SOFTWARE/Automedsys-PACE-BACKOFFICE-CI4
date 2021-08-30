@@ -90,7 +90,7 @@ ADD . .
 RUN composer validate
 RUN composer install --optimize-autoloader --prefer-dist --no-progress --no-dev
 
-RUN chown -R www-data:www-data /var/www/app
+RUN chown -R www-data:www-data /var/www/app/*
 
 RUN mkdir /run/php
 
