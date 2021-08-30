@@ -24,7 +24,4 @@ if [[ ! -z "${PHP_MAX_REQUESTS}" ]]; then
   sed -i "s,pm.max_requests = 500,pm.max_requests = ${PHP_MAX_REQUESTS},g" /etc/php/7.4/fpm/pool.d/laravel.conf
 fi
 
-/usr/bin/php /var/www/app/artisan migrate --force
-/usr/bin/php /var/www/app/artisan db:seed
-
 /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
