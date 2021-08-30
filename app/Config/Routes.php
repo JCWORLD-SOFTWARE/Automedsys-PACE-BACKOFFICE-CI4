@@ -53,6 +53,8 @@ $routes->get('/user-registrations', 'UserRegistration::index', ['filter' => 'aut
 $routes->get('/user-registrations/create', 'UserRegistration::create', ['filter' => 'auth', 'as' => 'user_registration_create']);
 $routes->post('/user-registrations/create', 'UserRegistration::store', ['filter' => 'auth', 'as' => 'user_registration_store']);
 $routes->get('/user-registrations/show/(:segment)', 'UserRegistration::show/$1', ['filter' => 'auth', 'as' => 'user_registration_show']);
+$routes->get('/user-registrations/edit/(:segment)', 'UserRegistration::edit/$1', ['filter' => 'auth', 'as' => 'user_registration_edit']);
+$routes->post('/user-registrations/edit/(:segment)', 'UserRegistration::update/$1', ['filter' => 'auth', 'as' => 'user_registration_update']);
 $routes->post('/user-registrations/resend-notification/(:segment)', 'UserRegistration::resendNotification/$1', ['filter' => 'auth', 'as' => 'user_registration_notification_resend']);
 $routes->get('/user-registrations/delete/(:segment)', 'UserRegistration::delete/$1', ['filter' => 'auth', 'as' => 'user_registration_delete']);
 

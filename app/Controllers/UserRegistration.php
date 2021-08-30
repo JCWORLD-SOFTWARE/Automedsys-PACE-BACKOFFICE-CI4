@@ -62,13 +62,13 @@ class UserRegistration extends BaseController
 		$validation =  Services::validation();
 
 		$validation->setRules([
-			'first_name' => 'required|min_length[2]',
-			'last_name' => 'required|min_length[2]',
-			'npi' => 'required|exact_length[10]',
-			'email_address' => 'required|valid_email',
+			'first_name' => 'required|string|min_length[2]',
+			'last_name' => 'required|string|min_length[2]',
+			'npi' => 'string|exact_length[0,10]',
+			'email_address' => 'required|string|valid_email',
 			'phone_number' => 'required|numeric',
-			'password' => 'required|min_length[5]',
-			'g-recaptcha-response' => 'required',
+			'password' => 'required|string|min_length[5]',
+			'g-recaptcha-response' => 'required|string',
 		]);
 
 		if (!$validation->withRequest($this->request)->run()) {
@@ -155,6 +155,82 @@ class UserRegistration extends BaseController
 		$response = json_decode($response->getBody(), true);
 
 		return $this->respond($response);
+	}
+
+	public function edit(string $id)
+	{
+		$token = ClientAuthenticator::getToken();
+		$client = new HTTPClient();
+		$apiEndpointsConfig = config('ApiEndpoints');
+
+		try {
+			$response = $client->request(
+				'GET',
+				"{$apiEndpointsConfig->baseUrl}/paceapi/v1/signup/{$id}",
+				['headers' => ['Authorization' => "Bearer {$token}"]]
+			);
+		} catch (Exception $exception) {
+			session()->setFlashdata('error', "<pre>{$exception->getMessage()}</pre>");
+			return redirect()->route('user_registration_index');
+		}
+
+		$response = json_decode($response->getBody(), true);
+
+		return view('user_registrations/edit', [
+			'user' => $response['ResponseData'],
+		]);
+	}
+
+	public function update(string $id)
+	{
+		$token = ClientAuthenticator::getToken();
+		$client = new HTTPClient();
+		$apiEndpointsConfig = config('ApiEndpoints');
+
+		$validation =  Services::validation();
+
+		$validation->setRules([
+			'first_name' => 'required|string|min_length[2]',
+			'last_name' => 'required|string|min_length[2]',
+			'npi' => 'string|exact_length[0,10]',
+			'email_address' => 'required|string|valid_email',
+			'phone_number' => 'required|numeric',
+			'password' => 'required|string|min_length[5]',
+			'g-recaptcha-response' => 'required|string',
+		]);
+
+		if (!$validation->withRequest($this->request)->run()) {
+			return redirect()->back()
+				->withInput()
+				->with('errors', $validation->getErrors());
+		}
+
+		try {
+			$client->request(
+				'PATCH',
+				"{$apiEndpointsConfig->baseUrl}/paceapi/v1/signup/{$id}",
+				[
+					'headers' => ['Authorization' => "Bearer {$token}"],
+					'json' => [
+						'UsernameEmail' => $this->request->getPost('email_address'),
+						'Password' => $this->request->getPost('password'),
+						'FirstName' => $this->request->getPost('first_name'),
+						'LastName' => $this->request->getPost('last_name'),
+						'Telephone' => $this->request->getPost('phone_number'),
+						'ProviderNPI' => $this->request->getPost('npi'),
+						'RequestUrl' => "http://dev.automedsys.com/signup",
+						'captchaToken' => $this->request->getPost('g-recaptcha-response')
+					]
+				]
+			);
+		} catch (Exception $exception) {
+			session()->setFlashdata('error', "<pre>{$exception->getMessage()}</pre>");
+			return redirect()->back()->withInput();
+		}
+
+		session()->setFlashdata('success', 'User sign up updated successfully');
+
+		return redirect()->route('user_registration_index');
 	}
 
 	public function delete(string $id)

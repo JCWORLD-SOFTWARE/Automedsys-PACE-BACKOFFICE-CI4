@@ -82,7 +82,7 @@
                                     <td nowrap=""><?= date("d/m/Y h:i a", strtotime($user["created_dt"])) ?></td>
                                     <td>
                                         <a class="btn btn-sm blue" href="<?= base_url(route_to('user_registration_show', $user["UniqueId"])); ?>">View</a>
-                                        <a class="btn btn-sm green" href="/crud/applicationupdate?id=2">Edit</a>
+                                        <a class="btn btn-sm green" href="<?= base_url(route_to('user_registration_edit', $user["UniqueId"])); ?>">Edit</a>
                                         <a class="btn btn-sm red" href="<?= base_url(route_to('user_registration_delete', $user["UniqueId"])); ?>" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
                                     </td>
                                 </tr>
