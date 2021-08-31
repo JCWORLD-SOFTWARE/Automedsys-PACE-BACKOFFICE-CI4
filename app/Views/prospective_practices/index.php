@@ -54,6 +54,48 @@
                 <div class="table-responsive">
                     <?= $pager->links() ?>
 
+                    <table class="table table-bordered" style="font-size: 12px;">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Practice Name<br>(Username)</th>
+                                <th>Tax ID</th>
+                                <th>Practice NPI<br>(Code)</th>
+                                <th>Phone (Fax)</th>
+                                <th>Contact Email<br>(Name)</th>
+                                <th>Created</th>
+                                <th>Edit / Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($prospectivePractices as $practice) : ?>
+                                <tr>
+                                    <td rowspan="2"><?= $practice["ID"] ?></td>
+                                    <td><?= $practice["PracticeName"] ?> (<?= $practice["PracticeName"] ?>)</td>
+                                    <td><?= $practice["TaxID"] ? $practice["TaxID"] : "N/A" ?></td>
+                                    <td><?= $practice["NPI"] ?><br />(<?= $practice["PracticeCode"] ?>)</td>
+                                    <td><?= $practice["phone"] ?> (<?= $practice["fax"] ?>)</td>
+                                    <td><?= $practice["contact_email"] ?><br />(<?= $practice["contact_firstname"] . ' ' . $practice["contact_firstname"] ?>)</td>
+                                    <td class="center" nowrap=""><?= str_replace(' ', '<br/>', strtok($practice["created_dt"], '.')) ?></td>
+                                    <td>
+                                        <a class="btn btn-sm btn-block green" href="/crud/applicationupdate?id=2">Edit</a>
+                                        <a class="btn btn-sm btn-block blue margin-top-10" href="<?= base_url(route_to('prospective_practice_show', $practice["PracticeCode"])); ?>">View</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><?= "{$practice["Street1"]} {$practice["Street2"]}, {$practice["City"]}, {$practice["State"]}, {$practice["ZipCode"]}, {$practice["Country"]}" ?></td>
+                                    <td class="server-db-name" colspan="2"><?= $practice["Server"] ?> / <?= $practice["DBName"] ?></td>
+                                    <td>
+                                        <a class="btn btn-sm btn-block green-jungle" href="<?= base_url(route_to('practice_request_show', $practice["PracticeCode"])); ?>" onclick="return confirm('Are you sure you want to approve this practice?')">Approve Practice</a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-sm btn-block red" href="#" onclick="return confirm('Are you sure you want to delete this application?')">Delete</a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+
                     <table class="table table-bordered table-striped" style="font-size: 12px;">
                         <thead>
                             <tr>
