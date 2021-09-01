@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Services\ClientAuthenticator;
+use App\Services\EmailNotifier;
 use CodeIgniter\API\ResponseTrait;
 use Exception;
 use GuzzleHttp\Client as HTTPClient;
@@ -69,5 +70,28 @@ class ActivePractice extends BaseController
 		return view('active_practices/show', [
 			'practice' => $response['ResponseData'],
 		]);
+	}
+
+	public function resendNotification(string $id)
+	{
+		$client = new HTTPClient();
+		$apiEndpointsConfig = config('ApiEndpoints');
+
+		try {
+			$token = ClientAuthenticator::getToken();
+			$response = $client->request(
+				'GET',
+				"{$apiEndpointsConfig->baseUrl}/paceapi/v1/active/practices/{$id}",
+				['headers' => ['Authorization' => "Bearer {$token}"]]
+			);
+
+			$response = json_decode($response->getBody(), true);
+
+			EmailNotifier::providerDeploymentReminder($response['ResponseData']);
+		} catch (Exception $exception) {
+			return $this->respond(['message' => $exception->getMessage()], 400);
+		}
+
+		return $this->respond(['message' => "Notification sent successfully"]);
 	}
 }

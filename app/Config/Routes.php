@@ -60,6 +60,7 @@ $routes->get('/user-registrations/delete/(:segment)', 'UserRegistration::delete/
 
 $routes->get('/active-practices', 'ActivePractice::index', ['filter' => 'auth', 'as' => 'active_practice_index']);
 $routes->get('/active-practices/show/(:segment)', 'ActivePractice::show/$1', ['filter' => 'auth', 'as' => 'active_practice_show']);
+$routes->post('/active-practices/resend-notification/(:segment)', 'ActivePractice::resendNotification/$1', ['filter' => 'auth', 'as' => 'active_practice_notification_resend']);
 $routes->get('/prospective-practices', 'ProspectivePractice::index', ['filter' => 'auth', 'as' => 'prospective_practice_index']);
 $routes->get('/prospective-practices/show/(:segment)', 'ProspectivePractice::show/$1', ['filter' => 'auth', 'as' => 'prospective_practice_show']);
 

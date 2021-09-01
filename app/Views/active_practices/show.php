@@ -94,8 +94,54 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div class="margin-top-20">
+                    <button id="resend-notification-button" type="button" class="btn blue">
+                        Resend Notification <i class="fa fa-bell icon-black"></i>
+                    </button>
+
+                    <div id="resend-notification-response" class="margin-top-10">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<?= $this->endSection() ?>
+
+<?= $this->section('scripts') ?>
+<script>
+    function formatObjectToPrettyJson(data) {
+        return JSON.stringify(data, '', 4)
+            .replace(/\n( *)/g, function(match, p1) {
+                return '<br>' + '&nbsp;'.repeat(p1.length);
+            })
+    }
+
+    $(document).ready(function() {
+        var resendNotificationButton = $('#resend-notification-button');
+        var resendNotificationResponseContainer = $('#resend-notification-response');
+
+        resendNotificationButton.on('click', function() {
+            resendNotificationButton.html("Resending notification...").prop("disabled", true);
+            resendNotificationResponseContainer.html("");
+
+            $.ajax({
+                    method: "POST",
+                    url: "/active-practices/resend-notification/<?= $practice['PracticeCode'] ?>",
+                })
+                .done(function(data) {
+                    resendNotificationResponseContainer.html(`<span class="font-green-jungle">Notification resent successfully!</span>`);
+                })
+                .fail(function(error) {
+                    resendNotificationResponseContainer.html(`<span class="font-red">${error.responseJSON.error}</span>`);
+                })
+                .always(function() {
+                    resendNotificationButton
+                        .html('Resend Notification <i class="fa fa-bell icon-black"></i>')
+                        .prop("disabled", false);
+                });
+        });
+    });
+</script>
 <?= $this->endSection() ?>
