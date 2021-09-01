@@ -4,7 +4,9 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Services\ClientAuthenticator;
+use App\Services\EmailNotifier;
 use CodeIgniter\API\ResponseTrait;
+use Exception;
 use GuzzleHttp\Client as HTTPClient;
 
 class ActivePractice extends BaseController
@@ -15,12 +17,12 @@ class ActivePractice extends BaseController
 
 	public function index()
 	{
-		$token = ClientAuthenticator::getToken();
 		$client = new HTTPClient();
 		$apiEndpointsConfig = config('ApiEndpoints');
 
 		$page = $this->request->getVar('page') ?? 1;
 
+		$token = ClientAuthenticator::getToken();
 		$response = $client->request(
 			'GET',
 			"{$apiEndpointsConfig->baseUrl}/paceapi/v1/active/practices",
@@ -44,5 +46,52 @@ class ActivePractice extends BaseController
 			'activePractices' => $response['ResponseData']['Items'],
 			'pager' => $pager,
 		]);
+	}
+
+	public function show(string $id)
+	{
+		$client = new HTTPClient();
+		$apiEndpointsConfig = config('ApiEndpoints');
+
+		try {
+			$token = ClientAuthenticator::getToken();
+			$response = $client->request(
+				'GET',
+				"{$apiEndpointsConfig->baseUrl}/paceapi/v1/active/practices/{$id}",
+				['headers' => ['Authorization' => "Bearer {$token}"]]
+			);
+		} catch (Exception $exception) {
+			session()->setFlashdata('error', "<pre>{$exception->getMessage()}</pre>");
+			return redirect()->route('active_practice_index');
+		}
+
+		$response = json_decode($response->getBody(), true);
+
+		return view('active_practices/show', [
+			'practice' => $response['ResponseData'],
+		]);
+	}
+
+	public function resendNotification(string $id)
+	{
+		$client = new HTTPClient();
+		$apiEndpointsConfig = config('ApiEndpoints');
+
+		try {
+			$token = ClientAuthenticator::getToken();
+			$response = $client->request(
+				'GET',
+				"{$apiEndpointsConfig->baseUrl}/paceapi/v1/active/practices/{$id}",
+				['headers' => ['Authorization' => "Bearer {$token}"]]
+			);
+
+			$response = json_decode($response->getBody(), true);
+
+			EmailNotifier::providerDeploymentReminder($response['ResponseData']);
+		} catch (Exception $exception) {
+			return $this->respond(['message' => $exception->getMessage()], 400);
+		}
+
+		return $this->respond(['message' => "Notification sent successfully"]);
 	}
 }

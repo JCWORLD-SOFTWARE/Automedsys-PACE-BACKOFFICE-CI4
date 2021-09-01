@@ -10,15 +10,9 @@ class EmailNotifier
 	{
 		$parser = Services::parser();
 
-		$fullName = $application['contact_prefix'] ? "{$application['contact_prefix']} " : "";
-		$fullName .= $application['contact_firstname'] ? "{$application['contact_firstname']} " : "";
-		$fullName .= $application['contact_middlename'] ? "{$application['contact_middlename']} " : "";
-		$fullName .= $application['contact_lastname'] ? "{$application['contact_lastname']} " : "";
-		$fullName .= $application['contact_suffix'] ? "{$application['contact_suffix']}" : "";
-
 		$message = $parser
 			->setVar('firstName', $application['contact_firstname'])
-			->setVar('fullName', trim($fullName))
+			->setVar('fullName', static::getFullName($application))
 			->setVar('username', $application['username'])
 			->setVar('practiceId', $application['PracticeCode'])
 			->setVar('loginUrl', 'http://dev-practice.automedsys.net/')
@@ -30,5 +24,36 @@ class EmailNotifier
 		$email->setSubject('Congratulations and Welcome to autoMedsys');
 		$email->setMessage($message);
 		$email->send();
+	}
+
+	public static function providerDeploymentReminder(array $practice)
+	{
+		$parser = Services::parser();
+
+		$message = $parser
+			->setVar('firstName', $practice['contact_firstname'])
+			->setVar('fullName', static::getFullName($practice))
+			->setVar('username', $practice['contact_email'])
+			->setVar('practiceId', $practice['PracticeCode'])
+			->setVar('loginUrl', 'http://dev-practice.automedsys.net/')
+			->render('emails/provider_practice_deployed');
+
+		$email = Services::email();
+		$email->setFrom('support@automedsys.com', 'AutoMedSys Support');
+		$email->setTo($practice['contact_email']);
+		$email->setSubject('Congratulations and Welcome to autoMedsys');
+		$email->setMessage($message);
+		$email->send();
+	}
+
+	public static function getFullName(array $practice): string
+	{
+		$fullName = $practice['contact_prefix'] ? "{$practice['contact_prefix']} " : "";
+		$fullName .= $practice['contact_firstname'] ? "{$practice['contact_firstname']} " : "";
+		$fullName .= $practice['contact_middlename'] ? "{$practice['contact_middlename']} " : "";
+		$fullName .= $practice['contact_lastname'] ? "{$practice['contact_lastname']} " : "";
+		$fullName .= $practice['contact_suffix'] ? "{$practice['contact_suffix']}" : "";
+
+		return trim($fullName);
 	}
 }
