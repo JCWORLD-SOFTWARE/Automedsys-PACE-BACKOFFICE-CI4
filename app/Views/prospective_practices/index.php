@@ -78,7 +78,7 @@
                                     <td><?= $practice["contact_email"] ?><br />(<?= $practice["contact_firstname"] . ' ' . $practice["contact_firstname"] ?>)</td>
                                     <td class="center" nowrap=""><?= date("d/m/Y h:i a", strtotime($practice["created_dt"])) ?></td>
                                     <td>
-                                        <a class="btn btn-sm btn-block green" href="/crud/applicationupdate?id=2">Edit</a>
+                                        <a class="btn btn-sm btn-block green" href="#">Edit</a>
                                         <a class="btn btn-sm btn-block blue margin-top-10" href="<?= base_url(route_to('prospective_practice_show', $practice["PracticeCode"])); ?>">View</a>
                                     </td>
                                 </tr>
