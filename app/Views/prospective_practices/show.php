@@ -89,7 +89,7 @@
                             </tr>
                             <tr>
                                 <th>Created Date</th>
-                                <td colspan="2"><?= strtok($practice['created_dt'], ' ') ?></td>
+                                <td colspan="2"><?= date("d/m/Y h:i a", strtotime($practice["created_dt"])) ?></td>
                             </tr>
                         </tbody>
                     </table>
