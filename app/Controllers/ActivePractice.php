@@ -93,7 +93,7 @@ class ActivePractice extends BaseController
 		$response = json_decode($response->getBody(), true);
 
 		return view('active_practices/edit', [
-			'user' => $response['ResponseData'],
+			'practice' => $response['ResponseData'],
 		]);
 	}
 
@@ -105,24 +105,19 @@ class ActivePractice extends BaseController
 		$validation =  Services::validation();
 
 		$validation->setRules([
-			'PracticeName' => "required|string|min_length[2]",
-			'Street1' => "required|string|min_length[2]",
-			'Street2' => "required|string|min_length[2]",
-			'City' => "required|string|min_length[2]",
-			'State' => "required|string|min_length[2]",
-			'ZipCode' => "required|string|min_length[2]",
-			'Country' => "required|string|min_length[2]",
-			'TaxID' => "required|string|min_length[2]",
-			'NPI' => "string|exact_length[0,10]",
-			'phone' => "required|string|min_length[5]",
-			'fax' => "required|string|min_length[2]",
-			'contact_email' => "required|string|valid_email",
+			'practice_npi' => "string|exact_length[0,10]",
+			'practice_name' => "required|string|min_length[2]",
+			'address_line_1' => "required|string|min_length[2]",
+			'address_line_2' => "required|string|min_length[2]",
+			'country' => "required|string|min_length[2]",
+			'state' => "required|string|min_length[2]",
+			'city' => "required|string|min_length[2]",
+			'zip_code' => "required|string|min_length[2]",
+			'contact_prefix' => "string",
 			'contact_firstname' => "required|string|min_length[2]",
+			'contact_middlename' => "string",
 			'contact_lastname' => "required|string|min_length[2]",
-			'contact_middlename' => "required|string|min_length[2]",
-			'contact_prefix' => "required|string|min_length[2]",
-			'contact_suffix' => "required|string|min_length[2]",
-			'CLIANO' => "required|string|min_length[2]",
+			'contact_suffix' => "string",
 		]);
 
 		if (!$validation->withRequest($this->request)->run()) {
@@ -139,25 +134,20 @@ class ActivePractice extends BaseController
 				[
 					'headers' => ['Authorization' => "Bearer {$token}"],
 					'json' => [
+						'NPI' =>  $this->request->getPost('practice_npi'),
 						'PracticeName' =>  $this->request->getPost('practice_name'),
-						'Street1' =>  $this->request->getPost('street1'),
-						'Street2' =>  $this->request->getPost('street2'),
-						'City' =>  $this->request->getPost('city'),
-						'State' =>  $this->request->getPost('state'),
-						'ZipCode' =>  $this->request->getPost('zip_code'),
+						'Street1' =>  $this->request->getPost('address_line_1'),
+						'Street2' =>  $this->request->getPost('address_line_2'),
 						'Country' =>  $this->request->getPost('country'),
-						'TaxID' =>  $this->request->getPost('tax_id'),
-						'NPI' =>  $this->request->getPost('npi'),
-						'phone' =>  $this->request->getPost('phone'),
-						'fax' =>  $this->request->getPost('fax'),
-						'contact_email' =>  $this->request->getPost('contact_email'),
-						'contact_firstname' =>  $this->request->getPost('contact_first_name'),
-						'contact_lastname' =>  $this->request->getPost('contact_last_name'),
-						'contact_middlename' =>  $this->request->getPost('contact_middle_name'),
+						'State' =>  $this->request->getPost('state'),
+						'City' =>  $this->request->getPost('city'),
+						'ZipCode' =>  $this->request->getPost('zip_code'),
 						'contact_prefix' =>  $this->request->getPost('contact_prefix'),
+						'contact_firstname' =>  $this->request->getPost('contact_first_name'),
+						'contact_middlename' =>  $this->request->getPost('contact_middle_name'),
+						'contact_lastname' =>  $this->request->getPost('contact_last_name'),
 						'contact_suffix' =>  $this->request->getPost('contact_suffix'),
-						'CLIANO' =>  $this->request->getPost('CLIANO'),
-					]
+					],
 				]
 			);
 		} catch (Exception $exception) {

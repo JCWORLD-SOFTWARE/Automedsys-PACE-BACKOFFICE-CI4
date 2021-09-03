@@ -81,7 +81,7 @@
                             </tr>
                             <tr>
                                 <th>Phone (Fax)</th>
-                                <td colspan="2"><?= $practice['phone'] ?> (<?= $practice['fax'] ?? "N/A" ?>)</td>
+                                <td colspan="2"><?= $practice['phone'] ?> (<?= $practice['fax'] ? $practice['fax'] : "N/A" ?>)</td>
                             </tr>
                             <tr>
                                 <th>Contact Email (Name)</th>

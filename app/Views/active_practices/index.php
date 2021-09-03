@@ -77,7 +77,7 @@
                                     <td class="center" nowrap=""><?= date("d/m/Y h:i a", strtotime($practice["created_dt"])) ?></td>
                                     <td nowrap="">
                                         <a class="btn btn-sm blue" href="<?= base_url(route_to('active_practice_show', $practice["PracticeCode"])); ?>">View</a>
-                                        <a class="btn btn-sm green" href="#">Edit</a>
+                                        <a class="btn btn-sm green" href="<?= base_url(route_to('active_practice_edit', $practice["PracticeCode"])); ?>">Edit</a>
                                         <a class="btn btn-sm red" href="#">Suspend</a>
                                     </td>
                                 </tr>
