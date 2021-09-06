@@ -81,7 +81,7 @@
                             </tr>
                             <tr>
                                 <th>Phone (Fax)</th>
-                                <td colspan="2"><?= $practice['phone'] ?> (<?= $practice['fax'] ?? "N/A" ?>)</td>
+                                <td colspan="2"><?= $practice['phone'] ?> (<?= $practice['fax'] ? $practice['fax'] : "N/A" ?>)</td>
                             </tr>
                             <tr>
                                 <th>Contact Email (Name)</th>
@@ -89,7 +89,7 @@
                             </tr>
                             <tr>
                                 <th>Created Date</th>
-                                <td colspan="2"><?= strtok($practice['created_dt'], ' ') ?></td>
+                                <td colspan="2"><?= date("d/m/Y h:i a", strtotime($practice["created_dt"])) ?></td>
                             </tr>
                         </tbody>
                     </table>

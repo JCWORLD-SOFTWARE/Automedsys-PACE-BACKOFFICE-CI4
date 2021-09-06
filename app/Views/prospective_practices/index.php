@@ -68,8 +68,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($prospectivePractices as $practice) : ?>
-                                <tr>
+                            <?php
+                            $ii = 0;
+                            ?>
+                            <?php foreach ($prospectivePractices as $practice) :
+                                $ii++;
+                                $color = ($ii % 2 === 0) ? "#ffffff" : "#efefef"
+                            ?>
+                                <tr style="background-color: <?= $color ?>;">
                                     <td rowspan="2"><?= $practice["ID"] ?></td>
                                     <td><?= $practice["PracticeName"] ?> (<?= $practice["PracticeName"] ?>)</td>
                                     <td><?= $practice["TaxID"] ? $practice["TaxID"] : "N/A" ?></td>
@@ -78,11 +84,11 @@
                                     <td><?= $practice["contact_email"] ?><br />(<?= $practice["contact_firstname"] . ' ' . $practice["contact_firstname"] ?>)</td>
                                     <td class="center" nowrap=""><?= date("d/m/Y h:i a", strtotime($practice["created_dt"])) ?></td>
                                     <td>
-                                        <a class="btn btn-sm btn-block green" href="#">Edit</a>
+                                        <a class="btn btn-sm btn-block green" href="<?= base_url(route_to('prospective_practice_edit', $practice["PracticeCode"])); ?>">Edit</a>
                                         <a class="btn btn-sm btn-block blue margin-top-10" href="<?= base_url(route_to('prospective_practice_show', $practice["PracticeCode"])); ?>">View</a>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr style="background-color: <?= $color ?>;">
                                     <td colspan="3"><?= "{$practice["Street1"]} {$practice["Street2"]}, {$practice["City"]}, {$practice["State"]}, {$practice["ZipCode"]}, {$practice["Country"]}" ?></td>
                                     <td class="server-db-name" colspan="2"><?= $practice["Server"] ?> / <?= $practice["DBName"] ?></td>
                                     <td>

@@ -15,7 +15,7 @@ class EmailNotifier
 			->setVar('fullName', static::getFullName($application))
 			->setVar('username', $application['username'])
 			->setVar('practiceId', $application['PracticeCode'])
-			->setVar('loginUrl', 'http://dev-practice.automedsys.net/')
+			->setVar('loginUrl', 'https://dev-epcs.automedsys.net')
 			->render('emails/provider_practice_deployed');
 
 		$email = Services::email();
@@ -35,7 +35,7 @@ class EmailNotifier
 			->setVar('fullName', static::getFullName($practice))
 			->setVar('username', $practice['contact_email'])
 			->setVar('practiceId', $practice['PracticeCode'])
-			->setVar('loginUrl', 'http://dev-practice.automedsys.net/')
+			->setVar('loginUrl', 'https://dev-epcs.automedsys.net')
 			->render('emails/provider_practice_deployed');
 
 		$email = Services::email();
