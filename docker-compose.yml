@@ -8,4 +8,4 @@ services:
             - ./:/var/www/app
             - /var/www/app/vendor
         ports:
-            - "8003:80"
+            - "${PORT}:80"
