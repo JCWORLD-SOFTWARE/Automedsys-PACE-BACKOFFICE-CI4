@@ -8,10 +8,4 @@ services:
             - ./:/var/www/app
             - /var/www/app/vendor
         ports:
-            - "8235:80"
-        networks:
-            - automedsys-backoffice_vpc
-
-networks:
-    automedsys-backoffice_vpc:
-        external: true
+            - "8003:80"
