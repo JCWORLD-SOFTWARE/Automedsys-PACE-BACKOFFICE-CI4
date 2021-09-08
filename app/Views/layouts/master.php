@@ -155,8 +155,8 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item">
-                                <a href="<?= base_url(route_to('practice_request_index')); ?>" class="nav-link ">
-                                    <span class="title">List Applications</span>
+                                <a href="<?= base_url(route_to('prospective_practice_index')); ?>" class="nav-link ">
+                                    <span class="title">Prospective Practices</span>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -167,11 +167,6 @@
                             <li class="nav-item">
                                 <a href="<?= base_url(route_to('active_practice_index_suspended')); ?>" class="nav-link ">
                                     <span class="title">Suspended Practices</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?= base_url(route_to('prospective_practice_index')); ?>" class="nav-link ">
-                                    <span class="title">Prospective Practices</span>
                                 </a>
                             </li>
                         </ul>

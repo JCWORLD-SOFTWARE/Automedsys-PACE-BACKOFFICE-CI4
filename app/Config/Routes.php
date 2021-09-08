@@ -41,13 +41,10 @@ $routes->get('/auth/login/google/oauth2/callback', 'Login::handleGoogleOauth2Cal
 $routes->get('/servers', 'Server::index', ['filter' => 'auth', 'as' => 'server_index']);
 $routes->get('/database-server-templates', 'DatabaseServerTemplate::index', ['filter' => 'auth', 'as' => 'database_server_template_index']);
 
-$routes->get('/practice-requests', 'PracticeRequest::index', ['filter' => 'auth', 'as' => 'practice_request_index']);
 $routes->get('/practice-requests/(:alphanum)', 'PracticeRequest::show/$1', ['filter' => 'auth', 'as' => 'practice_request_show']);
 $routes->get('/practice-requests/validate-npi/(:alphanum)', 'PracticeRequest::showNpiData/$1', ['filter' => 'auth', 'as' => 'npi_validate']);
 $routes->post('/practice-requests/approve/(:alphanum)', 'PracticeRequest::approve/$1', ['filter' => 'auth', 'as' => 'practice_request_approve']);
 $routes->get('/practice-requests/approve/(:segment)/success', 'PracticeRequest::showApprovalSuccess/$1', ['filter' => 'auth', 'as' => 'practice_request_approve_success_show']);
-
-$routes->get('/deployed-practices/filter/(:segment)', 'DeployedPractice::indexFiltered/$1', ['filter' => 'auth', 'as' => 'deployed_practice_index_filtered']);
 
 $routes->get('/user-registrations', 'UserRegistration::index', ['filter' => 'auth', 'as' => 'user_registration_index']);
 $routes->get('/user-registrations/create', 'UserRegistration::create', ['filter' => 'auth', 'as' => 'user_registration_create']);
@@ -58,6 +55,7 @@ $routes->post('/user-registrations/edit/(:segment)', 'UserRegistration::update/$
 $routes->post('/user-registrations/resend-notification/(:segment)', 'UserRegistration::resendNotification/$1', ['filter' => 'auth', 'as' => 'user_registration_notification_resend']);
 $routes->get('/user-registrations/delete/(:segment)', 'UserRegistration::delete/$1', ['filter' => 'auth', 'as' => 'user_registration_delete']);
 
+$routes->get('/deployed-practices/filter/(:segment)', 'DeployedPractice::indexFiltered/$1', ['filter' => 'auth', 'as' => 'deployed_practice_index_filtered']);
 $routes->get('/active-practices/active', 'DeployedPractice::indexActive', ['filter' => 'auth', 'as' => 'active_practice_index_active']);
 $routes->get('/active-practices/suspended', 'DeployedPractice::indexSuspended', ['filter' => 'auth', 'as' => 'active_practice_index_suspended']);
 $routes->get('/active-practices/show/(:segment)', 'DeployedPractice::show/$1', ['filter' => 'auth', 'as' => 'active_practice_show']);

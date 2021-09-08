@@ -22,27 +22,6 @@ class PracticeRequest extends BaseController
 		AuxPaceClient::__constructStatic();
 	}
 
-	public function index()
-	{
-		$page = $this->request->getVar('page') ?? 1;
-		$offset = (($page * static::PER_PAGE) - static::PER_PAGE) ?? 0;
-
-		list($practiceRequests, $practiceRequestCount) = AuxPaceClient::getPracticeRequestList(static::PER_PAGE, $offset);
-
-		$pager = service('pager');
-		$pager->setPath(route_to('practice_request_index'));
-
-		return view('practice_requests/index', [
-			'practiceRequests' => $practiceRequests,
-			'pager' => $pager,
-			'pagination' => [
-				'page' => $page,
-				'perPage' => static::PER_PAGE,
-				'total' => $practiceRequestCount
-			]
-		]);
-	}
-
 	public function show(string $practiceCode)
 	{
 		try {
