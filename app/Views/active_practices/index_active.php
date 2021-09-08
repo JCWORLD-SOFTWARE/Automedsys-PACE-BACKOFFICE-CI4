@@ -67,7 +67,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($activePractices as $practice) : ?>
+                            <?php foreach ($DeployedPractices as $practice) : ?>
                                 <tr>
                                     <td rowspan="2"><?= $practice["ID"] ?></td>
                                     <td><?= $practice["PracticeName"] ?> (<?= $practice["PracticeCode"] ?>)</td>
@@ -78,7 +78,7 @@
                                     <td nowrap="">
                                         <a class="btn btn-sm blue" href="<?= base_url(route_to('active_practice_show', $practice["PracticeCode"])); ?>">View</a>
                                         <a class="btn btn-sm green" href="<?= base_url(route_to('active_practice_edit', $practice["PracticeCode"])); ?>">Edit</a>
-                                        <a class="btn btn-sm red" href="#">Suspend</a>
+                                        <a class="btn btn-sm red" href="<?= base_url(route_to('active_practice_suspend', $practice["PracticeCode"])); ?>" onclick="return confirm('Are you sure you want to suspend this practice?')">Suspend</a>
                                     </td>
                                 </tr>
                                 <tr>

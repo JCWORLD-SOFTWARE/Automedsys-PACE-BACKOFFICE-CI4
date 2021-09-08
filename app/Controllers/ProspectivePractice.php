@@ -158,4 +158,26 @@ class ProspectivePractice extends BaseController
 
 		return redirect()->route('prospective_practice_index');
 	}
+
+	public function delete(string $id)
+	{
+		$client = new HTTPClient();
+		$apiEndpointsConfig = config('ApiEndpoints');
+
+		try {
+			$token = ClientAuthenticator::getToken();
+			$client->request(
+				'DELETE',
+				"{$apiEndpointsConfig->baseUrl}/paceapi/v1/prospective/practices/{$id}/reactivate",
+				['headers' => ['Authorization' => "Bearer {$token}"]]
+			);
+		} catch (Exception $exception) {
+			session()->setFlashdata('error', "<pre>{$exception->getMessage()}</pre>");
+			return redirect()->back();
+		}
+
+		session()->setFlashdata('success', 'Prospective practice deleted successfully');
+
+		return redirect()->route('prospective_practice_index');
+	}
 }

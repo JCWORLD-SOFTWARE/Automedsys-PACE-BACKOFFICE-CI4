@@ -38,7 +38,7 @@
         <div class="portlet light">
             <div class="portlet-title">
                 <div class="caption font-green-jungle">
-                    <span class="caption-subject bold">Active Practice [<?= $practice['PracticeCode'] ?>]</span>
+                    <span class="caption-subject bold">Practice [<?= $practice['PracticeCode'] ?>]</span>
                 </div>
             </div>
             <div class="portlet-body">

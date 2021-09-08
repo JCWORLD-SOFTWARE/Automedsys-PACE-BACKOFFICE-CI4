@@ -72,7 +72,7 @@
         <div class="page-header-inner ">
             <!-- BEGIN LOGO -->
             <div class="page-logo">
-                <a href="index.html">
+                <a href="/">
                     <img src="<?= base_url(); ?>/assets/layouts/layout/img/logo.png" alt="logo" class="logo-default" /> </a>
                 <div class="menu-toggler sidebar-toggler"> </div>
             </div>
@@ -160,8 +160,13 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?= base_url(route_to('active_practice_index')); ?>" class="nav-link ">
+                                <a href="<?= base_url(route_to('active_practice_index_active')); ?>" class="nav-link ">
                                     <span class="title">Active Practices</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url(route_to('active_practice_index_suspended')); ?>" class="nav-link ">
+                                    <span class="title">Suspended Practices</span>
                                 </a>
                             </li>
                             <li class="nav-item">

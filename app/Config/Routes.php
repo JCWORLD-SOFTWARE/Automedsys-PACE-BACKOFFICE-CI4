@@ -58,18 +58,20 @@ $routes->post('/user-registrations/edit/(:segment)', 'UserRegistration::update/$
 $routes->post('/user-registrations/resend-notification/(:segment)', 'UserRegistration::resendNotification/$1', ['filter' => 'auth', 'as' => 'user_registration_notification_resend']);
 $routes->get('/user-registrations/delete/(:segment)', 'UserRegistration::delete/$1', ['filter' => 'auth', 'as' => 'user_registration_delete']);
 
-$routes->get('/active-practices', 'ActivePractice::index', ['filter' => 'auth', 'as' => 'active_practice_index']);
-$routes->get('/active-practices/show/(:segment)', 'ActivePractice::show/$1', ['filter' => 'auth', 'as' => 'active_practice_show']);
-$routes->get('/active-practices/edit/(:segment)', 'ActivePractice::edit/$1', ['filter' => 'auth', 'as' => 'active_practice_edit']);
-$routes->post('/active-practices/edit/(:segment)', 'ActivePractice::update/$1', ['filter' => 'auth', 'as' => 'active_practice_update']);
-$routes->post('/active-practices/resend-notification/(:segment)', 'ActivePractice::resendNotification/$1', ['filter' => 'auth', 'as' => 'active_practice_notification_resend']);
+$routes->get('/active-practices/active', 'DeployedPractice::indexActive', ['filter' => 'auth', 'as' => 'active_practice_index_active']);
+$routes->get('/active-practices/suspended', 'DeployedPractice::indexSuspended', ['filter' => 'auth', 'as' => 'active_practice_index_suspended']);
+$routes->get('/active-practices/show/(:segment)', 'DeployedPractice::show/$1', ['filter' => 'auth', 'as' => 'active_practice_show']);
+$routes->get('/active-practices/edit/(:segment)', 'DeployedPractice::edit/$1', ['filter' => 'auth', 'as' => 'active_practice_edit']);
+$routes->post('/active-practices/edit/(:segment)', 'DeployedPractice::update/$1', ['filter' => 'auth', 'as' => 'active_practice_update']);
+$routes->get('/active-practices/suspend/(:segment)', 'DeployedPractice::suspend/$1', ['filter' => 'auth', 'as' => 'active_practice_suspend']);
+$routes->get('/active-practices/reactivate/(:segment)', 'DeployedPractice::reactivate/$1', ['filter' => 'auth', 'as' => 'active_practice_reactivate']);
+$routes->post('/active-practices/resend-notification/(:segment)', 'DeployedPractice::resendNotification/$1', ['filter' => 'auth', 'as' => 'active_practice_notification_resend']);
 
 $routes->get('/prospective-practices', 'ProspectivePractice::index', ['filter' => 'auth', 'as' => 'prospective_practice_index']);
 $routes->get('/prospective-practices/show/(:segment)', 'ProspectivePractice::show/$1', ['filter' => 'auth', 'as' => 'prospective_practice_show']);
 $routes->get('/prospective-practices/edit/(:segment)', 'ProspectivePractice::edit/$1', ['filter' => 'auth', 'as' => 'prospective_practice_edit']);
 $routes->post('/prospective-practices/edit/(:segment)', 'ProspectivePractice::update/$1', ['filter' => 'auth', 'as' => 'prospective_practice_update']);
-
-
+$routes->get('/prospective-practices/delete/(:segment)', 'ProspectivePractice::delete/$1', ['filter' => 'auth', 'as' => 'prospective_practice_delete']);
 
 /*
  * --------------------------------------------------------------------
