@@ -47,56 +47,42 @@
         <div class="portlet light">
             <div class="portlet-title">
                 <div class="caption font-green-jungle">
-                    <span class="caption-subject bold">Prospective Practices</span>
+                    <span class="caption-subject bold">Suspended Practices</span>
                 </div>
             </div>
             <div class="portlet-body">
                 <div class="table-responsive">
                     <?= $pager->links() ?>
 
-                    <table class="table table-bordered" style="font-size: 12px;">
+                    <table class="table table-bordered table-striped" style="font-size: 12px;">
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Practice Name<br>(Username)</th>
                                 <th>Tax ID</th>
                                 <th>Practice NPI<br>(Code)</th>
-                                <th>Phone (Fax)</th>
                                 <th>Contact Email<br>(Name)</th>
                                 <th>Created</th>
-                                <th>Edit / Delete</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            $ii = 0;
-                            ?>
-                            <?php foreach ($prospectivePractices as $practice) :
-                                $ii++;
-                                $color = ($ii % 2 === 0) ? "#ffffff" : "#efefef"
-                            ?>
-                                <tr style="background-color: <?= $color ?>;">
+                            <?php foreach ($suspendedPractices as $practice) : ?>
+                                <tr>
                                     <td rowspan="2"><?= $practice["ID"] ?></td>
-                                    <td><?= $practice["PracticeName"] ?> (<?= $practice["PracticeName"] ?>)</td>
-                                    <td><?= $practice["TaxID"] ? $practice["TaxID"] : "N/A" ?></td>
+                                    <td><?= $practice["PracticeName"] ?> (<?= $practice["PracticeCode"] ?>)</td>
+                                    <td><?= $practice["TaxID"] ?></td>
                                     <td><?= $practice["NPI"] ?><br />(<?= $practice["PracticeCode"] ?>)</td>
-                                    <td><?= $practice["phone"] ?> (<?= $practice["fax"] ?>)</td>
                                     <td><?= $practice["contact_email"] ?><br />(<?= $practice["contact_firstname"] . ' ' . $practice["contact_firstname"] ?>)</td>
                                     <td class="center" nowrap=""><?= date("d/m/Y h:i a", strtotime($practice["created_dt"])) ?></td>
-                                    <td>
-                                        <a class="btn btn-sm btn-block green" href="<?= base_url(route_to('prospective_practice_edit', $practice["PracticeCode"])); ?>">Edit</a>
-                                        <a class="btn btn-sm btn-block blue margin-top-10" href="<?= base_url(route_to('prospective_practice_show', $practice["PracticeCode"])); ?>">View</a>
+                                    <td nowrap="">
+                                        <a class="btn btn-sm blue" href="<?= base_url(route_to('active_practice_show', $practice["PracticeCode"])); ?>">View</a>
+                                        <a class="btn btn-sm green" href="<?= base_url(route_to('active_practice_edit', $practice["PracticeCode"])); ?>">Edit</a>
+                                        <a class="btn btn-sm green-meadow" href="<?= base_url(route_to('active_practice_reactivate', $practice["PracticeCode"])); ?>" onclick="return confirm('Are you sure you want to reactivate this practice?')">Reactivate</a>
                                     </td>
                                 </tr>
-                                <tr style="background-color: <?= $color ?>;">
-                                    <td colspan="3"><?= "{$practice["Street1"]} {$practice["Street2"]}, {$practice["City"]}, {$practice["State"]}, {$practice["ZipCode"]}, {$practice["Country"]}" ?></td>
-                                    <td class="server-db-name" colspan="2"><?= $practice["Server"] ?> / <?= $practice["DBName"] ?></td>
-                                    <td>
-                                        <a class="btn btn-sm btn-block green-jungle" href="<?= base_url(route_to('practice_request_show', $practice["PracticeCode"])); ?>" onclick="return confirm('Are you sure you want to approve this practice?')">Approve Practice</a>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-sm btn-block red" href="<?= base_url(route_to('prospective_practice_delete', $practice["PracticeCode"])); ?>" onclick="return confirm('Are you sure you want to delete this application?')">Delete</a>
-                                    </td>
+                                <tr>
+                                    <td colspan="6"><?= "{$practice['Street1']} {$practice['Street2']}, {$practice['City']}, {$practice['State']}, {$practice['ZipCode']}, {$practice['Country']}" ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

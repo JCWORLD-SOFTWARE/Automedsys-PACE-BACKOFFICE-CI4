@@ -26,7 +26,7 @@
         <div class="portlet light">
             <div class="portlet-title">
                 <div class="caption font-green-jungle">
-                    <span class="caption-subject bold">Edit Active Practice [<?= $practice["PracticeName"] ?>]</span>
+                    <span class="caption-subject bold">Edit Practice [<?= $practice["PracticeName"] ?>]</span>
                 </div>
             </div>
             <div class="portlet-body form">

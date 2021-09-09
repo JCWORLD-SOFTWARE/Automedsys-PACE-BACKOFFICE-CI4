@@ -7,5 +7,7 @@ services:
         volumes:
             - ./:/var/www/app
             - /var/www/app/vendor
+        extra_hosts:
+            - "dev-api.automedsys.net:10.10.10.3"
         ports:
             - "${PORT}:80"
