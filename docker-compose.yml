@@ -9,5 +9,7 @@ services:
             - /var/www/app/vendor
         extra_hosts:
             - "dev-api.automedsys.net:10.10.10.3"
+            - "stgmw.automedsys.net:10.10.10.3"
+            - "smtp.gmail.com:173.194.206.108"
         ports:
             - "${PORT}:80"

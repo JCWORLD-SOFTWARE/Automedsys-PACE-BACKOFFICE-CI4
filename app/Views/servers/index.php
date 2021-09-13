@@ -33,15 +33,15 @@
                 <table class="table table-striped flip-content">
                     <thead class="flip-content">
                         <tr>
-                            <th>ID</th>
+                            <th width="50">ID</th>
                             <th>Name</th>
                             <th>Host Address</th>
                             <th>Port</th>
                             <th>Binding</th>
                             <th>Status</th>
                             <th>Created</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th width="50">Edit</th>
+                            <th width="50">Delete</th>
                         </tr>
                     </thead>
                     <tbody>

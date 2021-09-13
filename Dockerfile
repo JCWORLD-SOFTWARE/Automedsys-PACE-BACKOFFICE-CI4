@@ -66,6 +66,7 @@ RUN apt-get update && \
     php7.4-xsl \
     php7.4-zip \
     php7.4-intl \
+    php7.4-soap \
     curl \
     zip \
     mcrypt \

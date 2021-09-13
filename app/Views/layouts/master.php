@@ -150,7 +150,7 @@
                     <li class="nav-item">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="icon-diamond"></i>
-                            <span class="title">Practice Applications</span>
+                            <span class="title">Practice Management</span>
                             <span class="arrow"></span>
                         </a>
                         <ul class="sub-menu">
