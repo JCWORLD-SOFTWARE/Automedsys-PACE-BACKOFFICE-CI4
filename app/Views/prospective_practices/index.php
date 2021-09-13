@@ -57,7 +57,7 @@
                     <table class="table table-bordered" style="font-size: 12px;">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th width="50">ID</th>
                                 <th>Practice Name<br>(Username)</th>
                                 <th>Tax ID</th>
                                 <th>Practice NPI<br>(Code)</th>

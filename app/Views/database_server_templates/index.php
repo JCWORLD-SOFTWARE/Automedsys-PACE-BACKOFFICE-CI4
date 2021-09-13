@@ -33,14 +33,14 @@
                 <table class="table table-striped flip-content">
                     <thead class="flip-content">
                         <tr>
-                            <th>ID</th>
+                            <th width="50">ID</th>
                             <th>Server ID</th>
                             <th>Template ID</th>
                             <th>Server Name</th>
                             <th>Server Status</th>
                             <th>Template Name / Template Description</th>
                             <th>Template Status</th>
-                            <th>Created</th>
+                            <th width="200">Created</th>
                         </tr>
                     </thead>
                     <tbody>

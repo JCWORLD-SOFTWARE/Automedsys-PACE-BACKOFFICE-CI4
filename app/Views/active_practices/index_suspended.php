@@ -57,13 +57,13 @@
                     <table class="table table-bordered table-striped" style="font-size: 12px;">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th width="50">ID</th>
                                 <th>Practice Name<br>(Username)</th>
                                 <th>Tax ID</th>
                                 <th>Practice NPI<br>(Code)</th>
                                 <th>Contact Email<br>(Name)</th>
-                                <th>Created</th>
-                                <th>Actions</th>
+                                <th width="200">Created</th>
+                                <th width="220">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
