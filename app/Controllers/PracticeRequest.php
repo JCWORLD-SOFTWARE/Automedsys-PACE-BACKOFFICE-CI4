@@ -4,10 +4,11 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Services\AuxPaceClient;
-use App\Services\EmailNotifier;
+use App\Services\ClientAuthenticator;
 use App\Services\NpiClient;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\Exceptions\PageNotFoundException;
+use GuzzleHttp\Client as HTTPClient;
 use Exception;
 
 class PracticeRequest extends BaseController
@@ -77,6 +78,10 @@ class PracticeRequest extends BaseController
 	public function approve(string $practiceId)
 	{
 		try {
+			$token = ClientAuthenticator::getToken();
+			$client = new HTTPClient();
+			$apiEndpointsConfig = config('ApiEndpoints');
+
 			$deploymentType = $this->request->getPost('deployment_type');
 			$databaseServerTemplates = AuxPaceClient::getDatabaseServerTemplateList();
 
@@ -102,24 +107,28 @@ class PracticeRequest extends BaseController
 				$parentTenantId = $this->request->getPost('parent_practice');
 			}
 
-			$approvePractice = AuxPaceClient::approvePractice([
+			$approvedPractice = AuxPaceClient::approvePractice([
 				'PracticeId' => $practiceId,
 				'ServerId' => $serverId,
 				'ParentTenantId' => $parentTenantId,
 				'DatabaseServerId' => $databaseServerTemplate['server_id'],
 				'DatabaseTemplateId' => $databaseServerTemplate['template_id']
 			]);
+
+			$client->request(
+				'PUT',
+				"{$apiEndpointsConfig->baseUrl}/paceapi/v1/active/practices/{$approvedPractice['PracticeCode']}/deployment-email",
+				['headers' => ['Authorization' => "Bearer {$token}"]]
+			);
 		} catch (Exception $exception) {
 			session()->setFlashdata('error', "<pre>{$exception->getMessage()}</pre>");
 			return redirect()->back();
 		}
 
-		EmailNotifier::providerDeploymentSuccess($approvePractice);
-
 		session()->setFlashdata('success', 'Practice deployed successfully');
 
 		return redirect()->route('practice_request_approve_success_show', [
-			base64_encode(json_encode($approvePractice))
+			base64_encode(json_encode($approvedPractice))
 		]);
 	}
 
