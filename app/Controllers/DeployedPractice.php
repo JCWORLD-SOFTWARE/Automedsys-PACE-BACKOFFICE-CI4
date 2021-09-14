@@ -5,7 +5,6 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Services\AuxPaceClient;
 use App\Services\ClientAuthenticator;
-use App\Services\EmailNotifier;
 use Config\Services;
 use GuzzleHttp\Client as HTTPClient;
 use CodeIgniter\API\ResponseTrait;
@@ -219,15 +218,12 @@ class DeployedPractice extends BaseController
 
 		try {
 			$token = ClientAuthenticator::getToken();
-			$response = $client->request(
-				'GET',
-				"{$apiEndpointsConfig->baseUrl}/paceapi/v1/active/practices/{$id}",
+
+			$client->request(
+				'PUT',
+				"{$apiEndpointsConfig->baseUrl}/paceapi/v1/active/practices/{$id}/deployment-email",
 				['headers' => ['Authorization' => "Bearer {$token}"]]
 			);
-
-			$response = json_decode($response->getBody(), true);
-
-			EmailNotifier::providerDeploymentReminder($response['ResponseData']);
 		} catch (Exception $exception) {
 			return $this->respond(['message' => $exception->getMessage()], 400);
 		}

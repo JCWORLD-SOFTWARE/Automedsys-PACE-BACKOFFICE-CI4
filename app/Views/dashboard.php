@@ -37,11 +37,11 @@
             </div>
             <div class="details">
                 <div class="number">
-                    <a class="font-white" href="<?= base_url(route_to('prospective_practice_index')); ?>">Prospective Practices</a>
+                    <a class="font-white" href="<?= base_url(route_to('active_practice_index_actice')); ?>">Active Practices</a>
                 </div>
-                <div class="desc">Manage Applications</div>
+                <div class="desc">Manage Practices</div>
             </div>
-            <a class="more" href="<?= base_url(route_to('prospective_practice_index')); ?>"> View more
+            <a class="more" href="<?= base_url(route_to('active_practice_index_actice')); ?>"> View more
                 <i class="m-icon-swapright m-icon-white"></i>
             </a>
         </div>
