@@ -209,6 +209,11 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a href="<?= base_url(route_to('organization_index')); ?>" class="nav-link ">
+                                    <span class="title">Organization Management</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="#" class="nav-link ">
                                     <span class="title">Application Management</span>
                                 </a>
