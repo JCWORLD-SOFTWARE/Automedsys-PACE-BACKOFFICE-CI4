@@ -204,12 +204,6 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item">
-                                <a href="<?= base_url(route_to('practice_request_index')); ?>" class="nav-link ">
-                                    <span class="title">Developer Onboarding</span>
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
                                 <a href="<?= base_url(route_to('organization_index')); ?>" class="nav-link ">
                                     <span class="title">Organization Management</span>
                                 </a>

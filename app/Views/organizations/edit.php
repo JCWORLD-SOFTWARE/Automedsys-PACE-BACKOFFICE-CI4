@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="portlet-body form">
-                <form action="<?= base_url(route_to('organization_update', $organization["UniqueId"])); ?>" method="POST" class="form-horizontal">
+                <form action="<?= base_url(route_to('organization_update', $organization["Id"])); ?>" method="POST" class="form-horizontal">
                     <div class="form-body">
                         <div class="form-group">
                             <label class="col-md-3 control-label">Organization Name</label>
