@@ -79,6 +79,14 @@ $routes->get('/organizations/edit/(:segment)', 'Organization::edit/$1', ['filter
 $routes->post('/organizations/edit/(:segment)', 'Organization::update/$1', ['filter' => 'auth', 'as' => 'organization_update']);
 $routes->get('/organizations/delete/(:segment)', 'Organization::delete/$1', ['filter' => 'auth', 'as' => 'organization_delete']);
 
+$routes->get('/scopes', 'Scope::index', ['filter' => 'auth', 'as' => 'scope_index']);
+$routes->get('/scopes/create', 'Scope::create', ['filter' => 'auth', 'as' => 'scope_create']);
+$routes->post('/scopes/create', 'Scope::store', ['filter' => 'auth', 'as' => 'scope_store']);
+$routes->get('/scopes/show/(:segment)', 'Scope::show/$1', ['filter' => 'auth', 'as' => 'scope_show']);
+$routes->get('/scopes/edit/(:segment)', 'Scope::edit/$1', ['filter' => 'auth', 'as' => 'scope_edit']);
+$routes->post('/scopes/edit/(:segment)', 'Scope::update/$1', ['filter' => 'auth', 'as' => 'scope_update']);
+$routes->get('/scopes/delete/(:segment)', 'Scope::delete/$1', ['filter' => 'auth', 'as' => 'scope_delete']);
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

@@ -26,7 +26,7 @@
         <div class="portlet light">
             <div class="portlet-title">
                 <div class="caption font-green-jungle">
-                    <span class="caption-subject bold">Organization [<?= $organization['OrgName'] ?>]</span>
+                    <span class="caption-subject bold">Scope [<?= $scope['ScopeID'] ?>]</span>
                 </div>
             </div>
             <div class="portlet-body">
@@ -35,19 +35,23 @@
                         <tbody>
                             <tr>
                                 <th width="200">ID</th>
-                                <td><?= $organization['Id'] ?></td>
+                                <td><?= $scope['ID'] ?></td>
                             </tr>
                             <tr>
-                                <th width="200">Organization Name</th>
-                                <td><?= $organization['OrgName'] ?></td>
+                                <th width="200">Scope ID</th>
+                                <td><?= $scope['ScopeID'] ?></td>
                             </tr>
                             <tr>
-                                <th width="200">Organization Description</th>
-                                <td><?= $organization['OrgDescr'] ?></td>
+                                <th width="200">Scope Description</th>
+                                <td><?= $scope['ScopeDescr'] ?></td>
+                            </tr>
+                            <tr>
+                                <th width="200">Requested Grant Types</th>
+                                <td><?= $scope['ReqdGrantTypes'] ?></td>
                             </tr>
                             <tr>
                                 <th width="200">Created Date</th>
-                                <td><?= date("d/m/Y h:i a", strtotime($organization["CreatedDt"])) ?></td>
+                                <td><?= date("d/m/Y h:i a", strtotime($scope["CreatedDt"])) ?></td>
                             </tr>
                         </tbody>
                     </table>

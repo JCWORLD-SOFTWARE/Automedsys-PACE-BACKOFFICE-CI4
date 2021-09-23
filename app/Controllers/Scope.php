@@ -9,7 +9,7 @@ use Config\Services;
 use Exception;
 use GuzzleHttp\Client as HTTPClient;
 
-class Organization extends BaseController
+class Scope extends BaseController
 {
 	use ResponseTrait;
 
@@ -25,7 +25,7 @@ class Organization extends BaseController
 
 		$response = $client->request(
 			'GET',
-			"{$apiEndpointsConfig->baseUrl}/emrapi/v1/apimanagement/organizations",
+			"{$apiEndpointsConfig->baseUrl}/emrapi/v1/apimanagement/scopes",
 			[
 				'headers' => ['Authorization' => "Bearer {$token}"],
 				'query' => [
@@ -39,18 +39,18 @@ class Organization extends BaseController
 		$response = json_decode($response->getBody(), true);
 
 		$pager = service('pager');
-		$pager->setPath(route_to('organization_index'));
+		$pager->setPath(route_to('scope_index'));
 		$pager->makeLinks($page, static::PER_PAGE, $response['ResponseData']['TotalCount']);
 
-		return view('organizations/index', [
-			'organizations' => $response['ResponseData']['Items'],
+		return view('scopes/index', [
+			'scopes' => $response['ResponseData']['Items'],
 			'pager' => $pager,
 		]);
 	}
 
 	public function create()
 	{
-		return view('organizations/create');
+		return view('scopes/create');
 	}
 
 	public function store()
@@ -62,8 +62,9 @@ class Organization extends BaseController
 		$validation =  Services::validation();
 
 		$validation->setRules([
-			'organization_name' => 'required|string|min_length[2]',
-			'organization_description' => 'required|string|min_length[2]',
+			'scope_id' => 'required|string|min_length[2]',
+			'scope_description' => 'required|string|min_length[2]',
+			'requested_grant_types' => 'required|string|min_length[2]',
 		]);
 
 		if (!$validation->withRequest($this->request)->run()) {
@@ -75,12 +76,13 @@ class Organization extends BaseController
 		try {
 			$client->request(
 				'POST',
-				"{$apiEndpointsConfig->baseUrl}/emrapi/v1/apimanagement/organizations",
+				"{$apiEndpointsConfig->baseUrl}/emrapi/v1/apimanagement/scopes",
 				[
 					'headers' => ['Authorization' => "Bearer {$token}"],
 					'json' => [
-						'OrgName' => $this->request->getPost('organization_name'),
-						'OrgDescr' => $this->request->getPost('organization_description'),
+						'ScopeID' => $this->request->getPost('scope_id'),
+						'ScopeDescr' => $this->request->getPost('scope_description'),
+						'ReqdGrantTypes' => $this->request->getPost('requested_grant_types'),
 					]
 				]
 			);
@@ -89,9 +91,9 @@ class Organization extends BaseController
 			return redirect()->back()->withInput();
 		}
 
-		session()->setFlashdata('success', 'New organization created successfully');
+		session()->setFlashdata('success', 'New scope created successfully');
 
-		return redirect()->route('organization_index');
+		return redirect()->route('scope_index');
 	}
 
 	public function show(string $id)
@@ -103,18 +105,18 @@ class Organization extends BaseController
 		try {
 			$response = $client->request(
 				'GET',
-				"{$apiEndpointsConfig->baseUrl}/emrapi/v1/apimanagement/organizations/{$id}",
+				"{$apiEndpointsConfig->baseUrl}/emrapi/v1/apimanagement/scopes/{$id}",
 				['headers' => ['Authorization' => "Bearer {$token}"]]
 			);
 		} catch (Exception $exception) {
 			session()->setFlashdata('error', "<pre>{$exception->getMessage()}</pre>");
-			return redirect()->route('organization_index');
+			return redirect()->route('scope_index');
 		}
 
 		$response = json_decode($response->getBody(), true);
 
-		return view('organizations/show', [
-			'organization' => $response['ResponseData'],
+		return view('scopes/show', [
+			'scope' => $response['ResponseData'],
 		]);
 	}
 
@@ -127,18 +129,18 @@ class Organization extends BaseController
 		try {
 			$response = $client->request(
 				'GET',
-				"{$apiEndpointsConfig->baseUrl}/emrapi/v1/apimanagement/organizations/{$id}",
+				"{$apiEndpointsConfig->baseUrl}/emrapi/v1/apimanagement/scopes/{$id}",
 				['headers' => ['Authorization' => "Bearer {$token}"]]
 			);
 		} catch (Exception $exception) {
 			session()->setFlashdata('error', "<pre>{$exception->getMessage()}</pre>");
-			return redirect()->route('organization_index');
+			return redirect()->route('scope_index');
 		}
 
 		$response = json_decode($response->getBody(), true);
 
-		return view('organizations/edit', [
-			'organization' => $response['ResponseData'],
+		return view('scopes/edit', [
+			'scope' => $response['ResponseData'],
 		]);
 	}
 
@@ -151,8 +153,9 @@ class Organization extends BaseController
 		$validation =  Services::validation();
 
 		$validation->setRules([
-			'organization_name' => 'required|string|min_length[2]',
-			'organization_description' => 'required|string|min_length[2]',
+			'scope_id' => 'required|string|min_length[2]',
+			'scope_description' => 'required|string|min_length[2]',
+			'requested_grant_types' => 'required|string|min_length[2]',
 		]);
 
 		if (!$validation->withRequest($this->request)->run()) {
@@ -164,12 +167,13 @@ class Organization extends BaseController
 		try {
 			$client->request(
 				'PATCH',
-				"{$apiEndpointsConfig->baseUrl}/emrapi/v1/apimanagement/organizations/{$id}",
+				"{$apiEndpointsConfig->baseUrl}/emrapi/v1/apimanagement/scopes/{$id}",
 				[
 					'headers' => ['Authorization' => "Bearer {$token}"],
 					'json' => [
-						'OrgName' => $this->request->getPost('organization_name'),
-						'OrgDescr' => $this->request->getPost('organization_description'),
+						'ScopeID' => $this->request->getPost('scope_id'),
+						'ScopeDescr' => $this->request->getPost('scope_description'),
+						'ReqdGrantTypes' => $this->request->getPost('requested_grant_types'),
 					]
 				]
 			);
@@ -178,9 +182,9 @@ class Organization extends BaseController
 			return redirect()->back()->withInput();
 		}
 
-		session()->setFlashdata('success', 'Organization updated successfully');
+		session()->setFlashdata('success', 'Scope updated successfully');
 
-		return redirect()->route('organization_index');
+		return redirect()->route('scope_index');
 	}
 
 	public function delete(string $id)
@@ -192,7 +196,7 @@ class Organization extends BaseController
 		try {
 			$client->request(
 				'DELETE',
-				"{$apiEndpointsConfig->baseUrl}/emrapi/v1/apimanagement/organizations/{$id}",
+				"{$apiEndpointsConfig->baseUrl}/emrapi/v1/apimanagement/scopes/{$id}",
 				['headers' => ['Authorization' => "Bearer {$token}"]]
 			);
 		} catch (Exception $exception) {
@@ -200,8 +204,8 @@ class Organization extends BaseController
 			return redirect()->back();
 		}
 
-		session()->setFlashdata('success', 'Organization deleted successfully');
+		session()->setFlashdata('success', 'Scope deleted successfully');
 
-		return redirect()->route('organization_index');
+		return redirect()->route('scope_index');
 	}
 }

@@ -208,6 +208,7 @@
                                     <span class="title">Developer Onboarding</span>
                                 </a>
                             </li>
+
                             <li class="nav-item">
                                 <a href="<?= base_url(route_to('organization_index')); ?>" class="nav-link ">
                                     <span class="title">Organization Management</span>
@@ -216,6 +217,11 @@
                             <li class="nav-item">
                                 <a href="#" class="nav-link ">
                                     <span class="title">Application Management</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url(route_to('scope_index')); ?>" class="nav-link ">
+                                    <span class="title">Scope Management</span>
                                 </a>
                             </li>
                             <li class="nav-item">

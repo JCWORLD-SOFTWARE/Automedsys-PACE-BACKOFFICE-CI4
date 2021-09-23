@@ -30,30 +30,41 @@
         <div class="portlet light">
             <div class="portlet-title">
                 <div class="caption font-green-jungle">
-                    <span class="caption-subject bold">Edit Organization [<?= "{$organization["OrgName"]}" ?>]</span>
+                    <span class="caption-subject bold">Edit Scope [<?= "{$scope["ScopeID"]}" ?>]</span>
                 </div>
             </div>
             <div class="portlet-body form">
-                <form action="<?= base_url(route_to('organization_update', $organization["UniqueId"])); ?>" method="POST" class="form-horizontal">
+                <form action="<?= base_url(route_to('scope_update', $scope["UniqueId"])); ?>" method="POST" class="form-horizontal">
                     <div class="form-body">
                         <div class="form-group">
-                            <label class="col-md-3 control-label">Organization Name</label>
+                            <label class="col-md-3 control-label">Scope Name</label>
                             <div class="col-md-4">
-                                <input type="text" name="organization_name" value="<?= old('organization_name', $organization["OrgName"]) ?>" class="form-control" placeholder="Enter Organization Name">
-                                <?php if (isset(session('errors')['organization_name'])) : ?>
+                                <input type="text" name="scope_name" value="<?= old('scope_name', $scope["OrgName"]) ?>" class="form-control" placeholder="Enter Scope Name">
+                                <?php if (isset(session('errors')['scope_name'])) : ?>
                                     <span class="help-block text-danger font-sm">
-                                        <?= session('errors')['organization_name'] ?>
+                                        <?= session('errors')['scope_name'] ?>
                                     </span>
                                 <?php endif ?>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 control-label">Organization Description</label>
+                            <label class="col-md-3 control-label">Scope Description</label>
                             <div class="col-md-4">
-                                <input type="text" name="organization_description" value="<?= old('organization_description', $organization["OrgDescr"]) ?>" class="form-control" placeholder="Enter Organization Description">
-                                <?php if (isset(session('errors')['organization_description'])) : ?>
+                                <input type="text" name="scope_description" value="<?= old('scope_description', $scope["OrgDescr"]) ?>" class="form-control" placeholder="Enter Scope Description">
+                                <?php if (isset(session('errors')['scope_description'])) : ?>
                                     <span class="help-block text-danger font-sm">
-                                        <?= session('errors')['organization_description'] ?>
+                                        <?= session('errors')['scope_description'] ?>
+                                    </span>
+                                <?php endif ?>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Requested Grant Types</label>
+                            <div class="col-md-4">
+                                <input type="text" name="requested_grant_types" value="<?= old('requested_grant_types', $scope["ReqdGrantTypes"]) ?>" class="form-control" placeholder="Enter Scope Description">
+                                <?php if (isset(session('errors')['requested_grant_types'])) : ?>
+                                    <span class="help-block text-danger font-sm">
+                                        <?= session('errors')['requested_grant_types'] ?>
                                     </span>
                                 <?php endif ?>
                             </div>
