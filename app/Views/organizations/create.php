@@ -65,6 +65,105 @@
                                 <?php endif ?>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Address Line 1</label>
+                            <div class="col-md-4">
+                                <input type="text" name="address_line_1" value="<?= old('address_line_1') ?>" class="form-control" placeholder="Enter Address 1">
+                                <?php if (isset(session('errors')['address_line_1'])) : ?>
+                                    <span class="help-block text-danger font-sm">
+                                        <?= session('errors')['address_line_1'] ?>
+                                    </span>
+                                <?php endif ?>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Address Line 2</label>
+                            <div class="col-md-4">
+                                <input type="text" name="address_line_2" value="<?= old('address_line_2') ?>" class="form-control" placeholder="Enter Address 2">
+                                <?php if (isset(session('errors')['address_line_2'])) : ?>
+                                    <span class="help-block text-danger font-sm">
+                                        <?= session('errors')['address_line_2'] ?>
+                                    </span>
+                                <?php endif ?>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">City</label>
+                            <div class="col-md-4">
+                                <input type="text" name="city" value="<?= old('city') ?>" class="form-control" placeholder="Enter City">
+                                <?php if (isset(session('errors')['city'])) : ?>
+                                    <span class="help-block text-danger font-sm">
+                                        <?= session('errors')['city'] ?>
+                                    </span>
+                                <?php endif ?>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">State</label>
+                            <div class="col-md-4">
+                                <input type="text" name="state" value="<?= old('state') ?>" class="form-control" placeholder="Enter State">
+                                <?php if (isset(session('errors')['state'])) : ?>
+                                    <span class="help-block text-danger font-sm">
+                                        <?= session('errors')['state'] ?>
+                                    </span>
+                                <?php endif ?>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Zip Code</label>
+                            <div class="col-md-4">
+                                <input type="text" name="zip_code" value="<?= old('zip_code') ?>" class="form-control" placeholder="Enter Zip Code">
+                                <?php if (isset(session('errors')['zip_code'])) : ?>
+                                    <span class="help-block text-danger font-sm">
+                                        <?= session('errors')['zip_code'] ?>
+                                    </span>
+                                <?php endif ?>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Country</label>
+                            <div class="col-md-4">
+                                <input type="text" name="country" value="<?= old('country') ?>" class="form-control" placeholder="Enter Country">
+                                <?php if (isset(session('errors')['country'])) : ?>
+                                    <span class="help-block text-danger font-sm">
+                                        <?= session('errors')['country'] ?>
+                                    </span>
+                                <?php endif ?>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Contact Name</label>
+                            <div class="col-md-4">
+                                <input type="text" name="contact_name" value="<?= old('contact_name') ?>" class="form-control" placeholder="Enter Contact Name">
+                                <?php if (isset(session('errors')['contact_name'])) : ?>
+                                    <span class="help-block text-danger font-sm">
+                                        <?= session('errors')['contact_name'] ?>
+                                    </span>
+                                <?php endif ?>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Contact Phone</label>
+                            <div class="col-md-4">
+                                <input type="text" name="contact_phone" value="<?= old('contact_phone') ?>" class="form-control" placeholder="Enter Contact Phone">
+                                <?php if (isset(session('errors')['contact_phone'])) : ?>
+                                    <span class="help-block text-danger font-sm">
+                                        <?= session('errors')['contact_phone'] ?>
+                                    </span>
+                                <?php endif ?>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Contact Email</label>
+                            <div class="col-md-4">
+                                <input type="text" name="contact_email" value="<?= old('contact_email') ?>" class="form-control" placeholder="Enter Contact Email">
+                                <?php if (isset(session('errors')['contact_email'])) : ?>
+                                    <span class="help-block text-danger font-sm">
+                                        <?= session('errors')['contact_email'] ?>
+                                    </span>
+                                <?php endif ?>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-actions">
                         <div class="row">
