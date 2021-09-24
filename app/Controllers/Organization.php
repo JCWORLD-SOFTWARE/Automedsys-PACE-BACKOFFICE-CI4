@@ -64,6 +64,15 @@ class Organization extends BaseController
 		$validation->setRules([
 			'organization_name' => 'required|string|min_length[2]',
 			'organization_description' => 'required|string|min_length[2]',
+			'address_line_1' => 'required|string|min_length[2]',
+			'address_line_2' => 'required|string|min_length[2]',
+			'city' => 'required|string|min_length[2]',
+			'state' => 'required|string|min_length[2]',
+			'zip_code' => 'required|string|min_length[2]',
+			'country' => 'required|string|min_length[2]',
+			'contact_name' => 'required|string|min_length[2]',
+			'contact_phone' => 'required|numeric',
+			'contact_email' => 'required|string|valid_email',
 		]);
 
 		if (!$validation->withRequest($this->request)->run()) {
@@ -81,6 +90,15 @@ class Organization extends BaseController
 					'json' => [
 						'OrgName' => $this->request->getPost('organization_name'),
 						'OrgDescr' => $this->request->getPost('organization_description'),
+						'AddressLine1' => $this->request->getPost('address_line_1'),
+						'AddressLine2' => $this->request->getPost('address_line_2'),
+						'City' => $this->request->getPost('city'),
+						'State' => $this->request->getPost('state'),
+						'ZipCode' => $this->request->getPost('zip_code'),
+						'Country' => $this->request->getPost('country'),
+						'ContactName' => $this->request->getPost('contact_name'),
+						'ContactPhone' => $this->request->getPost('contact_phone'),
+						'ContactEmail' => $this->request->getPost('contact_email'),
 					]
 				]
 			);
@@ -153,6 +171,15 @@ class Organization extends BaseController
 		$validation->setRules([
 			'organization_name' => 'required|string|min_length[2]',
 			'organization_description' => 'required|string|min_length[2]',
+			'address_line_1' => 'required|string|min_length[2]',
+			'address_line_2' => 'required|string|min_length[2]',
+			'city' => 'required|string|min_length[2]',
+			'state' => 'required|string|min_length[2]',
+			'zip_code' => 'required|string|min_length[2]',
+			'country' => 'required|string|min_length[2]',
+			'contact_name' => 'required|string|min_length[2]',
+			'contact_phone' => 'required|numeric',
+			'contact_email' => 'required|string|valid_email',
 		]);
 
 		if (!$validation->withRequest($this->request)->run()) {
@@ -170,6 +197,15 @@ class Organization extends BaseController
 					'json' => [
 						'OrgName' => $this->request->getPost('organization_name'),
 						'OrgDescr' => $this->request->getPost('organization_description'),
+						'AddressLine1' => $this->request->getPost('address_line_1'),
+						'AddressLine2' => $this->request->getPost('address_line_2'),
+						'City' => $this->request->getPost('city'),
+						'State' => $this->request->getPost('state'),
+						'ZipCode' => $this->request->getPost('zip_code'),
+						'Country' => $this->request->getPost('country'),
+						'ContactName' => $this->request->getPost('contact_name'),
+						'ContactPhone' => $this->request->getPost('contact_phone'),
+						'ContactEmail' => $this->request->getPost('contact_email'),
 					]
 				]
 			);

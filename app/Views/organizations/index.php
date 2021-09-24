@@ -57,8 +57,9 @@
                                 <th width="50">ID</th>
                                 <th>Organization Name</th>
                                 <th>Organization Description</th>
-                                <th width="200">Created</th>
-                                <th width="220">Edit / Delete</th>
+                                <th>Contact Name</th>
+                                <th width="150">Created</th>
+                                <th width="180">Edit / Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -67,9 +68,10 @@
                                     <td><?= $organization["Id"] ?></td>
                                     <td><?= $organization["OrgName"] ?></td>
                                     <td><?= $organization["OrgDescr"] ?></td>
+                                    <td><?= $organization["ContactName"] ?? "N/A" ?></td>
                                     <td nowrap=""><?= date("d/m/Y h:i a", strtotime($organization["CreatedDt"])) ?></td>
                                     <td nowrap="">
-                                        <a class="btn btn-sm blue" href="<?= base_url(route_to('organization_show', $organization["Id"])); ?>">View</a>
+                                        <a class="btn btn-sm blue" href="<?= base_url(route_to('organization_show', $organization["Id"])); ?>">Manage</a>
                                         <a class="btn btn-sm green" href="<?= base_url(route_to('organization_edit', $organization["Id"])); ?>">Edit</a>
                                         <a class="btn btn-sm red" href="<?= base_url(route_to('organization_delete', $organization["Id"])); ?>" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
                                     </td>
