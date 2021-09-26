@@ -1,9 +1,5 @@
 <?= $this->extend('layouts/master') ?>
 
-<?= $this->section('head') ?>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
-<?= $this->endSection() ?>
-
 <?= $this->section('content') ?>
 <div class="page-bar">
     <ul class="page-breadcrumb">

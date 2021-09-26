@@ -17,24 +17,28 @@ class Organization extends BaseController
 
 	public function index()
 	{
-		$token = ClientAuthenticator::getToken();
 		$client = new HTTPClient();
 		$apiEndpointsConfig = config('ApiEndpoints');
 
-		$page = $this->request->getVar('page') ?? 1;
+		try {
+			$token = ClientAuthenticator::getToken();
 
-		$response = $client->request(
-			'GET',
-			"{$apiEndpointsConfig->baseUrl}/emrapi/v1/apimanagement/organizations",
-			[
-				'headers' => ['Authorization' => "Bearer {$token}"],
-				'query' => [
-					'PageNumber' => $page,
-					'PageSize' => static::PER_PAGE,
-					'DateFrom' => '2021-01-01'
+			$page = $this->request->getVar('page') ?? 1;
+
+			$response = $client->request(
+				'GET',
+				"{$apiEndpointsConfig->baseUrl}/emrapi/v1/apimanagement/organizations",
+				[
+					'headers' => ['Authorization' => "Bearer {$token}"],
+					'query' => [
+						'PageNumber' => $page,
+						'PageSize' => static::PER_PAGE,
+						'DateFrom' => '2021-01-01'
+					]
 				]
-			]
-		);
+			);
+		} catch (Exception $exception) {
+		}
 
 		$response = json_decode($response->getBody(), true);
 

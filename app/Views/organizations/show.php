@@ -28,6 +28,11 @@
                 <div class="caption font-green-jungle">
                     <span class="caption-subject bold">Organization [<?= $organization['OrgName'] ?>]</span>
                 </div>
+                <div class="actions">
+                    <a href="<?= base_url(route_to('application_index', $organization['Id'])); ?>" class="btn green-jungle pull-right">
+                        Manage Applications <i class="fa fa-database icon-black"></i>
+                    </a>
+                </div>
             </div>
             <div class="portlet-body">
                 <div class="table-responsive">
