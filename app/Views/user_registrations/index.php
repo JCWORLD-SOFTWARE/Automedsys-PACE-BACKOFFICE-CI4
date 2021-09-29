@@ -2,8 +2,8 @@
 
 <?= $this->section('head') ?>
 <style>
-    .server-db-name {
-        word-break: break-word;
+    #filter {
+        padding: 20px;
     }
 </style>
 <?= $this->endSection() ?>
@@ -50,13 +50,69 @@
                     <span class="caption-subject bold">Sign Ups</span>
                 </div>
                 <div class="actions">
-                    <a href="<?= base_url(route_to('user_registration_create')); ?>" class="btn green-jungle pull-right">
+                    <button data-toggle="collapse" data-target="#filter" class="btn blue btn-outline">
+                        Filter <i class="fa fa-filter icon-black"></i>
+                    </button>
+                    <a href="<?= base_url(route_to('user_registration_create')); ?>" class="btn green-jungle">
                         New Sign Up <i class="fa fa-plus icon-black"></i>
                     </a>
                 </div>
             </div>
             <div class="portlet-body">
+                <form id="filter" class="bg-default form-horizontal collapse <?= $isFiltered ? "in" : "" ?>">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">First Name</label>
+                            <div class="col-md-6">
+                                <input type="text" name="first_name" value="<?= old('first_name', $filter['FirstName']) ?>" class="form-control" placeholder="Enter First Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Last Name</label>
+                            <div class="col-md-6">
+                                <input type="text" name="last_name" value="<?= old('last_name', $filter['LastName']) ?>" class="form-control" placeholder="Enter Last Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">NPI</label>
+                            <div class="col-md-6">
+                                <input type="text" name="npi" value="<?= old('npi', $filter['Provider_Npi']) ?>" class="form-control" placeholder="Enter NPI">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Email Address</label>
+                            <div class="col-md-6">
+                                <input type="text" name="email_address" value="<?= old('email_address', $filter['email']) ?>" class="form-control" placeholder="Enter Email Address">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Phone Number</label>
+                            <div class="col-md-6">
+                                <input type="text" name="phone_number" value="<?= old('phone_number', $filter['telephone']) ?>" class="form-control" placeholder="Enter Phone Number">
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-4">
+                                    <button type="submit" class="btn green">Filter Results <i class="fa fa-filter icon-black"></i></button>
+                                    <?php if ($isFiltered) : ?>
+                                        <a href="<?= base_url(route_to('user_registration_index')); ?>" class="btn red btn-outline">
+                                            Remove Filters <i class="fa fa-times icon-black"></i>
+                                        </a>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
                 <div class="table-responsive">
+                    <!-- <div class="margin-bottom-5">
+                        <strong>Filters:</strong>
+                        <span class="label label-sm label-info margin-left-20"> First Name </span> James
+                        <span class="label label-sm label-info margin-left-20"> Last Name </span> Brown
+                    </div> -->
+
                     <?= $pager->links() ?>
 
                     <table class="table table-bordered" style="font-size: 12px;">

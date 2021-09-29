@@ -59,7 +59,7 @@
                             </tr>
                             <tr>
                                 <th width="200">Provider NPI</th>
-                                <td><?= $user['ProviderNPI'] ?><br /></td>
+                                <td><?= $user["ProviderNPI"] ? $user["ProviderNPI"] : "N/A" ?><br /></td>
                             </tr>
                             <tr>
                                 <th width="200">Telephone</th>
