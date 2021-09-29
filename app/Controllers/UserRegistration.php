@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Libraries\ApiResourceFilter;
 use App\Services\ClientAuthenticator;
 use CodeIgniter\API\ResponseTrait;
 use Config\Services;
@@ -21,6 +22,16 @@ class UserRegistration extends BaseController
 		$client = new HTTPClient();
 		$apiEndpointsConfig = config('ApiEndpoints');
 
+		$filterRequestMap = [
+			'FirstName' => 'first_name',
+			'LastName' => 'last_name',
+			'Provider_Npi' => 'npi',
+			'email' => 'email_address',
+			'telephone' => 'phone_number',
+		];
+
+		$filter = new ApiResourceFilter($filterRequestMap);
+
 		$page = $this->request->getVar('page') ?? 1;
 
 		$response = $client->request(
@@ -28,11 +39,11 @@ class UserRegistration extends BaseController
 			"{$apiEndpointsConfig->baseUrl}/paceapi/v1/signup",
 			[
 				'headers' => ['Authorization' => "Bearer {$token}"],
-				'query' => [
+				'query' => array_merge($filter->getParams(), [
 					'PageNumber' => $page,
 					'PageSize' => static::PER_PAGE,
 					'datefrom' => '2021-01-01'
-				]
+				])
 			]
 		);
 
@@ -45,6 +56,8 @@ class UserRegistration extends BaseController
 		return view('user_registrations/index', [
 			'userRegistrations' => $response['ResponseData']['Items'],
 			'pager' => $pager,
+			'isFiltered' => $filter->isFiltered(),
+			'filter' => $filter->getParams()
 		]);
 	}
 
