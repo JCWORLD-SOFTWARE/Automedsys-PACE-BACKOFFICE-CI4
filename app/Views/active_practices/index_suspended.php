@@ -49,8 +49,108 @@
                 <div class="caption font-green-jungle">
                     <span class="caption-subject bold">Suspended Practices</span>
                 </div>
+                <div class="actions">
+                    <button data-toggle="collapse" data-target="#filter" class="btn blue btn-outline">
+                        Filter <i class="fa fa-filter icon-black"></i>
+                    </button>
+                </div>
             </div>
             <div class="portlet-body">
+                <form id="filter" class="filter-panel bg-default form-horizontal collapse <?= $isFiltered ? "in" : "" ?>">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Practice NPI</label>
+                            <div class="col-md-4">
+                                <input type="text" name="practice_npi" value="<?= old('practice_npi', $filter["NPI"]) ?>" class="form-control" placeholder="Enter Practice NPI">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Practice Name</label>
+                            <div class="col-md-4">
+                                <input type="text" name="practice_name" value="<?= old('practice_name', $filter["PracticeName"]) ?>" class="form-control" placeholder="Enter Practice Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Address Line 1</label>
+                            <div class="col-md-4">
+                                <input type="text" name="address_line_1" value="<?= old('address_line_1', $filter["Street1"]) ?>" class="form-control" placeholder="Enter Address Line 1">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Address Line 2</label>
+                            <div class="col-md-4">
+                                <input type="text" name="address_line_2" value="<?= old('address_line_2', $filter["Street2"]) ?>" class="form-control" placeholder="Enter Address Line 2">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Country</label>
+                            <div class="col-md-4">
+                                <input type="text" name="country" value="<?= old('country', $filter["Country"]) ?>" class="form-control" placeholder="Enter Country">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">State</label>
+                            <div class="col-md-4">
+                                <input type="text" name="state" value="<?= old('state', $filter["State"]) ?>" class="form-control" placeholder="Enter State">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">City</label>
+                            <div class="col-md-4">
+                                <input type="text" name="city" value="<?= old('city', $filter["City"]) ?>" class="form-control" placeholder="Enter City">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Zip Code</label>
+                            <div class="col-md-4">
+                                <input type="text" name="zip_code" value="<?= old('zip_code', $filter["ZipCode"]) ?>" class="form-control" placeholder="Enter Zip Code">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Contact Prefix</label>
+                            <div class="col-md-4">
+                                <input type="text" name="contact_prefix" value="<?= old('contact_prefix', $filter["contact_prefix"]) ?>" class="form-control" placeholder="Enter Contact Prefix">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Contact First Name</label>
+                            <div class="col-md-4">
+                                <input type="text" name="contact_firstname" value="<?= old('contact_firstname', $filter["contact_firstname"]) ?>" class="form-control" placeholder="Enter Contact First Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Contact Middle Name</label>
+                            <div class="col-md-4">
+                                <input type="text" name="contact_middlename" value="<?= old('contact_middlename', $filter["contact_middlename"]) ?>" class="form-control" placeholder="Enter Contact Middle Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Contact Last Name</label>
+                            <div class="col-md-4">
+                                <input type="text" name="contact_lastname" value="<?= old('contact_lastname', $filter["contact_lastname"]) ?>" class="form-control" placeholder="Enter Contact Last Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Contact Suffix</label>
+                            <div class="col-md-4">
+                                <input type="text" name="contact_suffix" value="<?= old('contact_suffix', $filter["contact_suffix"]) ?>" class="form-control" placeholder="Enter Contact Suffix">
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-4">
+                                    <button type="submit" class="btn green">Filter Results <i class="fa fa-filter icon-black"></i></button>
+                                    <?php if ($isFiltered) : ?>
+                                        <a href="<?= base_url(route_to('user_registration_index')); ?>" class="btn red btn-outline">
+                                            Remove Filters <i class="fa fa-times icon-black"></i>
+                                        </a>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
                 <div class="table-responsive">
                     <?= $pager->links() ?>
 

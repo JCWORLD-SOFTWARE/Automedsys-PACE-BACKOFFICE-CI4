@@ -59,6 +59,10 @@
         .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li.active>a>.selected {
             display: none;
         }
+
+        .filter-panel {
+            padding: 20px;
+        }
     </style>
 
     <?= $this->renderSection('head') ?>

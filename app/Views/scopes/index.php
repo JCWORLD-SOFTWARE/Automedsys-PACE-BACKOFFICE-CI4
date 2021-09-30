@@ -42,12 +42,50 @@
                     <span class="caption-subject bold">Scopes</span>
                 </div>
                 <div class="actions">
-                    <a href="<?= base_url(route_to('scope_create')); ?>" class="btn green-jungle pull-right">
+                    <button data-toggle="collapse" data-target="#filter" class="btn blue btn-outline">
+                        Filter <i class="fa fa-filter icon-black"></i>
+                    </button>
+                    <a href="<?= base_url(route_to('scope_create')); ?>" class="btn green-jungle">
                         New Scope <i class="fa fa-plus icon-black"></i>
                     </a>
                 </div>
             </div>
             <div class="portlet-body">
+                <form id="filter" class="filter-panel bg-default form-horizontal collapse <?= $isFiltered ? "in" : "" ?>">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Scope ID</label>
+                            <div class="col-md-4">
+                                <input type="text" name="scope_id" value="<?= old('scope_id', $filter["ScopeID"]) ?>" class="form-control" placeholder="Enter Scope ID">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Scope Description</label>
+                            <div class="col-md-4">
+                                <input type="text" name="scope_description" value="<?= old('scope_description', $filter["ScopeDescr"]) ?>" class="form-control" placeholder="Enter Scope Description">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Requested Grant Types</label>
+                            <div class="col-md-4">
+                                <input type="text" name="requested_grant_types" value="<?= old('requested_grant_types', $filter["ReqdGrantTypes"]) ?>" class="form-control" placeholder="Enter Address Line 1">
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-4">
+                                    <button type="submit" class="btn green">Filter Results <i class="fa fa-filter icon-black"></i></button>
+                                    <?php if ($isFiltered) : ?>
+                                        <a href="<?= base_url(route_to('user_registration_index')); ?>" class="btn red btn-outline">
+                                            Remove Filters <i class="fa fa-times icon-black"></i>
+                                        </a>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
                 <div class="table-responsive">
                     <?= $pager->links() ?>
 

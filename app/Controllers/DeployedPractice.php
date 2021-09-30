@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Libraries\ApiResourceFilter;
 use App\Services\AuxPaceClient;
 use App\Services\ClientAuthenticator;
 use Config\Services;
@@ -38,6 +39,24 @@ class DeployedPractice extends BaseController
 		$client = new HTTPClient();
 		$apiEndpointsConfig = config('ApiEndpoints');
 
+		$filterRequestMap = [
+			'NPI' => 'practice_npi',
+			'PracticeName' => 'practice_name',
+			'Street1' => 'address_line_1',
+			'Street2' => 'address_line_2',
+			'Country' => 'country',
+			'State' => 'state',
+			'City' => 'city',
+			'ZipCode' => 'zip_code',
+			'contact_prefix' => 'contact_prefix',
+			'contact_firstname' => 'contact_firstname',
+			'contact_middlename' => 'contact_middlename',
+			'contact_lastname' => 'contact_lastname',
+			'contact_suffix' => 'contact_suffix',
+		];
+
+		$filter = new ApiResourceFilter($filterRequestMap);
+
 		$page = $this->request->getVar('page') ?? 1;
 
 		$token = ClientAuthenticator::getToken();
@@ -46,11 +65,11 @@ class DeployedPractice extends BaseController
 			"{$apiEndpointsConfig->baseUrl}/paceapi/v1/active/practices",
 			[
 				'headers' => ['Authorization' => "Bearer {$token}"],
-				'query' => [
+				'query' => array_merge($filter->getParams(), [
 					'PageNumber' => $page,
 					'PageSize' => static::PER_PAGE,
 					'datefrom' => '2021-01-01'
-				]
+				])
 			]
 		);
 
@@ -63,6 +82,8 @@ class DeployedPractice extends BaseController
 		return view('active_practices/index_active', [
 			'DeployedPractices' => $response['ResponseData']['Items'],
 			'pager' => $pager,
+			'isFiltered' => $filter->isFiltered(),
+			'filter' => $filter->getParams()
 		]);
 	}
 
@@ -70,6 +91,24 @@ class DeployedPractice extends BaseController
 	{
 		$client = new HTTPClient();
 		$apiEndpointsConfig = config('ApiEndpoints');
+
+		$filterRequestMap = [
+			'NPI' => 'practice_npi',
+			'PracticeName' => 'practice_name',
+			'Street1' => 'address_line_1',
+			'Street2' => 'address_line_2',
+			'Country' => 'country',
+			'State' => 'state',
+			'City' => 'city',
+			'ZipCode' => 'zip_code',
+			'contact_prefix' => 'contact_prefix',
+			'contact_firstname' => 'contact_firstname',
+			'contact_middlename' => 'contact_middlename',
+			'contact_lastname' => 'contact_lastname',
+			'contact_suffix' => 'contact_suffix',
+		];
+
+		$filter = new ApiResourceFilter($filterRequestMap);
 
 		$page = $this->request->getVar('page') ?? 1;
 
@@ -79,12 +118,12 @@ class DeployedPractice extends BaseController
 			"{$apiEndpointsConfig->baseUrl}/paceapi/v1/active/practices",
 			[
 				'headers' => ['Authorization' => "Bearer {$token}"],
-				'query' => [
+				'query' => array_merge($filter->getParams(), [
 					'status' => '-1',
 					'PageNumber' => $page,
 					'PageSize' => static::PER_PAGE,
 					'datefrom' => '2021-01-01'
-				]
+				])
 			]
 		);
 
@@ -97,6 +136,8 @@ class DeployedPractice extends BaseController
 		return view('active_practices/index_suspended', [
 			'suspendedPractices' => $response['ResponseData']['Items'],
 			'pager' => $pager,
+			'isFiltered' => $filter->isFiltered(),
+			'filter' => $filter->getParams()
 		]);
 	}
 
