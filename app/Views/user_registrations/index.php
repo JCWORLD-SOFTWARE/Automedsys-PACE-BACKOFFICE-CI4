@@ -1,13 +1,5 @@
 <?= $this->extend('layouts/master') ?>
 
-<?= $this->section('head') ?>
-<style>
-    #filter {
-        padding: 20px;
-    }
-</style>
-<?= $this->endSection() ?>
-
 <?= $this->section('content') ?>
 <div class="page-bar">
     <ul class="page-breadcrumb">
@@ -59,7 +51,7 @@
                 </div>
             </div>
             <div class="portlet-body">
-                <form id="filter" class="bg-default form-horizontal collapse <?= $isFiltered ? "in" : "" ?>">
+                <form id="filter" class="filter-panel bg-default form-horizontal collapse <?= $isFiltered ? "in" : "" ?>">
                     <div class="form-body">
                         <div class="form-group">
                             <label class="col-md-3 control-label">First Name</label>

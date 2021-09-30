@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Libraries\ApiResourceFilter;
 use App\Services\ClientAuthenticator;
 use CodeIgniter\API\ResponseTrait;
 use Config\Services;
@@ -21,6 +22,14 @@ class Scope extends BaseController
 		$client = new HTTPClient();
 		$apiEndpointsConfig = config('ApiEndpoints');
 
+		$filterRequestMap = [
+			'ScopeID' => 'scope_id',
+			'ScopeDescr' => 'scope_descr',
+			'ReqdGrantTypes' => 'requested_grant_types',
+		];
+
+		$filter = new ApiResourceFilter($filterRequestMap);
+
 		$page = $this->request->getVar('page') ?? 1;
 
 		$response = $client->request(
@@ -28,11 +37,11 @@ class Scope extends BaseController
 			"{$apiEndpointsConfig->baseUrl}/emrapi/v1/apimanagement/scopes",
 			[
 				'headers' => ['Authorization' => "Bearer {$token}"],
-				'query' => [
+				'query' => array_merge($filter->getParams(), [
 					'PageNumber' => $page,
 					'PageSize' => static::PER_PAGE,
 					'DateFrom' => '2021-01-01'
-				]
+				])
 			]
 		);
 
@@ -45,6 +54,8 @@ class Scope extends BaseController
 		return view('scopes/index', [
 			'scopes' => $response['ResponseData']['Items'],
 			'pager' => $pager,
+			'isFiltered' => $filter->isFiltered(),
+			'filter' => $filter->getParams()
 		]);
 	}
 

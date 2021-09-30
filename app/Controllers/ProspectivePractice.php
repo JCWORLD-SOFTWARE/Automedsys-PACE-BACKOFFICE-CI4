@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Libraries\ApiResourceFilter;
 use App\Services\ClientAuthenticator;
 use CodeIgniter\API\ResponseTrait;
 use Config\Services;
@@ -21,6 +22,24 @@ class ProspectivePractice extends BaseController
 		$client = new HTTPClient();
 		$apiEndpointsConfig = config('ApiEndpoints');
 
+		$filterRequestMap = [
+			'NPI' => 'practice_npi',
+			'PracticeName' => 'practice_name',
+			'Street1' => 'address_line_1',
+			'Street2' => 'address_line_2',
+			'Country' => 'country',
+			'State' => 'state',
+			'City' => 'city',
+			'ZipCode' => 'zip_code',
+			'contact_prefix' => 'contact_prefix',
+			'contact_firstname' => 'contact_firstname',
+			'contact_middlename' => 'contact_middlename',
+			'contact_lastname' => 'contact_lastname',
+			'contact_suffix' => 'contact_suffix',
+		];
+
+		$filter = new ApiResourceFilter($filterRequestMap);
+
 		$page = $this->request->getVar('page') ?? 1;
 
 		$response = $client->request(
@@ -28,11 +47,11 @@ class ProspectivePractice extends BaseController
 			"{$apiEndpointsConfig->baseUrl}/paceapi/v1/prospective/practices",
 			[
 				'headers' => ['Authorization' => "Bearer {$token}"],
-				'query' => [
+				'query' => array_merge($filter->getParams(), [
 					'PageNumber' => $page,
 					'PageSize' => static::PER_PAGE,
 					'datefrom' => '2021-01-01'
-				]
+				])
 			]
 		);
 
@@ -45,6 +64,8 @@ class ProspectivePractice extends BaseController
 		return view('prospective_practices/index', [
 			'prospectivePractices' => $response['ResponseData']['Items'],
 			'pager' => $pager,
+			'isFiltered' => $filter->isFiltered(),
+			'filter' => $filter->getParams()
 		]);
 	}
 
