@@ -42,12 +42,58 @@
                     <span class="caption-subject bold">[<?= $organization['OrgName'] ?>] Applications</span>
                 </div>
                 <div class="actions">
-                    <a href="<?= base_url(route_to('application_create', $organization['Id'])); ?>" class="btn green-jungle pull-right">
+                    <button data-toggle="collapse" data-target="#filter" class="btn blue btn-outline">
+                        Filter <i class="fa fa-filter icon-black"></i>
+                    </button>
+                    <a href="<?= base_url(route_to('application_create', $organization['Id'])); ?>" class="btn green-jungle">
                         New Application <i class="fa fa-plus icon-black"></i>
                     </a>
                 </div>
             </div>
             <div class="portlet-body">
+                <form id="filter" class="filter-panel bg-default form-horizontal collapse <?= $isFiltered ? "in" : "" ?>">
+                    <div class="form-body">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Application Name</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="application_name" value="<?= old('application_name', $filter['APPName']) ?>" class="form-control" placeholder="Enter Application Name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Application Description</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="application_description" value="<?= old('application_description', $filter['APPDescr']) ?>" class="form-control" placeholder="Enter Application Description">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">User ID</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="user_id" value="<?= old('user_id', $filter['UserId']) ?>" class="form-control" placeholder="Enter User ID">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Client ID</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="client_id" value="<?= old('client_id', $filter['APPClientId']) ?>" class="form-control" placeholder="Enter Client ID">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-4">
+                                    <button type="submit" class="btn green">Filter Results <i class="fa fa-filter icon-black"></i></button>
+                                    <?php if ($isFiltered) : ?>
+                                        <a href="<?= base_url(route_to('application_index', $organization["Id"])); ?>" class="btn red btn-outline">
+                                            Remove Filters <i class="fa fa-times icon-black"></i>
+                                        </a>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
                 <div class="table-responsive">
                     <?= $pager->links() ?>
 

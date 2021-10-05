@@ -141,7 +141,7 @@
                                 <div class="col-md-offset-3 col-md-4">
                                     <button type="submit" class="btn green">Filter Results <i class="fa fa-filter icon-black"></i></button>
                                     <?php if ($isFiltered) : ?>
-                                        <a href="<?= base_url(route_to('user_registration_index')); ?>" class="btn red btn-outline">
+                                        <a href="<?= base_url(route_to('active_practice_index_suspended')); ?>" class="btn red btn-outline">
                                             Remove Filters <i class="fa fa-times icon-black"></i>
                                         </a>
                                     <?php endif; ?>

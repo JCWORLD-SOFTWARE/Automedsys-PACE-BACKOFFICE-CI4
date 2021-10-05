@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Libraries\ApiResourceFilter;
 use App\Services\ClientAuthenticator;
 use CodeIgniter\API\ResponseTrait;
 use Config\Services;
@@ -23,6 +24,15 @@ class Application extends BaseController
 		try {
 			$token = ClientAuthenticator::getToken();
 
+			$filterRequestMap = [
+				'APPName' => 'application_name',
+				'APPDescr' => 'application_description',
+				'UserId' => 'user_id',
+				'APPClientId' => 'client_id',
+			];
+
+			$filter = new ApiResourceFilter($filterRequestMap);
+
 			$page = $this->request->getVar('page') ?? 1;
 
 			$response = $client->request(
@@ -30,11 +40,11 @@ class Application extends BaseController
 				"{$apiEndpointsConfig->baseUrl}/emrapi/v1/apimanagement/organizations/{$organizationId}/applications",
 				[
 					'headers' => ['Authorization' => "Bearer {$token}"],
-					'query' => [
+					'query' => array_merge($filter->getParams(), [
 						'PageNumber' => $page,
 						'PageSize' => static::PER_PAGE,
 						'DateFrom' => '2021-01-01'
-					]
+					])
 				]
 			);
 
@@ -53,6 +63,8 @@ class Application extends BaseController
 			'organization' => $organization,
 			'applications' => $response['ResponseData']['Items'],
 			'pager' => $pager,
+			'isFiltered' => $filter->isFiltered(),
+			'filter' => $filter->getParams()
 		]);
 	}
 
