@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Libraries\ApiResourceFilter;
 use App\Services\ClientAuthenticator;
 use CodeIgniter\API\ResponseTrait;
 use Config\Services;
@@ -23,6 +24,22 @@ class Organization extends BaseController
 		try {
 			$token = ClientAuthenticator::getToken();
 
+			$filterRequestMap = [
+				'OrgName' => 'organization_name',
+				'OrgDescr' => 'organization_description',
+				'AddressLine1' => 'address_line_1',
+				'AddressLine2' => 'address_line_2',
+				'City' => 'city',
+				'State' => 'state',
+				'ZipCode' => 'zip_code',
+				'Country' => 'country',
+				'ContactName' => 'contact_name',
+				'ContactPhone' => 'contact_phone',
+				'ContactEmail' => 'contact_email',
+			];
+
+			$filter = new ApiResourceFilter($filterRequestMap);
+
 			$page = $this->request->getVar('page') ?? 1;
 
 			$response = $client->request(
@@ -30,11 +47,11 @@ class Organization extends BaseController
 				"{$apiEndpointsConfig->baseUrl}/emrapi/v1/apimanagement/organizations",
 				[
 					'headers' => ['Authorization' => "Bearer {$token}"],
-					'query' => [
+					'query' => array_merge($filter->getParams(), [
 						'PageNumber' => $page,
 						'PageSize' => static::PER_PAGE,
 						'DateFrom' => '2021-01-01'
-					]
+					])
 				]
 			);
 		} catch (Exception $exception) {
@@ -49,6 +66,8 @@ class Organization extends BaseController
 		return view('organizations/index', [
 			'organizations' => $response['ResponseData']['Items'],
 			'pager' => $pager,
+			'isFiltered' => $filter->isFiltered(),
+			'filter' => $filter->getParams()
 		]);
 	}
 

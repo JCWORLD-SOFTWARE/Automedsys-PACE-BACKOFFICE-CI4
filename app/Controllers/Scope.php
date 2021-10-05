@@ -24,7 +24,7 @@ class Scope extends BaseController
 
 		$filterRequestMap = [
 			'ScopeID' => 'scope_id',
-			'ScopeDescr' => 'scope_descr',
+			'ScopeDescr' => 'scope_description',
 			'ReqdGrantTypes' => 'requested_grant_types',
 		];
 
