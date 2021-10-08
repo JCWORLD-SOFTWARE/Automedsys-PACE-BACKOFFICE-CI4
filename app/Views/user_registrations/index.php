@@ -99,12 +99,6 @@
                 </form>
 
                 <div class="table-responsive">
-                    <!-- <div class="margin-bottom-5">
-                        <strong>Filters:</strong>
-                        <span class="label label-sm label-info margin-left-20"> First Name </span> James
-                        <span class="label label-sm label-info margin-left-20"> Last Name </span> Brown
-                    </div> -->
-
                     <?= $pager->links() ?>
 
                     <table class="table table-bordered" style="font-size: 12px;">

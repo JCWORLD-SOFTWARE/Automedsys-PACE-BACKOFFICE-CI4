@@ -118,7 +118,7 @@
                                         <td><?= $application["APPClientId"] ?></td>
                                         <td nowrap=""><?= date("d/m/Y h:i a", strtotime($application["CreatedDt"])) ?></td>
                                         <td nowrap="">
-                                            <a class="btn btn-sm blue" href="#">Manage</a>
+                                            <a class="btn btn-sm blue" href="<?= base_url(route_to('application_show', $organization["Id"], $application["Id"])); ?>">Manage</a>
                                             <a class="btn btn-sm green" href="<?= base_url(route_to('application_edit', $organization["Id"], $application["Id"])); ?>">Edit</a>
                                             <a class="btn btn-sm red" href="<?= base_url(route_to('application_delete', $organization["Id"], $application["Id"])); ?>" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
                                         </td>
