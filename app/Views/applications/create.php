@@ -41,7 +41,7 @@
                     <div class="form-body">
                         <div class="form-group">
                             <label class="col-md-3 control-label">Application Name</label>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <input type="text" name="application_name" value="<?= old('application_name') ?>" class="form-control" placeholder="Enter Application Name">
                                 <?php if (isset(session('errors')['application_name'])) : ?>
                                     <span class="help-block text-danger font-sm">
@@ -52,7 +52,7 @@
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label">Application Description</label>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <input type="text" name="application_description" value="<?= old('application_description') ?>" class="form-control" placeholder="Enter Application Description">
                                 <?php if (isset(session('errors')['application_description'])) : ?>
                                     <span class="help-block text-danger font-sm">

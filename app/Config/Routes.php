@@ -82,10 +82,13 @@ $routes->get('/organizations/delete/(:segment)', 'Organization::delete/$1', ['fi
 $routes->get('/organizations/(:segment)/applications', 'Application::index/$1', ['filter' => 'auth', 'as' => 'application_index']);
 $routes->get('/organizations/(:segment)/applications/create', 'Application::create/$1', ['filter' => 'auth', 'as' => 'application_create']);
 $routes->post('/organizations/(:segment)/applications/create', 'Application::store/$1', ['filter' => 'auth', 'as' => 'application_store']);
-$routes->get('/organizations/applications/show/(:segment)', 'Application::show/$1', ['filter' => 'auth', 'as' => 'application_show']);
+$routes->get('/organizations/(:segment)/applications/show/(:segment)', 'Application::show/$1/$2', ['filter' => 'auth', 'as' => 'application_show']);
 $routes->get('/organizations/(:segment)/applications/edit/(:segment)', 'Application::edit/$1/$2', ['filter' => 'auth', 'as' => 'application_edit']);
 $routes->post('/organizations/(:segment)/applications/edit/(:segment)', 'Application::update/$1/$2', ['filter' => 'auth', 'as' => 'application_update']);
 $routes->get('/organizations/(:segment)/applications/delete/(:segment)', 'Application::delete/$1/$2', ['filter' => 'auth', 'as' => 'application_delete']);
+
+$routes->post('/organizations/(:segment)/applications/(:segment)/scopes/create', 'ScopeAssignment::store/$1/$2', ['filter' => 'auth', 'as' => 'scope_assignment_store']);
+$routes->get('/organizations/(:segment)/applications/(:segment)/scopes/(:segment)/delete', 'ScopeAssignment::delete/$1/$2/$3', ['filter' => 'auth', 'as' => 'scope_assignment_delete']);
 
 $routes->get('/scopes', 'Scope::index', ['filter' => 'auth', 'as' => 'scope_index']);
 $routes->get('/scopes/create', 'Scope::create', ['filter' => 'auth', 'as' => 'scope_create']);

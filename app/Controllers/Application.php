@@ -123,18 +123,22 @@ class Application extends BaseController
 		return redirect()->route('application_index', [$organizationId]);
 	}
 
-	public function show(string $id)
+	public function show(string $organizationId, string $id)
 	{
-		$token = ClientAuthenticator::getToken();
 		$client = new HTTPClient();
 		$apiEndpointsConfig = config('ApiEndpoints');
 
 		try {
+			$token = ClientAuthenticator::getToken();
 			$response = $client->request(
 				'GET',
-				"{$apiEndpointsConfig->baseUrl}/emrapi/v1/apimanagement/applications/{$id}",
+				"{$apiEndpointsConfig->baseUrl}/emrapi/v1/apimanagement/organizations/{$organizationId}/applications/{$id}",
 				['headers' => ['Authorization' => "Bearer {$token}"]]
 			);
+
+			$organization = $this->getOrganization($token, $organizationId);
+			$scopes = $this->getScopes($token);
+			$scopeAssignments = $this->getScopeAssignments($token, $id);
 		} catch (Exception $exception) {
 			session()->setFlashdata('error', "<pre>{$exception->getMessage()}</pre>");
 			return redirect()->route('application_index');
@@ -142,8 +146,19 @@ class Application extends BaseController
 
 		$response = json_decode($response->getBody(), true);
 
+		$assignedScopeIds = array_column($scopeAssignments, 'ScopeDefnId');
+
+		$assignedScopes = array_filter($scopes, fn ($scope) => in_array($scope['ID'], $assignedScopeIds));
+		$assignedScopes = array_values($assignedScopes);
+
+		$unassignedScopes = array_filter($scopes, fn ($scope) => !in_array($scope['ID'], $assignedScopeIds));
+		$unassignedScopes = array_values($unassignedScopes);
+
 		return view('applications/show', [
-			'organization' => $response['ResponseData'],
+			'assignedScopes' => $assignedScopes,
+			'unassignedScopes' => $unassignedScopes,
+			'organization' => $organization,
+			'application' => $response['ResponseData'],
 		]);
 	}
 
@@ -161,6 +176,7 @@ class Application extends BaseController
 			);
 
 			$organization = $this->getOrganization($token, $organizationId);
+			$scopes = $this->getScopes($token);
 		} catch (Exception $exception) {
 			session()->setFlashdata('error', "<pre>{$exception->getMessage()}</pre>");
 			return redirect()->route('application_index');
@@ -170,6 +186,7 @@ class Application extends BaseController
 
 		return view('applications/edit', [
 			'organization' => $organization,
+			'scopes' => $scopes,
 			'application' => $response['ResponseData'],
 		]);
 	}
@@ -251,5 +268,49 @@ class Application extends BaseController
 		$response = json_decode($response->getBody(), true);
 
 		return $response['ResponseData'];
+	}
+
+	public function getScopes(string $token)
+	{
+		$client = new HTTPClient();
+		$apiEndpointsConfig = config('ApiEndpoints');
+
+		$response = $client->request(
+			'GET',
+			"{$apiEndpointsConfig->baseUrl}/emrapi/v1/apimanagement/scopes",
+			[
+				'headers' => ['Authorization' => "Bearer {$token}"],
+				'query' => [
+					'PageSize' => 100,
+					'DateFrom' => '2021-01-01'
+				]
+			]
+		);
+
+		$response = json_decode($response->getBody(), true);
+
+		return $response['ResponseData']['Items'];
+	}
+
+	public function getScopeAssignments(string $token, string $applicationId)
+	{
+		$client = new HTTPClient();
+		$apiEndpointsConfig = config('ApiEndpoints');
+
+		$response = $client->request(
+			'GET',
+			"{$apiEndpointsConfig->baseUrl}/emrapi/v1/apimanagement/applications/{$applicationId}/scopes",
+			[
+				'headers' => ['Authorization' => "Bearer {$token}"],
+				'query' => [
+					'PageSize' => 100,
+					'DateFrom' => '2021-01-01'
+				]
+			]
+		);
+
+		$response = json_decode($response->getBody(), true);
+
+		return $response['ResponseData']['Items'];
 	}
 }
