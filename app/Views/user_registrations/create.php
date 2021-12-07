@@ -37,6 +37,17 @@
                 <form action="<?= base_url(route_to('user_registration_store')); ?>" method="POST" class="form-horizontal">
                     <div class="form-body">
                         <div class="form-group">
+                            <label class="col-md-3 control-label">Record ID</label>
+                            <div class="col-md-4">
+                                <input type="text" readonly name="record_id" value="112342" class="form-control" placeholder="Enter Record ID">
+                                <?php if (isset(session('errors')['record_id'])) : ?>
+                                    <span class="help-block text-danger font-sm">
+                                        <?= session('errors')['record_id'] ?>
+                                    </span>
+                                <?php endif ?>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-md-3 control-label">First Name</label>
                             <div class="col-md-4">
                                 <input type="text" name="first_name" value="<?= old('first_name') ?>" class="form-control" placeholder="Enter First Name">
@@ -68,6 +79,14 @@
                                     </span>
                                 <?php endif ?>
                             </div>
+                            <div class="col-md-2">
+                                <input type="button" name="verify_npi" value="Verify NPI" class="btn btn-primary form-control">
+                                <?php if (isset(session('errors')['verify_npi'])) : ?>
+                                    <span class="help-block text-danger font-sm">
+                                        <?= session('errors')['verify_npi'] ?>
+                                    </span>
+                                <?php endif ?>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label">Email Address</label>
@@ -78,6 +97,10 @@
                                         <?= session('errors')['email_address'] ?>
                                     </span>
                                 <?php endif ?>
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-3">
+                                <input type="button" name="notification_resend" id="notification_resend" value="Resend Notification" class="btn btn-primary form-control">
                             </div>
                         </div>
                         <div class="form-group">
@@ -92,14 +115,28 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-md-3 control-label">Affiliated Practice</label>
+                            <div class="col-md-4">
+                                <input type="text" readonly name="affiliated_practice" value="1239833000" class="form-control bg-" placeholder="Enter Affiliated Practice">
+                                <?php if (isset(session('errors')['affiliated_practice'])) : ?>
+                                    <span class="help-block text-danger font-sm">
+                                        <?= session('errors')['affiliated_practice'] ?>
+                                    </span>
+                                <?php endif ?>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-md-3 control-label">Password</label>
                             <div class="col-md-4">
-                                <input type="password" name="password" value="<?= old('password') ?>" class="form-control" placeholder="Enter Password">
+                                <input type="password" name="password" id='password' value="<?= old('password') ?>" class="form-control" placeholder="Enter Password">
                                 <?php if (isset(session('errors')['password'])) : ?>
                                     <span class="help-block text-danger font-sm">
                                         <?= session('errors')['password'] ?>
                                     </span>
                                 <?php endif ?>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="button" id="reset_password" name="reset_password" id="reset_password" value="Reset Password" class="btn btn-primary form-control">
                             </div>
                         </div>
 

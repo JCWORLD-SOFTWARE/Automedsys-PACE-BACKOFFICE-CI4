@@ -37,17 +37,45 @@
 <div class="row">
     <div class="col-md-12">
         <div class="portlet light">
-            <div class="portlet-title">
-                <div class="caption font-green-jungle">
-                    <span class="caption-subject bold">Organizations</span>
-                </div>
-                <div class="actions">
-                    <button data-toggle="collapse" data-target="#filter" class="btn blue btn-outline">
-                        Filter <i class="fa fa-filter icon-black"></i>
-                    </button>
-                    <a href="<?= base_url(route_to('organization_create')); ?>" class="btn green-jungle">
-                        New Organization <i class="fa fa-plus icon-black"></i>
-                    </a>
+        <div class="portlet-title">
+                <div class="row">
+                    <div class="col-md-2 caption font-green-jungle">
+                        <span class="caption-subject bold">Organizations</span>
+                    </div>
+                    <div class="col-md-7 text-center page-toolbar" >
+                        <!-- Date Filter -->
+                        <table style="width: 80%;">
+                            <tr>
+                                <td class="form-group">
+                                    <div class="row">
+                                        <label for="search_fromdate" class="col-md-3 btn">Date From </label>
+                                        <div class="col-md-7">
+                                            <input type='date' id='search_fromdate' class="datepicker form-control btn btn-primary">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="form-group">
+                                    <div class="row">
+                                        <label for="search_todate" class="col-md-1 btn"> To </label>
+                                        <div class="col-md-9">
+                                            <input type='date' id='search_todate' class="datepicker form-control btn btn-primary">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type='button' id="btn_search" class="btn btn-success" value="Search">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-2 text-right actions">
+                        <button data-toggle="collapse" data-target="#filter" class="btn blue btn-outline" style="display: none;">
+                            Filter <i class="fa fa-filter icon-black"></i>
+                        </button>
+                        <button disabled class="btn btn-disabled green-jungle">
+                            New Organization <i class="fa fa-plus icon-black"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="portlet-body">
@@ -143,10 +171,13 @@
                         <thead>
                             <tr>
                                 <th width="50">ID</th>
+                                <th>Signup Date</th>
                                 <th>Organization Name</th>
+                                <th>Speciality</th>
+                                <th>Address</th>
+                                <th>Country</th>
                                 <th>Organization Description</th>
                                 <th>Contact Name</th>
-                                <th width="150">Created</th>
                                 <th width="180">Edit / Delete</th>
                             </tr>
                         </thead>
@@ -154,10 +185,14 @@
                             <?php foreach ($organizations as $organization) : ?>
                                 <tr>
                                     <td><?= $organization["Id"] ?></td>
+                                    <td nowrap=""><?= date("dS M y", strtotime($organization["CreatedDt"])) ?></td>
                                     <td><?= $organization["OrgName"] ?></td>
+                                    <td>Sehtufred</td>
+                                    <td>No <?= $organization["Id"] ?>, street name, City, State </td>
+                                    <td>Country</td>
                                     <td><?= $organization["OrgDescr"] ?></td>
                                     <td><?= $organization["ContactName"] ?? "N/A" ?></td>
-                                    <td nowrap=""><?= date("d/m/Y h:i a", strtotime($organization["CreatedDt"])) ?></td>
+                                    
                                     <td nowrap="">
                                         <a class="btn btn-sm blue" href="<?= base_url(route_to('organization_show', $organization["Id"])); ?>">Manage</a>
                                         <a class="btn btn-sm green" href="<?= base_url(route_to('organization_edit', $organization["Id"])); ?>">Edit</a>

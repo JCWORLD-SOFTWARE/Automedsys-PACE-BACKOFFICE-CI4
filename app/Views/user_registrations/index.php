@@ -11,13 +11,6 @@
             <span>User Registration Management</span>
         </li>
     </ul>
-    <div class="page-toolbar">
-        <div id="dashboard-report-range" class="pull-right tooltips btn btn-sm" data-container="body" data-placement="bottom" data-original-title="Change dashboard date range">
-            <i class="icon-calendar"></i>&nbsp;
-            <span class="thin uppercase hidden-xs"></span>&nbsp;
-            <i class="fa fa-angle-down"></i>
-        </div>
-    </div>
 </div>
 
 <h3 class="page-title">User Registration Management</h3>
@@ -38,16 +31,44 @@
     <div class="col-md-12">
         <div class="portlet light">
             <div class="portlet-title">
-                <div class="caption font-green-jungle">
-                    <span class="caption-subject bold">Sign Ups</span>
-                </div>
-                <div class="actions">
-                    <button data-toggle="collapse" data-target="#filter" class="btn blue btn-outline">
-                        Filter <i class="fa fa-filter icon-black"></i>
-                    </button>
-                    <a href="<?= base_url(route_to('user_registration_create')); ?>" class="btn green-jungle">
-                        New Sign Up <i class="fa fa-plus icon-black"></i>
-                    </a>
+                <div class="row">
+                    <div class="col-md-2 caption font-green-jungle">
+                        <span class="caption-subject bold">Sign Ups</span>
+                    </div>
+                    <div class="col-md-8 text-center page-toolbar" >
+                        <!-- Date Filter -->
+                        <table style="width: 80%;">
+                            <tr>
+                                <td class="form-group">
+                                    <div class="row">
+                                        <label for="search_fromdate" class="col-md-3 btn">Date From </label>
+                                        <div class="col-md-7">
+                                            <input type='date' id='search_fromdate' class="datepicker form-control btn btn-primary">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="form-group">
+                                    <div class="row">
+                                        <label for="search_todate" class="col-md-1 btn"> To </label>
+                                        <div class="col-md-9">
+                                            <input type='date' id='search_todate' class="datepicker form-control btn btn-primary">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type='button' id="btn_search" class="btn btn-success" value="Search">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-2 text-right actions">
+                        <button data-toggle="collapse" data-target="#filter" class="btn blue btn-outline" style="display: none;">
+                            Filter <i class="fa fa-filter icon-black"></i>
+                        </button>
+                        <button disabled class="btn btn-disabled green-jungle">
+                            New Sign Up <i class="fa fa-plus icon-black"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="portlet-body">
@@ -101,31 +122,37 @@
                 <div class="table-responsive">
                     <?= $pager->links() ?>
 
-                    <table class="table table-bordered" style="font-size: 12px;">
+                    <table class="table table-bordered" style="font-size: 12px; ">
                         <thead>
                             <tr>
-                                <th width="50">ID</th>
-                                <th>Full Name</th>
+                                <th width="45">ID</th>
+                                <th width="180">Signup Date</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
                                 <th>Email Address</th>
                                 <th>Telephone</th>
-                                <th>Provider NPI</th>
-                                <th width="200">Created</th>
-                                <th width="220">Edit / Delete</th>
+                                <th>NPI</th>
+                                <th>Affiliated Practice</th>
+                                <th>Email Verified</th>
+                                <th width="120">Edit / Delete</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($userRegistrations as $user) : ?>
                                 <tr>
                                     <td><?= $user["Id"] ?></td>
-                                    <td><?= $user["FirstName"] ?> <?= $user["LastName"] ?></td>
+                                    <td nowrap=""><?= date("dS M y \n h:i a", strtotime($user["created_dt"])) ?></td>
+                                    <td><?= $user["FirstName"] ?></td>
+                                    <td><?= $user["LastName"] ?></td>
                                     <td><?= $user["UsernameEmail"] ?></td>
                                     <td><?= $user["Telephone"] ?></td>
                                     <td><?= $user["ProviderNPI"] ? $user["ProviderNPI"] : "N/A" ?></td>
-                                    <td nowrap=""><?= date("d/m/Y h:i a", strtotime($user["created_dt"])) ?></td>
+                                    <td><?= $user["Telephone"] ?></td>
+                                    <td>True</td>
                                     <td nowrap="">
-                                        <a class="btn btn-sm blue" href="<?= base_url(route_to('user_registration_show', $user["UniqueId"])); ?>">View</a>
-                                        <a class="btn btn-sm green" href="<?= base_url(route_to('user_registration_edit', $user["UniqueId"])); ?>">Edit</a>
-                                        <a class="btn btn-sm red" href="<?= base_url(route_to('user_registration_delete', $user["UniqueId"])); ?>" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
+                                        <a class="btn btn-sm blue" href="<?= base_url(route_to('user_registration_show', $user["UniqueId"])); ?>"><i class="fa fa-eye"></i></a>
+                                        <a class="btn btn-sm green" href="<?= base_url(route_to('user_registration_edit', $user["UniqueId"])); ?>"><i class="fa fa-pencil"></i></a>
+                                        <a class="btn btn-sm red" href="<?= base_url(route_to('user_registration_delete', $user["UniqueId"])); ?>" onclick="return confirm('Are you sure you want to delete this record?')"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

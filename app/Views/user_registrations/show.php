@@ -47,23 +47,53 @@
                         <tbody>
                             <tr>
                                 <th width="200">ID</th>
-                                <td><?= $user['Id'] ?></td>
+                                <td>
+                                    <input type="text" value="<?= old('record_id', $user['Id']) ?>" name="record_Id" id="" class="form-control">
+                                </td>
                             </tr>
                             <tr>
                                 <th width="200">First Name</th>
-                                <td><?= $user['FirstName'] ?></td>
+                                <td>
+                                    <input type="text" name="first_name" value="<?= old('first_name', $user["FirstName"]) ?>" class="form-control" placeholder="Enter First Name">
+                                    <?php if (isset(session('errors')['first_name'])) : ?>
+                                        <span class="help-block text-danger font-sm">
+                                            <?= session('errors')['first_name'] ?>
+                                        </span>
+                                    <?php endif ?>
+                                </td>
                             </tr>
                             <tr>
                                 <th width="200">Last Name</th>
-                                <td><?= $user['LastName'] ?></td>
+                                <td>
+                                    <input type="text" name="last_name" value="<?= old('last_name', $user["LastName"]) ?>" class="form-control" placeholder="Enter Last Name">
+                                    <?php if (isset(session('errors')['last_name'])) : ?>
+                                        <span class="help-block text-danger font-sm">
+                                            <?= session('errors')['last_name'] ?>
+                                        </span>
+                                    <?php endif ?>
+                                </td>
                             </tr>
                             <tr>
                                 <th width="200">Provider NPI</th>
-                                <td><?= $user["ProviderNPI"] ? $user["ProviderNPI"] : "N/A" ?><br /></td>
+                                <td>
+                                    <input type="text" name="npi" value="<?= old('npi', $user["ProviderNPI"]) ?>" class="form-control" placeholder="Enter NPI">
+                                    <?php if (isset(session('errors')['npi'])) : ?>
+                                        <span class="help-block text-danger font-sm">
+                                            <?= session('errors')['npi'] ?>
+                                        </span>
+                                    <?php endif ?>
+                                </td>
                             </tr>
                             <tr>
                                 <th width="200">Telephone</th>
-                                <td><?= $user['Telephone'] ?></td>
+                                <td>
+                                    <input type="text" name="phone_number" value="<?= old('phone_number', $user["Telephone"]) ?>" class="form-control" placeholder="Enter Phone Number">
+                                    <?php if (isset(session('errors')['phone_number'])) : ?>
+                                        <span class="help-block text-danger font-sm">
+                                            <?= session('errors')['phone_number'] ?>
+                                        </span>
+                                    <?php endif ?>
+                                </td>
                             </tr>
                             <tr>
                                 <th width="200">Created Date</th>

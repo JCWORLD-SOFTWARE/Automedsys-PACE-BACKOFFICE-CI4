@@ -216,7 +216,7 @@ class UserRegistration extends BaseController
 			return redirect()->back()
 				->withInput()
 				->with('errors', $validation->getErrors());
-		}
+		} 
 
 		try {
 			$client->request(
@@ -266,5 +266,33 @@ class UserRegistration extends BaseController
 		session()->setFlashdata('success', 'User sign up deleted successfully');
 
 		return redirect()->route('user_registration_index');
+	}
+
+	public function verifyNPI(string $id)
+	{
+		$token = ClientAuthenticator::getToken();
+		$client = new HTTPClient();
+		$apiEndpointsConfig = config('ApiEndpoints');
+
+		try {
+			$response = $client->request(
+				'POST',
+				"{$apiEndpointsConfig->baseUrl}/paceapi/v1/signup/{$id}/verify-npi",
+				[
+					'headers' => ['Authorization' => "Bearer {$token}"],
+					'query' => ['RequestUrl' => "http://dev.automedsys.com/signup"]
+				]
+			);
+		} catch (Exception $exception) {
+			return $this->fail(
+				$exception->getMessage(),
+				400,
+				"An error occured while verifying NPI"
+			);
+		}
+
+		$response = json_decode($response->getBody(), true);
+
+		return $this->respond($response);
 	}
 }
