@@ -1,6 +1,6 @@
 version: '3'
 services:
-  automedbko-web:
+  automedbko-web-ci4-new:
     build:
       context: .
       dockerfile: docker/apache/Dockerfile

@@ -26,6 +26,10 @@ RUN docker-php-ext-install \
     mysqli
     #soap
 
+RUN apt-get update && \
+    apt-get install -y libxml2-dev
+RUN docker-php-ext-install soap && docker-php-ext-enable soap
+
 # 2. set up document root for apache
 COPY docker/apache/000-default.conf /etc/apache2/sites-available/000-default.conf
 

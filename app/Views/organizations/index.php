@@ -11,13 +11,6 @@
             <span>API Management</span>
         </li>
     </ul>
-    <div class="page-toolbar">
-        <div id="dashboard-report-range" class="pull-right tooltips btn btn-sm" data-container="body" data-placement="bottom" data-original-title="Change dashboard date range">
-            <i class="icon-calendar"></i>&nbsp;
-            <span class="thin uppercase hidden-xs"></span>&nbsp;
-            <i class="fa fa-angle-down"></i>
-        </div>
-    </div>
 </div>
 
 <h3 class="page-title">API Management</h3>
@@ -44,21 +37,21 @@
                     </div>
                     <div class="col-md-7 text-center page-toolbar" >
                         <!-- Date Filter -->
-                        <table style="width: 80%;">
+                        <table style="width: 90%;">
                             <tr>
                                 <td class="form-group">
                                     <div class="row">
-                                        <label for="search_fromdate" class="col-md-3 btn">Date From </label>
-                                        <div class="col-md-7">
-                                            <input type='date' id='search_fromdate' class="datepicker form-control btn btn-primary">
+                                        <label for="search_fromdate" class="col-md-3 btn">From </label>
+                                        <div class="col-md-8">
+                                            <input type='date' id='search_fromdate' class="datepicker date-filter form-control btn btn-primary">
                                         </div>
                                     </div>
                                 </td>
                                 <td class="form-group">
                                     <div class="row">
-                                        <label for="search_todate" class="col-md-1 btn"> To </label>
+                                        <label for="search_todate" class="col-md-2 text-center btn"> To </label>
                                         <div class="col-md-9">
-                                            <input type='date' id='search_todate' class="datepicker form-control btn btn-primary">
+                                            <input type='date' id='search_todate' class="datepicker date-filter form-control btn btn-primary">
                                         </div>
                                     </div>
                                 </td>

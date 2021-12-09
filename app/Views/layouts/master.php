@@ -63,6 +63,10 @@
         .filter-panel {
             padding: 20px;
         }
+        .date-filter{
+            padding: 2px;
+            text-align: center;
+        }
     </style>
 
     <?= $this->renderSection('head') ?>

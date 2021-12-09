@@ -1,0 +1,57 @@
+[Sat Nov 13 12:17:14.772026 2021] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.51 (Debian) PHP/7.4.25 configured -- resuming normal operations
+[Sat Nov 13 12:17:14.774090 2021] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Sat Nov 13 12:17:42.431220 2021] [php7:warn] [pid 20] [client 172.18.0.1:35722] PHP Warning:  require(/var/www/html/app/Config/../../vendor/codeigniter4/framework/system/bootstrap.php): failed to open stream: No such file or directory in /var/www/html/public/index.php on line 28
+[Sat Nov 13 12:17:42.431848 2021] [php7:error] [pid 20] [client 172.18.0.1:35722] PHP Fatal error:  require(): Failed opening required '/var/www/html/app/Config/../../vendor/codeigniter4/framework/system/bootstrap.php' (include_path='.:/usr/local/lib/php') in /var/www/html/public/index.php on line 28
+[Sat Nov 13 12:18:40.274244 2021] [php7:warn] [pid 21] [client 172.18.0.1:35754] PHP Warning:  require(/var/www/html/app/Config/../../vendor/codeigniter4/framework/system/bootstrap.php): failed to open stream: No such file or directory in /var/www/html/public/index.php on line 28
+[Sat Nov 13 12:18:40.275009 2021] [php7:error] [pid 21] [client 172.18.0.1:35754] PHP Fatal error:  require(): Failed opening required '/var/www/html/app/Config/../../vendor/codeigniter4/framework/system/bootstrap.php' (include_path='.:/usr/local/lib/php') in /var/www/html/public/index.php on line 28
+[Sat Nov 13 12:18:42.280780 2021] [php7:warn] [pid 21] [client 172.18.0.1:35754] PHP Warning:  require(/var/www/html/app/Config/../../vendor/codeigniter4/framework/system/bootstrap.php): failed to open stream: No such file or directory in /var/www/html/public/index.php on line 28
+[Sat Nov 13 12:18:42.281874 2021] [php7:error] [pid 21] [client 172.18.0.1:35754] PHP Fatal error:  require(): Failed opening required '/var/www/html/app/Config/../../vendor/codeigniter4/framework/system/bootstrap.php' (include_path='.:/usr/local/lib/php') in /var/www/html/public/index.php on line 28
+[Sat Nov 13 12:25:31.503163 2021] [php7:warn] [pid 18] [client 172.18.0.1:35818] PHP Warning:  require(/var/www/html/app/Config/../../vendor/codeigniter4/framework/system/bootstrap.php): failed to open stream: No such file or directory in /var/www/html/public/index.php on line 28
+[Sat Nov 13 12:25:31.508012 2021] [php7:error] [pid 18] [client 172.18.0.1:35818] PHP Fatal error:  require(): Failed opening required '/var/www/html/app/Config/../../vendor/codeigniter4/framework/system/bootstrap.php' (include_path='.:/usr/local/lib/php') in /var/www/html/public/index.php on line 28
+[Sat Nov 13 12:25:35.410647 2021] [php7:warn] [pid 18] [client 172.18.0.1:35818] PHP Warning:  require(/var/www/html/app/Config/../../vendor/codeigniter4/framework/system/bootstrap.php): failed to open stream: No such file or directory in /var/www/html/public/index.php on line 28
+[Sat Nov 13 12:25:35.412870 2021] [php7:error] [pid 18] [client 172.18.0.1:35818] PHP Fatal error:  require(): Failed opening required '/var/www/html/app/Config/../../vendor/codeigniter4/framework/system/bootstrap.php' (include_path='.:/usr/local/lib/php') in /var/www/html/public/index.php on line 28
+[Sat Nov 13 12:25:38.827220 2021] [php7:warn] [pid 18] [client 172.18.0.1:35818] PHP Warning:  require(/var/www/html/app/Config/../../vendor/codeigniter4/framework/system/bootstrap.php): failed to open stream: No such file or directory in /var/www/html/public/index.php on line 28
+[Sat Nov 13 12:25:38.828568 2021] [php7:error] [pid 18] [client 172.18.0.1:35818] PHP Fatal error:  require(): Failed opening required '/var/www/html/app/Config/../../vendor/codeigniter4/framework/system/bootstrap.php' (include_path='.:/usr/local/lib/php') in /var/www/html/public/index.php on line 28
+[Sat Nov 13 12:25:49.341910 2021] [php7:warn] [pid 19] [client 172.18.0.1:35822] PHP Warning:  require(/var/www/html/app/Config/../../vendor/codeigniter4/framework/system/bootstrap.php): failed to open stream: No such file or directory in /var/www/html/public/index.php on line 28
+[Sat Nov 13 12:25:49.345767 2021] [php7:error] [pid 19] [client 172.18.0.1:35822] PHP Fatal error:  require(): Failed opening required '/var/www/html/app/Config/../../vendor/codeigniter4/framework/system/bootstrap.php' (include_path='.:/usr/local/lib/php') in /var/www/html/public/index.php on line 28
+[Sat Nov 13 12:26:46.185009 2021] [php7:warn] [pid 21] [client 172.18.0.1:35832] PHP Warning:  require(/var/www/html/app/Config/../../vendor/codeigniter4/framework/system/bootstrap.php): failed to open stream: No such file or directory in /var/www/html/public/index.php on line 28
+[Sat Nov 13 12:26:46.188136 2021] [php7:error] [pid 21] [client 172.18.0.1:35832] PHP Fatal error:  require(): Failed opening required '/var/www/html/app/Config/../../vendor/codeigniter4/framework/system/bootstrap.php' (include_path='.:/usr/local/lib/php') in /var/www/html/public/index.php on line 28
+[Sat Nov 13 12:26:50.540745 2021] [php7:warn] [pid 18] [client 172.18.0.1:35842] PHP Warning:  require(/var/www/html/app/Config/../../vendor/codeigniter4/framework/system/bootstrap.php): failed to open stream: No such file or directory in /var/www/html/public/index.php on line 28
+[Sat Nov 13 12:26:50.541757 2021] [php7:error] [pid 18] [client 172.18.0.1:35842] PHP Fatal error:  require(): Failed opening required '/var/www/html/app/Config/../../vendor/codeigniter4/framework/system/bootstrap.php' (include_path='.:/usr/local/lib/php') in /var/www/html/public/index.php on line 28
+[Sat Nov 13 12:42:36.511602 2021] [mpm_prefork:notice] [pid 1] AH00170: caught SIGWINCH, shutting down gracefully
+[Sat Nov 13 12:42:47.555376 2021] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.51 (Debian) PHP/7.4.25 configured -- resuming normal operations
+[Sat Nov 13 12:42:47.557010 2021] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Sat Nov 13 12:53:11.581992 2021] [mpm_prefork:notice] [pid 1] AH00170: caught SIGWINCH, shutting down gracefully
+[Sat Nov 13 12:53:22.977672 2021] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.51 (Debian) PHP/7.4.25 configured -- resuming normal operations
+[Sat Nov 13 12:53:22.978219 2021] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Sat Nov 13 12:54:39.322984 2021] [mpm_prefork:notice] [pid 1] AH00170: caught SIGWINCH, shutting down gracefully
+[Sat Nov 13 12:54:47.274357 2021] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.51 (Debian) PHP/7.4.25 configured -- resuming normal operations
+[Sat Nov 13 12:54:47.274935 2021] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Sat Nov 13 12:58:46.405939 2021] [mpm_prefork:notice] [pid 1] AH00170: caught SIGWINCH, shutting down gracefully
+[Sat Nov 13 12:58:54.527570 2021] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.51 (Debian) PHP/7.4.25 configured -- resuming normal operations
+[Sat Nov 13 12:58:54.528168 2021] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Fri Nov 19 01:26:51.377830 2021] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.51 (Debian) PHP/7.4.26 configured -- resuming normal operations
+[Fri Nov 19 01:26:51.661268 2021] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Sat Nov 20 08:43:20.845047 2021] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.51 (Debian) PHP/7.4.26 configured -- resuming normal operations
+[Sat Nov 20 08:43:20.977081 2021] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Mon Nov 22 18:05:12.754747 2021] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.51 (Debian) PHP/7.4.26 configured -- resuming normal operations
+[Mon Nov 22 18:05:12.858459 2021] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Tue Nov 23 05:40:31.505115 2021] [mpm_prefork:notice] [pid 1] AH00170: caught SIGWINCH, shutting down gracefully
+[Tue Nov 23 05:40:58.449081 2021] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.51 (Debian) PHP/7.4.26 configured -- resuming normal operations
+[Tue Nov 23 05:40:58.465135 2021] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Thu Dec 09 13:41:21.287211 2021] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.51 (Debian) PHP/7.4.26 configured -- resuming normal operations
+[Thu Dec 09 13:41:21.300844 2021] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Thu Dec 09 15:52:06.680862 2021] [mpm_prefork:notice] [pid 1] AH00170: caught SIGWINCH, shutting down gracefully
+[Thu Dec 09 15:52:17.209693 2021] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.51 (Debian) PHP/7.4.26 configured -- resuming normal operations
+[Thu Dec 09 15:52:17.210799 2021] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Thu Dec 09 16:53:29.312824 2021] [mpm_prefork:notice] [pid 1] AH00170: caught SIGWINCH, shutting down gracefully
+[Thu Dec 09 16:53:44.146702 2021] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.51 (Debian) PHP/7.4.26 configured -- resuming normal operations
+[Thu Dec 09 16:53:44.147765 2021] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Thu Dec 09 17:24:55.739849 2021] [mpm_prefork:notice] [pid 1] AH00170: caught SIGWINCH, shutting down gracefully
+[Thu Dec 09 17:25:25.405841 2021] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.51 (Debian) PHP/7.4.26 configured -- resuming normal operations
+[Thu Dec 09 17:25:25.407720 2021] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Thu Dec 09 19:56:15.020373 2021] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.51 (Debian) PHP/7.4.26 configured -- resuming normal operations
+[Thu Dec 09 19:56:15.079521 2021] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Thu Dec 09 19:59:02.680691 2021] [mpm_prefork:notice] [pid 1] AH00169: caught SIGTERM, shutting down
+[Thu Dec 09 19:59:31.338646 2021] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.51 (Debian) PHP/7.4.26 configured -- resuming normal operations
+[Thu Dec 09 19:59:31.339084 2021] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
