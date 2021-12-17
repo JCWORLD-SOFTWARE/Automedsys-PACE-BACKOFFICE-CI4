@@ -35,9 +35,16 @@
                     <div class="col-md-2 caption font-green-jungle">
                         <span class="caption-subject bold">Sign Ups</span>
                     </div>
-                    <div class="col-md-7 text-center page-toolbar" >
+                    <div class="col-md-5 text-center page-toolbar" >
                         <!-- Date Filter -->
-                        <table style="width: 90%;">
+                        <div class="page-toolbar">
+                            <div id="dashboard-report-range" class="pull-right tooltips btn btn-sm" data-container="body" data-placement="bottom" data-original-title="Change dashboard date range">
+                                <i class="icon-calendar"></i>&nbsp;
+                                <span class="thin uppercase hidden-xs"></span>&nbsp;
+                                <i class="fa fa-angle-down"></i>
+                            </div>
+                        </div>
+                        <table style="width: 90%; display: none;">
                             <tr>
                                 <td class="form-group">
                                     <div class="row">
@@ -61,9 +68,9 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="col-md-2 text-right actions">
-                        <button data-toggle="collapse" data-target="#filter" class="btn blue btn-outline" style="display: none;">
-                            Filter <i class="fa fa-filter icon-black"></i>
+                    <div class="col-md-4 text-right actions">
+                        <button data-toggle="collapse" data-target="#filter" class="btn blue btn-outline">
+                            Search <i class="fa fa-search icon-black"></i>
                         </button>
                         <button disabled class="btn btn-disabled green-jungle">
                             New Sign Up <i class="fa fa-plus icon-black"></i>
@@ -107,7 +114,7 @@
                         <div class="form-actions">
                             <div class="row">
                                 <div class="col-md-offset-3 col-md-4">
-                                    <button type="submit" class="btn green">Filter Results <i class="fa fa-filter icon-black"></i></button>
+                                    <button type="submit" class="btn green">Search Results <i class="fa fa-filter icon-black"></i></button>
                                     <?php if ($isFiltered) : ?>
                                         <a href="<?= base_url(route_to('user_registration_index')); ?>" class="btn red btn-outline">
                                             Remove Filters <i class="fa fa-times icon-black"></i>
