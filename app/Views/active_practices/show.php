@@ -20,7 +20,7 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <span>Practice Management New</span>
+            <span>Practice Management</span>
         </li>
     </ul>
 </div>

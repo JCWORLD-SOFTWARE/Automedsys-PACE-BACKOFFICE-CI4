@@ -11,13 +11,6 @@
             <span>API Management</span>
         </li>
     </ul>
-    <div class="page-toolbar">
-        <div id="dashboard-report-range" class="pull-right tooltips btn btn-sm" data-container="body" data-placement="bottom" data-original-title="Change dashboard date range">
-            <i class="icon-calendar"></i>&nbsp;
-            <span class="thin uppercase hidden-xs"></span>&nbsp;
-            <i class="fa fa-angle-down"></i>
-        </div>
-    </div>
 </div>
 
 <h3 class="page-title">API Management</h3>
@@ -38,16 +31,29 @@
     <div class="col-md-12">
         <div class="portlet light">
             <div class="portlet-title">
-                <div class="caption font-green-jungle">
-                    <span class="caption-subject bold">Scopes</span>
-                </div>
-                <div class="actions">
-                    <button data-toggle="collapse" data-target="#filter" class="btn blue btn-outline">
-                        Filter <i class="fa fa-filter icon-black"></i>
-                    </button>
-                    <a href="<?= base_url(route_to('scope_create')); ?>" class="btn green-jungle">
-                        New Scope <i class="fa fa-plus icon-black"></i>
-                    </a>
+                <div class="row">
+                    <div class="col-md-3">
+                    <div class="caption font-green-jungle">
+                        <span class="caption-subject bold">Scopes</span>
+                    </div>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <div id="dashboard-report-range" class="tooltips btn btn-sm" data-container="body" data-placement="bottom" data-original-title="Change dashboard date range">
+                            <i class="icon-calendar"></i>&nbsp;
+                            <span class="thin uppercase hidden-xs"></span>&nbsp;
+                            <i class="fa fa-angle-down"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                    <div class="actions">
+                        <button data-toggle="collapse" data-target="#filter" class="btn blue btn-outline">
+                        Search <i class="fa fa-search icon-black"></i>
+                        </button>
+                        <a href="<?= base_url(route_to('scope_create')); ?>" class="btn green-jungle">
+                            New Scope <i class="fa fa-plus icon-black"></i>
+                        </a>
+                    </div>
+                    </div>
                 </div>
             </div>
             <div class="portlet-body">
@@ -74,7 +80,7 @@
                         <div class="form-actions">
                             <div class="row">
                                 <div class="col-md-offset-3 col-md-4">
-                                    <button type="submit" class="btn green">Filter Results <i class="fa fa-filter icon-black"></i></button>
+                                    <button type="submit" class="btn green">Search Results <i class="fa fa-filter icon-black"></i></button>
                                     <?php if ($isFiltered) : ?>
                                         <a href="<?= base_url(route_to('scope_index')); ?>" class="btn red btn-outline">
                                             Remove Filters <i class="fa fa-times icon-black"></i>

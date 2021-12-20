@@ -55,3 +55,21 @@
 [Thu Dec 09 19:59:02.680691 2021] [mpm_prefork:notice] [pid 1] AH00169: caught SIGTERM, shutting down
 [Thu Dec 09 19:59:31.338646 2021] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.51 (Debian) PHP/7.4.26 configured -- resuming normal operations
 [Thu Dec 09 19:59:31.339084 2021] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Fri Dec 17 20:09:53.914491 2021] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.51 (Debian) PHP/7.4.27 configured -- resuming normal operations
+[Fri Dec 17 20:09:53.944715 2021] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Fri Dec 17 20:13:41.245644 2021] [php7:warn] [pid 18] [client 172.20.0.1:45612] PHP Warning:  require(/var/www/html/app/Config/../../vendor/codeigniter4/framework/system/bootstrap.php): failed to open stream: No such file or directory in /var/www/html/public/index.php on line 28, referer: http://localhost:8235/user-registrations
+[Fri Dec 17 20:13:41.246440 2021] [php7:error] [pid 18] [client 172.20.0.1:45612] PHP Fatal error:  require(): Failed opening required '/var/www/html/app/Config/../../vendor/codeigniter4/framework/system/bootstrap.php' (include_path='.:/usr/local/lib/php') in /var/www/html/public/index.php on line 28, referer: http://localhost:8235/user-registrations
+[Fri Dec 17 20:13:54.456481 2021] [php7:warn] [pid 20] [client 172.20.0.1:45618] PHP Warning:  require(/var/www/html/app/Config/../../vendor/codeigniter4/framework/system/bootstrap.php): failed to open stream: No such file or directory in /var/www/html/public/index.php on line 28
+[Fri Dec 17 20:13:54.457987 2021] [php7:error] [pid 20] [client 172.20.0.1:45618] PHP Fatal error:  require(): Failed opening required '/var/www/html/app/Config/../../vendor/codeigniter4/framework/system/bootstrap.php' (include_path='.:/usr/local/lib/php') in /var/www/html/public/index.php on line 28
+[Fri Dec 17 20:16:59.258149 2021] [php7:warn] [pid 18] [client 172.20.0.1:45642] PHP Warning:  require(/var/www/html/app/Config/../../vendor/codeigniter4/framework/system/bootstrap.php): failed to open stream: No such file or directory in /var/www/html/public/index.php on line 28
+[Fri Dec 17 20:16:59.259196 2021] [php7:error] [pid 18] [client 172.20.0.1:45642] PHP Fatal error:  require(): Failed opening required '/var/www/html/app/Config/../../vendor/codeigniter4/framework/system/bootstrap.php' (include_path='.:/usr/local/lib/php') in /var/www/html/public/index.php on line 28
+[Fri Dec 17 20:17:14.452262 2021] [php7:warn] [pid 19] [client 172.20.0.1:45648] PHP Warning:  require(/var/www/html/app/Config/../../vendor/codeigniter4/framework/system/bootstrap.php): failed to open stream: No such file or directory in /var/www/html/public/index.php on line 28
+[Fri Dec 17 20:17:14.460869 2021] [php7:error] [pid 19] [client 172.20.0.1:45648] PHP Fatal error:  require(): Failed opening required '/var/www/html/app/Config/../../vendor/codeigniter4/framework/system/bootstrap.php' (include_path='.:/usr/local/lib/php') in /var/www/html/public/index.php on line 28
+[Mon Dec 20 12:31:10.221730 2021] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.51 (Debian) PHP/7.4.27 configured -- resuming normal operations
+[Mon Dec 20 12:31:10.293257 2021] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Mon Dec 20 12:48:11.378253 2021] [mpm_prefork:notice] [pid 1] AH00169: caught SIGTERM, shutting down
+[Mon Dec 20 12:48:46.337247 2021] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.51 (Debian) PHP/7.4.27 configured -- resuming normal operations
+[Mon Dec 20 12:48:46.337641 2021] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Mon Dec 20 12:54:51.609947 2021] [mpm_prefork:notice] [pid 1] AH00169: caught SIGTERM, shutting down
+[Mon Dec 20 12:59:43.613170 2021] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.51 (Debian) PHP/7.4.27 configured -- resuming normal operations
+[Mon Dec 20 12:59:43.613615 2021] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'

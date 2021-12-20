@@ -46,7 +46,9 @@
                             </tr>
                             <tr>
                                 <th width="200">Organization Name</th>
-                                <td><?= $organization['OrgName'] ?></td>
+                                <td>
+                                <input type="text" name="OrgName" value="<?= old('OrgName', $organization["OrgName"]) ?>" class="form-control">
+                            </td>
                             </tr>
                             <tr>
                                 <th width="200">Organization Description</th>
@@ -55,9 +57,15 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th width="200">Address</th>
+                                <th width="200">Address Line 1</th>
                                 <td>
-                                    <?= "{$organization["AddressLine1"]}, {$organization["AddressLine2"]}, {$organization["City"]}, {$organization["State"]}, {$organization["ZipCode"]}, {$organization["Country"]}" ?>
+                                    <input type="text" name="address_line_1" value="<?= old('address_line_1', $organization["AddressLine1"]) ?>" class="form-control" placeholder="Enter Address 1">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="200">Address Line 2</th>
+                                <td>
+                                    <input type="text" name="address_line_2" value="<?= old('address_line_2', $organization["AddressLine2"]) ?>" class="form-control" placeholder="Enter Address 2">
                                 </td>
 
                             </tr>
