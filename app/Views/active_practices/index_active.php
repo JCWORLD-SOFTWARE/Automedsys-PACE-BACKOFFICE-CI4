@@ -19,13 +19,6 @@
             <span>Practice Management</span>
         </li>
     </ul>
-    <div class="page-toolbar">
-        <div id="dashboard-report-range" class="pull-right tooltips btn btn-sm" data-container="body" data-placement="bottom" data-original-title="Change dashboard date range">
-            <i class="icon-calendar"></i>&nbsp;
-            <span class="thin uppercase hidden-xs"></span>&nbsp;
-            <i class="fa fa-angle-down"></i>
-        </div>
-    </div>
 </div>
 
 <h3 class="page-title">Practice Management</h3>
@@ -45,13 +38,23 @@
 <div class="row">
     <div class="col-md-12">
         <div class="portlet light">
-            <div class="portlet-title">
-                <div class="caption font-green-jungle">
-                    <span class="caption-subject bold">Active Practices</span>
+            <div class="row">
+                <div class="col-md-2 caption font-green-jungle">
+                    <span class="caption-subject bold">Active practices</span>
                 </div>
-                <div class="actions">
+                <div class="col-md-7 text-center page-toolbar" >
+                    <!-- Date Filter -->
+                    <div class="page-toolbar">
+                        <div id="dashboard-report-range" class="pull-right tooltips btn btn-sm" data-container="body" data-placement="bottom" data-original-title="Change dashboard date range">
+                            <i class="icon-calendar"></i>&nbsp;
+                            <span class="thin uppercase hidden-xs"></span>&nbsp;
+                            <i class="fa fa-angle-down"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 text-right actions">
                     <button data-toggle="collapse" data-target="#filter" class="btn blue btn-outline">
-                        Filter <i class="fa fa-filter icon-black"></i>
+                        Search <i class="fa fa-search icon-black"></i>
                     </button>
                 </div>
             </div>
@@ -139,7 +142,7 @@
                         <div class="form-actions">
                             <div class="row">
                                 <div class="col-md-offset-3 col-md-4">
-                                    <button type="submit" class="btn green">Filter Results <i class="fa fa-filter icon-black"></i></button>
+                                    <button type="submit" class="btn green">Search Results <i class="fa fa-filter icon-black"></i></button>
                                     <?php if ($isFiltered) : ?>
                                         <a href="<?= base_url(route_to('active_practice_index_active')); ?>" class="btn red btn-outline">
                                             Remove Filters <i class="fa fa-times icon-black"></i>
@@ -158,11 +161,11 @@
                         <thead>
                             <tr>
                                 <th width="50">ID</th>
+                                <th width="200">Signup Date</th>
                                 <th>Practice Name<br>(Username)</th>
                                 <th>Tax ID</th>
                                 <th>Practice NPI<br>(Code)</th>
                                 <th>Contact Email<br>(Name)</th>
-                                <th width="200">Created</th>
                                 <th width="220">Actions</th>
                             </tr>
                         </thead>
@@ -170,11 +173,14 @@
                             <?php foreach ($DeployedPractices as $practice) : ?>
                                 <tr>
                                     <td rowspan="2"><?= $practice["ID"] ?></td>
+                                    <td class="center" nowrap="">
+                                        <?= date("dS M y \n h:i a", strtotime($practice["created_dt"])) ?>
+                                    </td>
                                     <td><?= $practice["PracticeName"] ?> (<?= $practice["PracticeCode"] ?>)</td>
                                     <td><?= $practice["TaxID"] ?></td>
                                     <td><?= $practice["NPI"] ?><br />(<?= $practice["PracticeCode"] ?>)</td>
                                     <td><?= $practice["contact_email"] ?><br />(<?= $practice["contact_firstname"] . ' ' . $practice["contact_firstname"] ?>)</td>
-                                    <td class="center" nowrap=""><?= date("d/m/Y h:i a", strtotime($practice["created_dt"])) ?></td>
+                                    
                                     <td nowrap="">
                                         <a class="btn btn-sm blue" href="<?= base_url(route_to('active_practice_show', $practice["PracticeCode"])); ?>">View</a>
                                         <a class="btn btn-sm green" href="<?= base_url(route_to('active_practice_edit', $practice["PracticeCode"])); ?>">Edit</a>

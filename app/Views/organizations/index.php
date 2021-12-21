@@ -14,7 +14,7 @@
 </div>
 
 <h3 class="page-title">API Management</h3>
-
+tobi
 <?php if (session()->getFlashdata('success')) : ?>
     <div class="alert alert-success">
         <?= session()->getFlashdata('success'); ?>
@@ -30,41 +30,26 @@
 <div class="row">
     <div class="col-md-12">
         <div class="portlet light">
-        <div class="portlet-title">
+            <div class="portlet-title">
                 <div class="row">
                     <div class="col-md-2 caption font-green-jungle">
-                        <span class="caption-subject bold">Organizations</span>
+                        <span class="caption-subject bold">Organizationss</span>
                     </div>
-                    <div class="col-md-7 text-center page-toolbar" >
+                    <div class="col-md-6 text-center page-toolbar" >
                         <!-- Date Filter -->
-                        <table style="width: 90%;">
-                            <tr>
-                                <td class="form-group">
-                                    <div class="row">
-                                        <label for="search_fromdate" class="col-md-3 btn">From </label>
-                                        <div class="col-md-8">
-                                            <input type='date' id='search_fromdate' class="datepicker date-filter form-control btn btn-primary">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="form-group">
-                                    <div class="row">
-                                        <label for="search_todate" class="col-md-2 text-center btn"> To </label>
-                                        <div class="col-md-9">
-                                            <input type='date' id='search_todate' class="datepicker date-filter form-control btn btn-primary">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <input type='button' id="btn_search" class="btn btn-success" value="Search">
-                                </td>
-                            </tr>
-                        </table>
+                        <div class="page-toolbar">
+                            <div id="dashboard-report-range" class="pull-right tooltips btn btn-sm" data-container="body" data-placement="bottom" data-original-title="Change dashboard date range">
+                                <i class="icon-calendar"></i>&nbsp;
+                                <span class="thin uppercase hidden-xs"></span>&nbsp;
+                                <i class="fa fa-angle-down"></i>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-2 text-right actions">
-                        <button data-toggle="collapse" data-target="#filter" class="btn blue btn-outline" style="display: none;">
-                            Filter <i class="fa fa-filter icon-black"></i>
+                    <div class="col-md-4 text-right actions">
+                        <button data-toggle="collapse" data-target="#filter" class="btn blue btn-outline">
+                            Search <i class="fa fa-search icon-black"></i>
                         </button>
+                        
                         <button disabled class="btn btn-disabled green-jungle">
                             New Organization <i class="fa fa-plus icon-black"></i>
                         </button>
@@ -145,7 +130,7 @@
                         <div class="form-actions">
                             <div class="row">
                                 <div class="col-md-offset-3 col-md-4">
-                                    <button type="submit" class="btn green">Filter Results <i class="fa fa-filter icon-black"></i></button>
+                                    <button type="submit" class="btn green">Search Results <i class="fa fa-filter icon-black"></i></button>
                                     <?php if ($isFiltered) : ?>
                                         <a href="<?= base_url(route_to('organization_index')); ?>" class="btn red btn-outline">
                                             Remove Filters <i class="fa fa-times icon-black"></i>
@@ -171,25 +156,35 @@
                                 <th>Country</th>
                                 <th>Organization Description</th>
                                 <th>Contact Name</th>
-                                <th width="180">Edit / Delete</th>
+                                <th>Contact Phone</th>
+                                <th>Contact Email</th>
+                                <th width="150">Edit / Delete</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($organizations as $organization) : ?>
                                 <tr>
                                     <td><?= $organization["Id"] ?></td>
-                                    <td nowrap=""><?= date("dS M y", strtotime($organization["CreatedDt"])) ?></td>
+                                    <td nowrap=""><?= date("dS M, Y", strtotime($organization["CreatedDt"])) ?></td>
                                     <td><?= $organization["OrgName"] ?></td>
                                     <td>Sehtufred</td>
                                     <td>No <?= $organization["Id"] ?>, street name, City, State </td>
                                     <td>Country</td>
                                     <td><?= $organization["OrgDescr"] ?></td>
                                     <td><?= $organization["ContactName"] ?? "N/A" ?></td>
+                                    <td><?= $organization["ContactPhone"] ?? "N/A" ?></td>
+                                    <td><?= $organization["ContactEmail"] ?? "N/A" ?></td>
                                     
                                     <td nowrap="">
-                                        <a class="btn btn-sm blue" href="<?= base_url(route_to('organization_show', $organization["Id"])); ?>">Manage</a>
-                                        <a class="btn btn-sm green" href="<?= base_url(route_to('organization_edit', $organization["Id"])); ?>">Edit</a>
-                                        <a class="btn btn-sm red" href="<?= base_url(route_to('organization_delete', $organization["Id"])); ?>" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
+                                        <a class="btn btn-sm blue" href="<?= base_url(route_to('organization_show', $organization["Id"])); ?>">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                        <a class="btn btn-sm green" href="<?= base_url(route_to('organization_edit', $organization["Id"])); ?>">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        <a class="btn btn-sm red" href="<?= base_url(route_to('organization_delete', $organization["Id"])); ?>" onclick="return confirm('Are you sure you want to delete this record?')">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
