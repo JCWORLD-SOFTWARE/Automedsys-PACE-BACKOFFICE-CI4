@@ -14,6 +14,7 @@
         <li>
             <a href="<?= base_url(route_to('home')); ?>">Home</a>
             <i class="fa fa-circle"></i>
+            
         </li>
         <li>
             <span>Practice Management</span>
