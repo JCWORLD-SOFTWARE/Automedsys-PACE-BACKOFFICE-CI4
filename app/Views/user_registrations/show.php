@@ -196,7 +196,7 @@
                     providerNpiDataContainer.html(formatObjectToPrettyJson(data));
                 })
                 .fail(function(error) {
-                    providerNpiDataContainer.html(formatObjectToPrettyJson(error.responseJSON.message));
+                    providerNpiDataContainer.html('Validation Failed <i class="fa fa-database icon-black"></i>');
                 })
                 .always(function() {
                     validateNpiButton

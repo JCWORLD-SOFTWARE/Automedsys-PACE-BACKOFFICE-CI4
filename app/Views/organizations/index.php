@@ -14,7 +14,7 @@
 </div>
 
 <h3 class="page-title">API Management</h3>
-tobi
+
 <?php if (session()->getFlashdata('success')) : ?>
     <div class="alert alert-success">
         <?= session()->getFlashdata('success'); ?>
@@ -33,7 +33,7 @@ tobi
             <div class="portlet-title">
                 <div class="row">
                     <div class="col-md-2 caption font-green-jungle">
-                        <span class="caption-subject bold">Organizationss</span>
+                        <span class="caption-subject bold">Organizations</span>
                     </div>
                     <div class="col-md-6 text-center page-toolbar" >
                         <!-- Date Filter -->

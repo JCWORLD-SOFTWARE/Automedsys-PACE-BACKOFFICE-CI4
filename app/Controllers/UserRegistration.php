@@ -161,7 +161,7 @@ class UserRegistration extends BaseController
 			return $this->fail(
 				$exception->getMessage(),
 				400,
-				"An error occured while resending notification"
+				"An error occurred while resending notification"
 			);
 		}
 
@@ -287,11 +287,11 @@ class UserRegistration extends BaseController
 			return $this->fail(
 				$exception->getMessage(),
 				400,
-				"An error occured while verifying NPI"
+				"An error occurred while verifying NPI"
 			);
 		}
 
-		$response = json_decode($response->getBody(), true);
+		$response = json_encode($response->getBody(), true);
 
 		return $this->respond($response);
 	}

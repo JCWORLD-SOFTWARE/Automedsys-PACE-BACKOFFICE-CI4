@@ -72,7 +72,7 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label">NPI</label>
                             <div class="col-md-4">
-                                <input type="text" name="npi" value="<?= old('npi') ?>" class="form-control" placeholder="Enter NPI">
+                                <input type="text" name="npi" id="npi" class="form-control" placeholder="Enter NPI">
                                 <?php if (isset(session('errors')['npi'])) : ?>
                                     <span class="help-block text-danger font-sm">
                                         <?= session('errors')['npi'] ?>
@@ -80,27 +80,27 @@
                                 <?php endif ?>
                             </div>
                             <div class="col-md-2">
-                                <input type="button" name="verify_npi" value="Verify NPI" class="btn btn-primary form-control">
-                                <?php if (isset(session('errors')['verify_npi'])) : ?>
-                                    <span class="help-block text-danger font-sm">
-                                        <?= session('errors')['verify_npi'] ?>
-                                    </span>
-                                <?php endif ?>
+                                <input type="button" id="validate-npi-button" name="verify_npi" value="Verify NPI" class="btn btn-primary form-control">
+                            </div>
+                            <div class="col-md-3">
+                                <pre style="border: none; background: transparent;" id="provider-npi-data"></pre>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label">Email Address</label>
                             <div class="col-md-4">
-                                <input type="text" name="email_address" value="<?= old('email_address') ?>" class="form-control" placeholder="Enter Email Address">
+                                <input type="text" id="email" name="email_address" class="form-control" placeholder="Enter Email Address">
                                 <?php if (isset(session('errors')['email_address'])) : ?>
                                     <span class="help-block text-danger font-sm">
                                         <?= session('errors')['email_address'] ?>
                                     </span>
                                 <?php endif ?>
                             </div>
-                            <div class="col-md-2"></div>
+                            <div class="col-md-2">
+                                <pre style="border: none; background: transparent;" id="resend-notification-response"></pre>
+                            </div>
                             <div class="col-md-3">
-                                <input type="button" name="notification_resend" id="notification_resend" value="Resend Notification" class="btn btn-primary form-control">
+                                <input type="button" name="notification_resend" id="resend-notification-button" value="Resend Notification" class="btn btn-primary form-control">
                             </div>
                         </div>
                         <div class="form-group">
@@ -164,4 +164,72 @@
         </div>
     </div>
 </div>
+<?= $this->endSection() ?>
+
+<?= $this->section('scripts') ?>
+<script>
+    function formatObjectToPrettyJson(data) {
+        return JSON.stringify(data, '', 4)
+            .replace(/\n( *)/g, function(match, p1) {
+                return '<br>' + '&nbsp;'.repeat(p1.length);
+            })
+    }
+
+    $(document).ready(function() {
+        var resendNotificationButton = $('#resend-notification-button');
+        var resendNotificationResponseContainer = $('#resend-notification-response');
+        var validateNpiButton = $('#validate-npi-button');
+        var providerNpiDataContainer = $('#provider-npi-data');
+
+        resendNotificationButton.on('click', function() {
+            resendNotificationButton.html("Resending notification...").prop("disabled", true);
+            resendNotificationResponseContainer.html("");
+            var email = $("#email").val();
+
+            $.ajax({
+                    method: "POST",
+                    url: "/user-registrations/resend-notification/" + email,
+                })
+                .done(function(data) {
+                    resendNotificationResponseContainer.html(`<span class="font-green-jungle">Notification resent successfully!</span>`);
+                })
+                .fail(function(error) {
+                    resendNotificationResponseContainer.html(`<span class="font-red">${error.responseJSON.error}</span>`);
+                })
+                .always(function() {
+                    resendNotificationButton
+                        .html('Resend Notification <i class="fa fa-bell icon-black"></i>')
+                        .prop("disabled", false);
+                });
+        });
+
+        validateNpiButton.on('click', function() {
+            validateNpiButton.html("Validating NPI...").prop("disabled", true);
+            providerNpiDataContainer.html("Fetching data...");
+            var inputted_npi = $("#npi").val();
+
+
+            $.getJSON("/practice-requests/validate-npi/" + inputted_npi)
+                .done(function(data) {
+                    data = JSON.parse(data)
+                    // providerNpiDataContainer.html(formatObjectToPrettyJson(data));
+                    if(!empty(data)) {
+                        providerNpiDataContainer.html('Success');
+                    } else {
+                        providerNpiDataContainer.html('NPI invalid');
+                    }
+                    
+                })
+                .fail(function(error) {
+                    providerNpiDataContainer.html('Validation Failed');
+                })
+                .always(function() {
+                    validateNpiButton
+                        .html('')
+                        .prop("disabled", false);
+                })
+        });
+    });
+</script>
+
 <?= $this->endSection() ?>
