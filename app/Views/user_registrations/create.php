@@ -96,11 +96,11 @@
                                     </span>
                                 <?php endif ?>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <pre style="border: none; background: transparent;" id="resend-notification-response"></pre>
                             </div>
-                            <div class="col-md-3">
-                                <input type="button" name="notification_resend" id="resend-notification-button" value="Resend Notification" class="btn btn-primary form-control">
+                            <div class="col-md-2">
+                                <button type="button" name="notification_resend" id="resend-notification-button" class="btn btn-primary" style="width: 100%;">Resend <br> Notification</button>
                             </div>
                         </div>
                         <div class="form-group">
@@ -136,7 +136,7 @@
                                 <?php endif ?>
                             </div>
                             <div class="col-md-2">
-                                <input type="button" id="reset_password" name="reset_password" id="reset_password" value="Reset Password" class="btn btn-primary form-control">
+                                <button type="button" id="reset_password" name="reset_password" id="reset_password" class="btn btn-primary" style="height: fit-content">Reset Password</button>
                             </div>
                         </div>
 
@@ -182,7 +182,7 @@
         var providerNpiDataContainer = $('#provider-npi-data');
 
         resendNotificationButton.on('click', function() {
-            resendNotificationButton.html("Resending notification...").prop("disabled", true);
+            resendNotificationButton.html("Resending <br> notification...").prop("disabled", true);
             resendNotificationResponseContainer.html("");
             var email = $("#email").val();
 
@@ -198,7 +198,7 @@
                 })
                 .always(function() {
                     resendNotificationButton
-                        .html('Resend Notification <i class="fa fa-bell icon-black"></i>')
+                        .html('Resend <br> Notification <i class="fa fa-bell icon-black"></i>')
                         .prop("disabled", false);
                 });
         });
@@ -211,13 +211,7 @@
 
             $.getJSON("/practice-requests/validate-npi/" + inputted_npi)
                 .done(function(data) {
-                    data = JSON.parse(data)
-                    // providerNpiDataContainer.html(formatObjectToPrettyJson(data));
-                    if(!empty(data)) {
-                        providerNpiDataContainer.html('Success');
-                    } else {
-                        providerNpiDataContainer.html('NPI invalid');
-                    }
+                    providerNpiDataContainer.html('Valid NPI');
                     
                 })
                 .fail(function(error) {
