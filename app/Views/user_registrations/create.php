@@ -59,7 +59,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-3 control-label">Your Last Name</label>
+                            <label class="col-md-3 control-label">Last Name</label>
                             <div class="col-md-4">
                                 <input type="text" name="last_name" value="<?= old('last_name') ?>" class="form-control" placeholder="Enter Last Name">
                                 <?php if (isset(session('errors')['last_name'])) : ?>
