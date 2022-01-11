@@ -7,6 +7,7 @@
             <a href="<?= base_url(route_to('home')); ?>">Home</a>
             <i class="fa fa-circle"></i>
         </li>
+        <!--tobi added commment -->
         <li>
             <span>User Registration Management</span>
         </li>
