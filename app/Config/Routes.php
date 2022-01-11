@@ -54,7 +54,8 @@ $routes->get('/user-registrations/edit/(:segment)', 'UserRegistration::edit/$1',
 $routes->post('/user-registrations/edit/(:segment)', 'UserRegistration::update/$1', ['filter' => 'auth', 'as' => 'user_registration_update']);
 $routes->post('/user-registrations/resend-notification/(:segment)', 'UserRegistration::resendNotification/$1', ['filter' => 'auth', 'as' => 'user_registration_notification_resend']);
 $routes->get('/user-registrations/delete/(:segment)', 'UserRegistration::delete/$1', ['filter' => 'auth', 'as' => 'user_registration_delete']);
-$routes->post('/user-registrations/verify-npi/(:segment)', 'UserRegistration::verifyNPI/$1', ['filter' => 'auth', 'as' => 'user_registration_verify_npi']);
+$routes->post('/user-registrations/verify-npi/(:segment) ', 'UserRegistration::verifyNPI/$1', ['filter' => 'auth', 'as' => 'user_registration_verify_npi']);
+$routes->get('/practice-requests/validate-npi/(:segment)', 'UserRegistration::verifyNPI/$1', ['filter' => 'auth', 'as' => 'user_registration_verify_npi']);
 
 $routes->get('/deployed-practices/filter/(:segment)', 'DeployedPractice::indexFiltered/$1', ['filter' => 'auth', 'as' => 'deployed_practice_index_filtered']);
 $routes->get('/active-practices/active', 'DeployedPractice::indexActive', ['filter' => 'auth', 'as' => 'active_practice_index_active']);
