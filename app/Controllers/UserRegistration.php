@@ -149,6 +149,7 @@ class UserRegistration extends BaseController
 		$apiEndpointsConfig = config('ApiEndpoints');
 
 		try {
+			console.log("{$apiEndpointsConfig->baseUrl}/paceapi/v1/signup/{$id}/resend-notification");
 			$response = $client->request(
 				'POST',
 				"{$apiEndpointsConfig->baseUrl}/paceapi/v1/signup/{$id}/resend-notification",
@@ -273,7 +274,7 @@ class UserRegistration extends BaseController
 		$token = ClientAuthenticator::getToken();
 		$client = new HTTPClient();
 		$apiEndpointsConfig = config('ApiEndpoints');
-
+ console.log("i");
 		try {
 			$response = $client->request(
 				'POST',
