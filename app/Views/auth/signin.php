@@ -64,7 +64,7 @@
     <div class="content">
         <!-- BEGIN LOGIN FORM -->
         <form class="login-form" action="index.html" method="post">
-            <h3 class="form-title">Login to your account</h3>
+            <h3 class="form-title">Login to your account - Tobiloba</h3>
             <div class="alert alert-danger display-hide">
                 <button class="close" data-close="alert"></button>
                 <span> Enter any username and password. </span>
