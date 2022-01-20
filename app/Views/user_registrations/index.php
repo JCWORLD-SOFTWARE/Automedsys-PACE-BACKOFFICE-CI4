@@ -7,7 +7,6 @@
             <a href="<?= base_url(route_to('home')); ?>">Home</a>
             <i class="fa fa-circle"></i>
         </li>
-        <!--tobi added commment -->
         <li>
             <span>User Registration Management</span>
         </li>
@@ -30,7 +29,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="portlet light">
+        <div class="portlet light"> 
             <div class="portlet-title">
                 <div class="row">
                     <div class="col-md-2 caption font-green-jungle">
