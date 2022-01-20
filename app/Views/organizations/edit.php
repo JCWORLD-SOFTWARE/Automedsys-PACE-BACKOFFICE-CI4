@@ -187,7 +187,7 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label">Contact Email</label>
                             <div class="col-md-4">
-                                <input type="text" name="contact_email" value="<?= old('contact_email', $organization["ContactEmail"]) ?>" class="form-control" placeholder="Enter Contact Email">
+                                <input type="text" id="email" name="contact_email" value="<?= old('contact_email', $organization["ContactEmail"]) ?>" class="form-control" placeholder="Enter Contact Email">
                                 <?php if (isset(session('errors')['contact_email'])) : ?>
                                     <span class="help-block text-danger font-sm">
                                         <?= session('errors')['contact_email'] ?>
@@ -195,8 +195,12 @@
                                 <?php endif ?>
                             </div>
                             <div class="col-md-2">
-                                <input type="button" name="notification_resend" id="notification_resend" value="Resend Notification" class="btn btn-primary form-control">
+                                <input type="button"  name="notification_resend" id="resend-notification-button" value="Resend Notification" class="btn btn-primary form-control">
                             </div>
+                            <div class="col-md-3">
+                                <pre style="background: transparent; border: none;"><span id="resend-notification-response"></pre>
+                            </div>
+                            
                         </div>
                         <div class="form-group" style="display: none;">
                             <label class="col-md-3 control-label">Password</label>
@@ -236,6 +240,45 @@
         </div>
     </div>
 </div>
+<?= $this->endSection() ?>
+
+<?= $this->section('scripts') ?>
+<script>
+    function formatObjectToPrettyJson(data) {
+        return JSON.stringify(data, '', 4)
+            .replace(/\n( *)/g, function(match, p1) {
+                return '<br>' + '&nbsp;'.repeat(p1.length);
+            })
+    }
+
+    $(document).ready(function() {
+        var resendNotificationButton = $('#resend-notification-button');
+        var resendNotificationResponseContainer = $('#resend-notification-response');
+
+        resendNotificationButton.on('click', function() {
+            resendNotificationButton.html("Resending <br> notification...").prop("disabled", true);
+            resendNotificationResponseContainer.html("");
+            var email = $("#email").val();
+
+            $.ajax({
+                    method: "POST",
+                    url: "/organizations/resend/" + email + "/notification",
+                })
+                .done(function(data) {
+                    resendNotificationResponseContainer.html(`<span class="font-green-jungle">Notification resent successfully!</span>`);
+                })
+                .fail(function(error) {
+                    resendNotificationResponseContainer.html(`<span class="font-red">Error!</span>`);
+                })
+                .always(function() {
+                    resendNotificationButton
+                        .html('Resend <br> Notification <i class="fa fa-bell icon-black"></i>')
+                        .prop("disabled", false);
+                });
+        });
+    });
+</script>
+
 <?= $this->endSection() ?>
 
 <style>

@@ -38,15 +38,49 @@
     <div class="col-md-12">
         <div class="portlet light">
             <div class="portlet-title">
-                <div class="caption font-green-jungle">
-                    <span class="caption-subject bold">Prospective Practices</span>
+                <div class="row">
+                    <div class="col-md-2 caption font-green-jungle">
+                        <span class="caption-subject bold">Prospective Practices</span>
+                    </div>
+                    <div class="col-md-5 text-center page-toolbar" >
+                        <!-- Date Filter -->
+                        <div class="page-toolbar">
+                            <div id="dashboard-report-range" class="pull-right tooltips btn btn-sm" data-container="body" data-placement="bottom" data-original-title="Change dashboard date range">
+                                <i class="icon-calendar"></i>&nbsp;
+                                <span class="thin uppercase hidden-xs"></span>&nbsp;
+                                <i class="fa fa-angle-down"></i>
+                            </div>
+                        </div>
+                        <table style="width: 90%; display: none;">
+                            <tr>
+                                <td class="form-group">
+                                    <div class="row">
+                                        <label for="search_fromdate" class="col-md-3 btn">From </label>
+                                        <div class="col-md-8">
+                                            <input type='date' id='search_fromdate' class="datepicker date-filter form-control btn btn-primary">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="form-group">
+                                    <div class="row">
+                                        <label for="search_todate" class="col-md-2 text-center btn"> To </label>
+                                        <div class="col-md-9">
+                                            <input type='date' id='search_todate' class="datepicker date-filter form-control btn btn-primary">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type='button' id="btn_search" class="btn btn-success" value="Search">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-4 text-right actions">
+                        <button data-toggle="collapse" data-target="#filter" class="btn blue btn-outline">
+                            Search <i class="fa fa-search icon-black"></i>
+                        </button>
+                    </div>
                 </div>
-                <div class="actions">
-                    <button data-toggle="collapse" data-target="#filter" class="btn blue btn-outline">
-                        Filter <i class="fa fa-filter icon-black"></i>
-                    </button>
-                </div>
-            </div>
             <div class="portlet-body">
 
                 <form id="filter" class="filter-panel bg-default form-horizontal collapse <?= $isFiltered ? "in" : "" ?>">
