@@ -270,7 +270,7 @@ class UserRegistration extends BaseController
 	}
 
 	public function verifyNPI(string $id)
-	{
+	  {
 		$token = ClientAuthenticator::getToken();
 		$client = new HTTPClient();
 		$apiEndpointsConfig = config('ApiEndpoints');
@@ -295,5 +295,5 @@ class UserRegistration extends BaseController
 		$response = json_encode($response->getBody(), true);
 
 		return $this->respond($response);
-	}
+	  }
 }
