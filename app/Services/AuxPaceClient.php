@@ -12,7 +12,23 @@ class AuxPaceClient
 
 	public static function __constructStatic()
 	{
-		self::$soapClient =  new SoapClient('http://stgmw.automedsys.net/AuxPaceService.asmx?WSDL');
+		$contextOptions = array(
+			'ssl' => array(
+			'verify_peer' => false,
+			'verify_peer_name' => false,
+			'allow_self_signed' => true
+			));
+		
+		$sslContext = stream_context_create($contextOptions);
+		
+		$params =  array(
+			'trace' => 1,
+			'exceptions' => true,
+			'cache_wsdl' => WSDL_CACHE_NONE,
+			'stream_context' => $sslContext
+			);
+
+		self::$soapClient =  new SoapClient('http://stgmw.automedsys.net/AuxPaceService.asmx?WSDL',$params);
 	}
 
 	public static function getPracticeRequestList(int $perPage = 10, int $offset = 0, string $practiceCode = '')
