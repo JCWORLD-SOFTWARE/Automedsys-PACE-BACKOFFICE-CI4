@@ -26,7 +26,7 @@ class App extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $baseURL = 'http://10.10.20.60:9202';
+	public $baseURL = 'https://qa-pace.automedsys.net/';
 
 	/**
 	 * --------------------------------------------------------------------------
