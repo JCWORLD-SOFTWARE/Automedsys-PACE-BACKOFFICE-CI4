@@ -218,7 +218,7 @@ class UserRegistration extends BaseController
 				->withInput()
 				->with('errors', $validation->getErrors());
 		} 
-
+//added comment here
 		try {
 			$client->request(
 				'PATCH',
