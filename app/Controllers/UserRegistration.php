@@ -149,7 +149,6 @@ class UserRegistration extends BaseController
 		$apiEndpointsConfig = config('ApiEndpoints');
 
 		try {
-			console.log("{$apiEndpointsConfig->baseUrl}/paceapi/v1/signup/{$id}/resend-notification");
 			$response = $client->request(
 				'POST',
 				"{$apiEndpointsConfig->baseUrl}/paceapi/v1/signup/{$id}/resend-notification",
@@ -218,7 +217,7 @@ class UserRegistration extends BaseController
 				->withInput()
 				->with('errors', $validation->getErrors());
 		} 
-//added comment here
+
 		try {
 			$client->request(
 				'PATCH',
@@ -270,11 +269,11 @@ class UserRegistration extends BaseController
 	}
 
 	public function verifyNPI(string $id)
-	  {
+	{
 		$token = ClientAuthenticator::getToken();
 		$client = new HTTPClient();
 		$apiEndpointsConfig = config('ApiEndpoints');
- console.log("i");
+
 		try {
 			$response = $client->request(
 				'POST',
@@ -295,5 +294,5 @@ class UserRegistration extends BaseController
 		$response = json_encode($response->getBody(), true);
 
 		return $this->respond($response);
-	  }
+	}
 }
