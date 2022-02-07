@@ -263,4 +263,32 @@ class Organization extends BaseController
 
 		return redirect()->route('organization_index');
 	}
+
+	public function resendNotification(string $id)
+	{
+		$token = ClientAuthenticator::getToken();
+		$client = new HTTPClient();
+		$apiEndpointsConfig = config('ApiEndpoints');
+
+		try {
+			$response = $client->request(
+				'POST',
+				"{$apiEndpointsConfig->baseUrl}/paceapi/v1/signup/{$id}/resend-notification",
+				[
+					'headers' => ['Authorization' => "Bearer {$token}"],
+					'query' => ['RequestUrl' => "http://dev.automedsys.com/signup"]
+				]
+			);
+		} catch (Exception $exception) {
+			return $this->fail(
+				$exception->getMessage(),
+				400,
+				"An error occurred while resending notification"
+			);
+		}
+
+		$response = json_decode($response->getBody(), true);
+
+		return $this->respond($response);
+	}
 }

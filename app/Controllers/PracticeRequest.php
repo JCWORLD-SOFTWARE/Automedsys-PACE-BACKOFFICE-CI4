@@ -131,7 +131,7 @@ class PracticeRequest extends BaseController
 			base64_encode(json_encode($approvedPractice))
 		]);
 	}
-//added
+
 	public function showApprovalSuccess(string $encodedPracticeData)
 	{
 		$application = json_decode(base64_decode($encodedPracticeData), true);

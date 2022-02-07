@@ -20,20 +20,17 @@ class App extends BaseConfig
 	 * and path to your installation. However, you should always configure this
 	 * explicitly and never rely on auto-guessing, especially in production
 	 * environments.
-	 * Added
-	 * 
-	 * 
 	 *
 	 * @var string
 	 */
-	public $baseURL = 'https://qa-pace.automedsys.net/';
+	public $baseURL = 'https://qa-pace.automedsys.net';
 
 	/**
 	 * --------------------------------------------------------------------------
 	 * Index File
 	 * --------------------------------------------------------------------------
 	 *
-	 * Typically this will bSe your index.php file, unless you've renamed it to
+	 * Typically this will be your index.php file, unless you've renamed it to
 	 * something else. If you are using mod_rewrite to remove the page set this
 	 * variable so that it is blank.
 	 *

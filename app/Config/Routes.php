@@ -36,11 +36,7 @@ $routes->get('/', 'Home::index', ['filter' => 'auth', 'as' => 'home']);
 $routes->get('/auth/login', 'Login::showLoginPage', ['as' => 'login']);
 $routes->get('/auth/logout', 'Login::logout', ['as' => 'logout']);
 $routes->get('/auth/login/google/oauth2', 'Login::initiateGoogleOauth2', ['as' => 'initiate_google_oauth']);
-
-$routes->get('/auth/login/google/oauth2/callback', 'Login::handleGoogleOauth2Callback', ['as' => 'google_oauth_callback2']);
-$routes->get('/oauth', 'Login::handleGoogleOauth2Callback', ['as' => 'google_oauth_callback']);
-
-
+$routes->get('/auth/login/google/oauth2/callback', 'Login::handleGoogleOauth2Callback', ['as' => 'google_oauth_callback']);
 
 $routes->get('/servers', 'Server::index', ['filter' => 'auth', 'as' => 'server_index']);
 $routes->get('/database-server-templates', 'DatabaseServerTemplate::index', ['filter' => 'auth', 'as' => 'database_server_template_index']);
@@ -84,6 +80,7 @@ $routes->get('/organizations/show/(:segment)', 'Organization::show/$1', ['filter
 $routes->get('/organizations/edit/(:segment)', 'Organization::edit/$1', ['filter' => 'auth', 'as' => 'organization_edit']);
 $routes->post('/organizations/edit/(:segment)', 'Organization::update/$1', ['filter' => 'auth', 'as' => 'organization_update']);
 $routes->get('/organizations/delete/(:segment)', 'Organization::delete/$1', ['filter' => 'auth', 'as' => 'organization_delete']);
+$routes->post('/organizations/resend/(:segment)/notification', 'Organization::resendNotification/$1', ['filter' => 'auth', 'as' => 'organization_notification_resend']);
 
 $routes->get('/organizations/(:segment)/applications', 'Application::index/$1', ['filter' => 'auth', 'as' => 'application_index']);
 $routes->get('/organizations/(:segment)/applications/create', 'Application::create/$1', ['filter' => 'auth', 'as' => 'application_create']);
@@ -101,7 +98,7 @@ $routes->get('/scopes/create', 'Scope::create', ['filter' => 'auth', 'as' => 'sc
 $routes->post('/scopes/create', 'Scope::store', ['filter' => 'auth', 'as' => 'scope_store']);
 $routes->get('/scopes/show/(:segment)', 'Scope::show/$1', ['filter' => 'auth', 'as' => 'scope_show']);
 $routes->get('/scopes/edit/(:segment)', 'Scope::edit/$1', ['filter' => 'auth', 'as' => 'scope_edit']);
-$routes->post('/scopes/edit/(:segment)', 'Scope::update/$1', ['filter' => 'auth', 'as' => 'scope_update']);
+$routes->post('/scopes/update/(:segment)', 'Scope::update/$1', ['filter' => 'auth', 'as' => 'scope_update']);
 $routes->get('/scopes/delete/(:segment)', 'Scope::delete/$1', ['filter' => 'auth', 'as' => 'scope_delete']);
 
 /*
