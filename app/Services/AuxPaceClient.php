@@ -10,9 +10,13 @@ class AuxPaceClient
 {
 	private static SoapClient $soapClient;
 
-	public static function __constructStatic()
-	{
-		self::$soapClient =  new SoapClient('http://stgmw.automedsys.net/AuxPaceService.asmx?WSDL');
+	public static function __constructStatic() {
+
+		$apiEndpointsConfig = config('ApiEndpoints');
+
+        $soapBaseUrl = $apiEndpointsConfig->soapBaseUrl;
+		
+		self::$soapClient =  new SoapClient('{$soapBaseUrl}');
 	}
 
 	public static function getPracticeRequestList(int $perPage = 10, int $offset = 0, string $practiceCode = '')
