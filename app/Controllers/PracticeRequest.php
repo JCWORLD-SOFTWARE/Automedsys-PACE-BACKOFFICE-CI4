@@ -121,15 +121,19 @@ class PracticeRequest extends BaseController
 				['headers' => ['Authorization' => "Bearer {$token}"]]
 			);
 		} catch (Exception $exception) {
-			session()->setFlashdata('error', "<pre>{$exception->getMessage()}</pre>");
-			return redirect()->back();
+			// session()->setFlashdata('error', "<pre>{$exception->getMessage()}</pre>");
+			// return redirect()->back();
+
+			echo $exception->getMessage();
 		}
 
-		session()->setFlashdata('success', 'Practice deployed successfully');
+		// echo base64_encode(json_encode($approvedPractice));
 
-		return redirect()->route('practice_request_approve_success_show', [
-			base64_encode(json_encode($approvedPractice))
-		]);
+		// session()->setFlashdata('success', 'Practice deployed successfully');
+
+		// return redirect()->route('practice_request_approve_success_show', [
+		// 	base64_encode(json_encode($approvedPractice))
+		// ]);
 	}
 
 	public function showApprovalSuccess(string $encodedPracticeData)

@@ -16,6 +16,10 @@ class Login extends BaseController
     public function __construct()
     {
         $this->client = new HTTPClient();
+
+        $apiEndpointsConfig = config('ApiEndpoints');
+
+		
     }
 
     public function showLoginPage()

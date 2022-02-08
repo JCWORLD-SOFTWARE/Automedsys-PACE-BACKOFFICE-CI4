@@ -8,6 +8,12 @@ class EmailNotifier
 {
 	public static function providerDeploymentSuccess(array $application)
 	{
+
+		$apiEndpointsConfig = config('ApiEndpoints');
+
+		$loginUrl = $apiEndpointsConfig->loginUrl;
+		$fromUrl = $apiEndpointsConfig->fromUrl;
+
 		$parser = Services::parser();
 
 		$message = $parser
@@ -15,11 +21,11 @@ class EmailNotifier
 			->setVar('fullName', static::getFullName($application))
 			->setVar('username', $application['username'])
 			->setVar('practiceId', $application['PracticeCode'])
-			->setVar('loginUrl', 'https://dev-epcs.automedsys.net')
+			->setVar('loginUrl', '{$loginUrl}')
 			->render('emails/provider_practice_deployed');
 
 		$email = Services::email();
-		$email->setFrom('support@automedsys.com', 'AutoMedSys Support');
+		$email->setFrom('{$fromUrl}', 'AutoMedSys Support');
 		$email->setTo($application['contact_email']);
 		$email->setSubject('Congratulations and Welcome to autoMedsys');
 		$email->setMessage($message);
@@ -28,6 +34,12 @@ class EmailNotifier
 
 	public static function providerDeploymentReminder(array $practice)
 	{
+
+		$apiEndpointsConfig = config('ApiEndpoints');
+
+		$loginUrl = $apiEndpointsConfig->loginUrl;
+		$fromUrl = $apiEndpointsConfig->fromUrl;
+		
 		$parser = Services::parser();
 
 		$message = $parser
@@ -35,11 +47,11 @@ class EmailNotifier
 			->setVar('fullName', static::getFullName($practice))
 			->setVar('username', $practice['contact_email'])
 			->setVar('practiceId', $practice['PracticeCode'])
-			->setVar('loginUrl', 'https://dev-epcs.automedsys.net')
+			->setVar('loginUrl', '{$loginUrl}')
 			->render('emails/provider_practice_deployed');
 
 		$email = Services::email();
-		$email->setFrom('support@automedsys.com', 'AutoMedSys Support');
+		$email->setFrom('{$fromUrl}', 'AutoMedSys Support');
 		$email->setTo($practice['contact_email']);
 		$email->setSubject('Congratulations and Welcome to autoMedsys');
 		$email->setMessage($message);
