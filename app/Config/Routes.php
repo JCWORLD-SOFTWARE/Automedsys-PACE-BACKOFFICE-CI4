@@ -43,7 +43,7 @@ $routes->get('/auth/login/google/oauth2/callback', 'Login::handleGoogleOauth2Cal
 $routes->get('/oauth', 'Login::handleGoogleOauth2Callback', ['as' => 'google_oauth_callback']);
 
 
-//
+//check
 
 $routes->get('/servers', 'Server::index', ['filter' => 'auth', 'as' => 'server_index']);
 $routes->get('/database-server-templates', 'DatabaseServerTemplate::index', ['filter' => 'auth', 'as' => 'database_server_template_index']);
