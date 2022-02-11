@@ -23,7 +23,9 @@ class App extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $baseURL = 'http://qa-pace.automedsys.net/';
+	public $baseURL = 'http://localhost:8235/';
+
+//	public $baseURL = 'http://'.$_SERVER['HTTP_HOST'];
 
 	/**
 	 * --------------------------------------------------------------------------
@@ -34,8 +36,6 @@ class App extends BaseConfig
 	 * something else. If you are using mod_rewrite to remove the page set this
 	 * variable so that it is blank.
 	 *
-	 * 
-	 * 
 	 * @var string
 	 */
 	public $indexPage = '';

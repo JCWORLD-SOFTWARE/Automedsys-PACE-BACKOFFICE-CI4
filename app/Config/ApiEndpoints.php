@@ -19,6 +19,8 @@ class ApiEndpoints extends BaseConfig
 
 	public $soapBaseUrl;
 
+	//public $soapBaseUrl;
+
 	public $loginUrl;
 
 	public $fromUrl;
