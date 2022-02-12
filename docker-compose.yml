@@ -19,6 +19,6 @@ services:
       - "stgmw.automedsys.net:10.10.10.3"
       - "smtp.gmail.com:173.194.206.108"
     ports:
-      - 8235:80
+      - ${DPORT}:80
 volumes:
   src:
