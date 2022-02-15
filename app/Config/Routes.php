@@ -38,6 +38,15 @@ $routes->get('/auth/logout', 'Login::logout', ['as' => 'logout']);
 $routes->get('/auth/login/google/oauth2', 'Login::initiateGoogleOauth2', ['as' => 'initiate_google_oauth']);
 $routes->get('/auth/login/google/oauth2/callback', 'Login::handleGoogleOauth2Callback', ['as' => 'google_oauth_callback']);
 
+
+
+/*
+$routes->get('/auth/login/google/oauth2/callback', 'Login::handleGoogleOauth2Callback', ['as' => 'google_oauth_callback2']);
+$routes->get('/oauth', 'Login::handleGoogleOauth2Callback', ['as' => 'google_oauth_callback']);
+
+
+*/
+
 $routes->get('/servers', 'Server::index', ['filter' => 'auth', 'as' => 'server_index']);
 $routes->get('/database-server-templates', 'DatabaseServerTemplate::index', ['filter' => 'auth', 'as' => 'database_server_template_index']);
 

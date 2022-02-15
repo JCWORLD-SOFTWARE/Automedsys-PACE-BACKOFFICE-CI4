@@ -26,7 +26,8 @@ class App extends BaseConfig
 	
 	public function __construct()
 	{
-		$protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === 0 ? 'https://' : 'http://';
+		//$protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === 0 ? 'https://' : 'http://';
+		$protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === 0 ? 'https://' : 'https://';
 		$this->baseURL = $protocol.$_SERVER['HTTP_HOST'];
 	}
 
