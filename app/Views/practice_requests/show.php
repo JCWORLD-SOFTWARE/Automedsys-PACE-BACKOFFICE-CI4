@@ -137,7 +137,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> 
                         <div id="database-form-section" class="row">
                             <div class="col-md-12 ">
                                 <div class="form-group">
@@ -160,7 +160,7 @@
                                     <select name="server" class="form-control">
                                         <option value="">Please select...</option>
                                         <?php foreach ($servers as $s) : ?>
-                                            <option value="<?= $s['ID'] ?>">
+                                            <option value="<?= $dst['ID'] ?>">
                                                 <?= "{$s['name']} => {$s['endpoint_address']} => {$s['host_address']}" ?>
                                             </option>
                                         <?php endforeach; ?>

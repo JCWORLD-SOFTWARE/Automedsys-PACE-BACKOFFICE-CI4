@@ -23,15 +23,7 @@ class App extends BaseConfig
 	 *
 	 * @var string
 	 */
-	
-	public function __construct()
-	{
-		//$protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === 0 ? 'https://' : 'http://';
-		$protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === 0 ? 'https://' : 'https://';
-		$this->baseURL = $protocol.$_SERVER['HTTP_HOST'];
-	}
-
-	 public $baseURL = '';
+	public $baseURL = 'http://localhost:8235/';
 
 //	public $baseURL = 'http://'.$_SERVER['HTTP_HOST'];
 

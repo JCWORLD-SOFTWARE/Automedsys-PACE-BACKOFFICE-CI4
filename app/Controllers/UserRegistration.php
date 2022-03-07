@@ -49,16 +49,23 @@ class UserRegistration extends BaseController
 
 		$response = json_decode($response->getBody(), true);
 
-		$pager = service('pager');
-		$pager->setPath(route_to('user_registration_index'));
-		$pager->makeLinks($page, static::PER_PAGE, $response['ResponseData']['TotalCount']);
+		if($response['ResultType'] == "error"){ 
+			// echo "No record found";
+			return redirect()->to('/user-registrations')->with('errors', 'No record found');
+		} else {
+			$pager = service('pager');
+			$pager->setPath(route_to('user_registration_index'));
+			$pager->makeLinks($page, static::PER_PAGE, $response['ResponseData']['TotalCount']);
+	
+			return view('user_registrations/index', [
+				'userRegistrations' => $response['ResponseData']['Items'],
+				'pager' => $pager,
+				'isFiltered' => $filter->isFiltered(),
+				'filter' => $filter->getParams()
+			]);
+		}
 
-		return view('user_registrations/index', [
-			'userRegistrations' => $response['ResponseData']['Items'],
-			'pager' => $pager,
-			'isFiltered' => $filter->isFiltered(),
-			'filter' => $filter->getParams()
-		]);
+		echo "Lol!";
 	}
 
 	public function create()

@@ -41,8 +41,6 @@ class AuxPaceClient
 		return [$practiceRequests, $practiceRequestCount];
 	}
 
-
-
 	public static function getPracticeServerList(int $perPage = 10, int $offset = 0)
 	{
 		$practiceServerListResponse = self::$soapClient->__soapCall('PracticeServerList', [
@@ -74,7 +72,7 @@ class AuxPaceClient
 	{
 
 		/*
-/paceapi/v1/databasetemplates
+			/paceapi/v1/databasetemplates  
 		*/
 		$databaseServerTemplateListResponse =  self::$soapClient
 			->__soapCall('PracticeDatabaseServerTemplateList', [
@@ -113,15 +111,12 @@ class AuxPaceClient
 
 		/*
 		/paceapi/v1/paceaccount/practices/approve
-
-
-
-{
-  "PracticeId": 0,
-  "ServerId": 0,
-  "DatabaseServerId": 0,
-  "DatabaseTemplateId": 0
-}
+			{
+			"PracticeId": 0,
+			"ServerId": 0,
+			"DatabaseServerId": 0,
+			"DatabaseTemplateId": 0
+			}
 		*/
 		$approvePracticeResponse =  self::$soapClient->__soapCall('ApprovePractice', [
 			[
@@ -138,8 +133,8 @@ class AuxPaceClient
 			]
 		]);
 
-	//	var_dump($approvePracticeResponse);
-	//	exit;
+		//	var_dump($approvePracticeResponse);
+		//	exit;
 
 
 		if (property_exists($approvePracticeResponse->ApprovePracticeResult, 'ErrorMessage')) {
@@ -148,7 +143,7 @@ class AuxPaceClient
 
 		//var_dump(json_decode($approvePracticeResponse->ApprovePracticeResult->MiscField1, true)[0]);
 		//exit;
- //echo "This is the Service Dump end";
+ 		//echo "This is the Service Dump end";
 
  
 		return json_decode($approvePracticeResponse->ApprovePracticeResult->MiscField1, true)[0];

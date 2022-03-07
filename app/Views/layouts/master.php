@@ -228,6 +228,20 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item">
+                        <a href="javascript:;" class="nav-link nav-toggle">
+                            <i class="icon-support"></i>
+                            <span class="title">Support</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li class="nav-item">
+                                <a href="<?= base_url(route_to('contact_us')); ?>" class="nav-link ">
+                                    <span class="title">Contact us</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
                 <!-- END SIDEBAR MENU -->
                 <!-- END SIDEBAR MENU -->
