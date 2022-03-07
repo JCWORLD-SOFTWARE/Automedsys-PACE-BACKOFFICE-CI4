@@ -38,10 +38,6 @@ class PracticeRequest extends BaseController
 			fn ($server) => $server['status'] === "1"
 		);
 
-		/*
-		var_dump($servers);
-		exit;
-*/
 		return view('practice_requests/show', [
 			'application' => $practiceRequests[0],
 			'servers' => $servers,
@@ -111,7 +107,6 @@ class PracticeRequest extends BaseController
 				$parentTenantId = $this->request->getPost('parent_practice');
 			}
 
-/*
 var_dump([
 	'PracticeId' => $practiceId,
 	'ServerId' => $serverId,
@@ -123,7 +118,6 @@ var_dump([
 $baseURL2 = 'http://'.$_SERVER['HTTP_HOST'];
 echo $baseURL2;
 exit;
-*/
 
 			$approvedPractice = AuxPaceClient::approvePractice([
 				'PracticeId' => $practiceId,
