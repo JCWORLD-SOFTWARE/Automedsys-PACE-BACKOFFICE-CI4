@@ -8,7 +8,7 @@
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <span>Suport</span>
+            <span>Support</span>
             <i class="fa fa-circle"></i>
         </li>
         <li>
@@ -78,86 +78,84 @@
                         </button>
                     </div>
                 </div>
-            <div class="portlet-body">
-
-                <form id="filter" class="filter-panel bg-default form-horizontal collapse <?= $isFiltered ? "in" : "" ?>">
-                    <div class="form-body">
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">Email Address</label>
-                            <div class="col-md-4">
-                                <input type="text" name="emailAddress" value="<?= old('emailAddress', $filter["emailAddress"]) ?>" class="form-control" placeholder="Enter Email Address">
+            
+                <div class="portlet-body">
+                    <form id="filter" class="filter-panel bg-default form-horizontal collapse <?= $isFiltered ? "in" : "" ?>">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Email Address</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="emailAddress" value="<?= old('emailAddress', $filter["emailAddress"]) ?>" class="form-control" placeholder="Enter Email Address">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">Firstname</label>
-                            <div class="col-md-4">
-                                <input type="text" name="firstName" value="<?= old('firstName', $filter["firstName"]) ?>" class="form-control" placeholder="Enter First Name">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Firstname</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="firstName" value="<?= old('firstName', $filter["firstName"]) ?>" class="form-control" placeholder="Enter First Name">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">Lastname</label>
-                            <div class="col-md-4">
-                                <input type="text" name="lastName" value="<?= old('lastName', $filter["lastName"]) ?>" class="form-control" placeholder="Enter Last Name">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Lastname</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="lastName" value="<?= old('lastName', $filter["lastName"]) ?>" class="form-control" placeholder="Enter Last Name">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">Message</label>
-                            <div class="col-md-4">
-                                <input type="text" name="message" value="<?= old('message', $filter["message"]) ?>" class="form-control" placeholder="Enter Message">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Message</label>
+                                <div class="col-md-4">
+                                    <input type="text" name="message" value="<?= old('message', $filter["message"]) ?>" class="form-control" placeholder="Enter Message">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-actions">
-                            <div class="row">
-                                <div class="col-md-offset-3 col-md-4">
-                                    <button type="submit" class="btn green">Filter Results <i class="fa fa-filter icon-black"></i></button>
-                                    <?php if ($isFiltered) : ?>
-                                        <a href="<?= base_url(route_to('contact_us')); ?>" class="btn red btn-outline">
-                                            Remove Filters <i class="fa fa-times icon-black"></i>
-                                        </a>
-                                    <?php endif; ?>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-4">
+                                        <button type="submit" class="btn green">Filter Results <i class="fa fa-filter icon-black"></i></button>
+                                        <?php if ($isFiltered) : ?>
+                                            <a href="<?= base_url(route_to('contact_us')); ?>" class="btn red btn-outline">
+                                                Remove Filters <i class="fa fa-times icon-black"></i>
+                                            </a>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
 
-                <div class="table-responsive">
-                    <?= $pager->links() ?>
+                    <div class="table-responsive">
+                        <?= $pager->links() ?>
 
-                    <table class="table table-bordered" style="font-size: 12px;">
-                        <thead>
-                            <tr>
-
-                                <th>Email Address</th>
-                                <th>Firstname</th>
-                                <th>Lastname</th>
-                                <th>Phone number</th>
-                                <th>Message</th>
-                                <th>Created</th>
-                                
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $ii = 0;
-                            ?>
-                            <?php foreach ($prospectivePractices as $practice) :
-                                $ii++;
-                                $color = ($ii % 2 === 0) ? "#ffffff" : "#efefef"
-                            ?>
-                                <tr style="background-color: <?= $color ?>;">
-                                    <td><?= $practice["emailAddress"] ?></td>
-                                    <td><?= $practice["firstName"] ?></td>
-                                    <td><?= $practice["lastName"] ?></td>
-                                    <td><?= $practice["phoneNumber"] ?></td>
-                                    <td><?= $practice["message"] ?></td>
-                                    <td class="center" nowrap=""><?= date("d/m/Y h:i a", strtotime($practice["created_dt"])) ?></td>
+                        <table class="table table-bordered"  style="font-size: 12px;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 60px; overflow: hidden">Email Address</th>
+                                    <th style="width: 80px; overflow: hidden">Firstname</th>
+                                    <th style="width: 80px; overflow: hidden">Lastname</th>
+                                    <th style="width: 85px; overflow: hidden">Phone number</th>
+                                    <th style="width: 125px; overflow: hidden">Message</th>
+                                    <th style="width: 100px; overflow: hidden">Created</th>
                                 </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <?php
+                                    $ii = 0;
+                                    foreach ($prospectivePractices as $practice) :
+                                        $ii++;
+                                        $color = ($ii % 2 === 0) ? "#ffffff" : "#efefef"
+                                        ?>
+                                        <tr style="background-color: <?= $color ?>;">
+                                            <td style="width: 60px; overflow: hidden"><?= $practice["emailAddress"] ?></td>
+                                            <td style="width: 80px; overflow: hidden"><?= $practice["firstName"] ?></td>
+                                            <td style="width: 80px; overflow: hidden"><?= $practice["lastName"] ?></td>
+                                            <td style="width: 85px; overflow: hidden"><?= $practice["phoneNumber"] ?></td>
+                                            <td style="width: 125px; overflow: hidden"><?= $practice["message"] ?></td>
+                                            <td class="center" nowrap="" style="width: 100px; overflow: hidden"><?= date("d/m/Y h:i a", strtotime($practice["created_dt"])) ?></td>
+                                        </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
 
-                    <?= $pager->links() ?>
+                        <?= $pager->links() ?>
+                    </div>
                 </div>
             </div>
         </div>
