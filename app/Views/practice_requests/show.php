@@ -160,7 +160,7 @@
                                     <select name="server" class="form-control">
                                         <option value="">Please select...</option>
                                         <?php foreach ($servers as $s) : ?>
-                                            <option value="<?= $dst['ID'] ?>">
+                                            <option value="<?= $s['ID'] ?>">
                                                 <?= "{$s['name']} => {$s['endpoint_address']} => {$s['host_address']}" ?>
                                             </option>
                                         <?php endforeach; ?>
