@@ -107,6 +107,18 @@ class PracticeRequest extends BaseController
 				$parentTenantId = $this->request->getPost('parent_practice');
 			}
 
+var_dump([
+	'PracticeId' => $practiceId,
+	'ServerId' => $serverId,
+	'ParentTenantId' => $parentTenantId,
+	'DatabaseServerId' => $databaseServerTemplate['server_id'],
+	'DatabaseTemplateId' => $databaseServerTemplate['template_id']
+]);
+
+$baseURL2 = 'http://'.$_SERVER['HTTP_HOST'];
+echo $baseURL2;
+exit;
+
 			$approvedPractice = AuxPaceClient::approvePractice([
 				'PracticeId' => $practiceId,
 				'ServerId' => $serverId,
@@ -115,13 +127,38 @@ class PracticeRequest extends BaseController
 				'DatabaseTemplateId' => $databaseServerTemplate['template_id']
 			]);
 
-			$client->request(
-				'PUT',
-				"{$apiEndpointsConfig->baseUrl}/paceapi/v1/active/practices/{$approvedPractice['PracticeCode']}/deployment-email",
-				['headers' => ['Authorization' => "Bearer {$token}"]]
-			);
+			//var_dump($approvedPractice);
+			//exit;
+
+			
+if (isset($approvedPractice['PracticeCode'] ) && $approvedPractice['PracticeCode'] != '' ) {
+
+
+	$client->request(
+		'PUT',
+		"{$apiEndpointsConfig->baseUrl}/paceapi/v1/active/practices/{$approvedPractice['PracticeCode']}/deployment-email",
+		['headers' => ['Authorization' => "Bearer {$token}"]]
+	);
+
+	//Redirect to the succces page here
+	//$this->showApprovalSuccessJs($approvedPractice);
+	session()->setFlashdata('success', 'Practice deployed successfully');
+
+	return redirect()->route('practice_request_approve_success_show', [
+	 	base64_encode(json_encode($approvedPractice))
+	 ]);
+
+} else {
+	session()->setFlashdata('error', "<pre>{$exception->getMessage()}</pre>");
+			
+	//Redirect to the failure page here
+}
+
+
+	
+			
 		} catch (Exception $exception) {
-			// session()->setFlashdata('error', "<pre>{$exception->getMessage()}</pre>");
+			 session()->setFlashdata('error', "<pre>{$exception->getMessage()}</pre>");
 			// return redirect()->back();
 
 			echo $exception->getMessage();
@@ -129,12 +166,26 @@ class PracticeRequest extends BaseController
 
 		// echo base64_encode(json_encode($approvedPractice));
 
-		// session()->setFlashdata('success', 'Practice deployed successfully');
+		//session()->setFlashdata('success', 'Practice deployed successfully');
 
-		// return redirect()->route('practice_request_approve_success_show', [
+		//return redirect()->route('practice_request_approve_success_show', [
 		// 	base64_encode(json_encode($approvedPractice))
 		// ]);
 	}
+
+	public function showApprovalSuccessJs($PracticeData)
+	{
+	//	$application = json_decode(base64_decode($PracticeData), true);
+
+	//	if (!$application) {
+	//		throw PageNotFoundException::forPageNotFound();
+	//	}
+
+		return view('practice_requests/show_approval_success', [
+			'application' => $PracticeData,
+		]);
+	}
+
 
 	public function showApprovalSuccess(string $encodedPracticeData)
 	{
