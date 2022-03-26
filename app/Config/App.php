@@ -23,7 +23,16 @@ class App extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $baseURL = 'http://qa-pace.automedsys.net/';
+	
+	public function __construct()
+	{
+		$protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === 0 ? 'https://' : 'https://';
+		$this->baseURL = $protocol.$_SERVER['HTTP_HOST'];
+	}
+
+	 public $baseURL = '';
+
+//	public $baseURL = 'http://'.$_SERVER['HTTP_HOST'];
 
 	/**
 	 * --------------------------------------------------------------------------
