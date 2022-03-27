@@ -107,17 +107,7 @@ class PracticeRequest extends BaseController
 				$parentTenantId = $this->request->getPost('parent_practice');
 			}
 
-var_dump([
-	'PracticeId' => $practiceId,
-	'ServerId' => $serverId,
-	'ParentTenantId' => $parentTenantId,
-	'DatabaseServerId' => $databaseServerTemplate['server_id'],
-	'DatabaseTemplateId' => $databaseServerTemplate['template_id']
-]);
 
-$baseURL2 = 'http://'.$_SERVER['HTTP_HOST'];
-echo $baseURL2;
-exit;
 
 			$approvedPractice = AuxPaceClient::approvePractice([
 				'PracticeId' => $practiceId,
