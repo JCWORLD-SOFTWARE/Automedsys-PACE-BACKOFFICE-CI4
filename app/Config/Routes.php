@@ -36,7 +36,7 @@ $routes->get('/', 'Home::index', ['filter' => 'auth', 'as' => 'home']);
 $routes->get('/auth/login', 'Login::showLoginPage', ['as' => 'login']);
 $routes->get('/auth/logout', 'Login::logout', ['as' => 'logout']);
 
-//$routes->get('/auth/login/google/oauth2', 'Login::initiateGoogleOauth2', ['as' => 'initiate_google_oauth']);
+$routes->get('/auth/login/google/oauth2', 'Login::initiateGoogleOauth2', ['as' => 'initiate_google_oauth']);
 
 //$routes->get('/auth/login/google/oauth2/callback', 'Login::handleGoogleOauth2Callback', ['as' => 'google_oauth_callback']);
 
