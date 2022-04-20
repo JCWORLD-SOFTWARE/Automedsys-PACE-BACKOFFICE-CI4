@@ -132,7 +132,8 @@
                                     <th style="width: 80px; overflow: hidden">Lastname</th>
                                     <th style="width: 85px; overflow: hidden">Phone number</th>
                                     <th style="width: 125px; overflow: hidden">Message</th>
-                                    <th style="width: 100px; overflow: hidden">Created</th>
+                                    <th style="width: 100px; overflow: hidden">Date Created</th>
+                                    <th style="width: 100px; overflow: hidden">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -140,20 +141,98 @@
                                     $ii = 0;
                                     foreach ($prospectivePractices as $practice) :
                                         $ii++;
-                                        $color = ($ii % 2 === 0) ? "#ffffff" : "#efefef"
+                                        $color = ($ii % 2 === 0) ? "#ffffff" : "#efefef";
                                         ?>
                                         <tr style="background-color: <?= $color ?>;">
                                             <td style="width: 60px; overflow: hidden"><?= $practice["emailAddress"] ?></td>
-                                            <td style="width: 80px; overflow: hidden"><?= $practice["firstName"] ?></td>
-                                            <td style="width: 80px; overflow: hidden"><?= $practice["lastName"] ?></td>
+                                            <td style="width: 80px; overflow: hidden"><?= ucfirst($practice["firstName"]); ?></td>
+                                            <td style="width: 80px; overflow: hidden"><?= ucfirst($practice["lastName"]); ?></td>
                                             <td style="width: 85px; overflow: hidden"><?= $practice["phoneNumber"] ?></td>
                                             <td style="width: 125px; overflow: hidden"><?= $practice["message"] ?></td>
                                             <td class="center" nowrap="" style="width: 100px; overflow: hidden"><?= date("d/m/Y h:i a", strtotime($practice["created_dt"])) ?></td>
+                                            <td>
+                                                <button type="button" onclick="showModal<?= $ii; ?>()" class="btn btn-primary"><i class="fa fa-eye "></i></button>
+                                            </td>
                                         </tr>
+                                        <!-- Modal -->
+                                        <div class="modal" style="display: none; background: rgba(0, 0, 0, 0.5);" id="exampleModal<?= $ii; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header" style="text-align: center;">
+                                                        <style>
+                                                            .mb20{
+                                                                margin-bottom: 20px;
+                                                            }
+                                                        </style>
+                                                        <div class="form-inline">
+                                                            <label for="date">Date: </label>
+                                                            <input type="text" name="date" value="<?= date("d/m/Y h:i a", strtotime($practice["created_dt"])) ?>" style="border: none;" />
+                                                            <label for="IP">IP: </label>
+                                                            <input type="text" name="IP" value="000.000.000.00:0000" style="border: none;"/>
+                                                            <label for="status">Customer's status: </label>
+                                                            <input type="text" name="status" value="None" style="border: none;"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form>
+                                                            <div class="form-group row">
+                                                                <div class="col-lg-6 col-md-6 col-sm-12 mb20">
+                                                                    <label for="firstname">First name <i class="text-danger">*</i></label>
+                                                                    <input type="text" name="firstname" id="firstname" class="form-control" placeholder="firstname" value="<?= $practice["firstName"] ?>" aria-describedby="helpId">
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-6 col-sm-12 mb20">
+                                                                    <label for="lastname">Last name <i class="text-danger">*</i></label>
+                                                                    <input type="text" name="lastname" id="lastname" class="form-control" placeholder="lastname" value="<?= $practice["lastName"] ?>" aria-describedby="helpId">
+                                                                </div>
+                                                                <div class="col-lg-12 mb20">
+                                                                    <label for="email">Email Address<i class="text-danger">*</i></label>
+                                                                    <input type="text" name="email" id="email" class="form-control" placeholder="email" value="<?= $practice["emailAddress"] ?>" aria-describedby="helpId">
+                                                                </div>
+                                                                <div class="col-lg-12 mb20">
+                                                                    <label for="phone">Phone number<i class="text-danger">*</i></label>
+                                                                    <input type="text" name="phone" id="phone" class="form-control" placeholder="phone" value="<?= $practice["phoneNumber"] ?>" aria-describedby="helpId">
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-6 col-sm-12 mb20">
+                                                                    <label for="pcategory">Product Category <i class="text-danger">*</i></label>
+                                                                    <select class="form-control" name="" id="">
+                                                                        <option>Product Category </option>
+                                                                        <option>Product Category </option>
+                                                                        <option>Product Category </option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-6 col-sm-12 mb20">
+                                                                    <label for="ptype">Practice Type<i class="text-danger">*</i></label>
+                                                                    <select class="form-control" name="" id="">
+                                                                        <option>Practice Type</option>
+                                                                        <option>Practice Type</option>
+                                                                        <option>Practice Type</option>
+                                                                    </select>
+                                                                </div>
+                                                                <br>
+                                                                <div class="col-lg-12 mb20">
+                                                                    <label for="message">Message</label>
+                                                                    <textarea class="form-control" name="message" id="message" rows="6"><?= $practice["message"] ?></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" onclick="closeModal<?= $ii; ?>()" data-dismiss="modal">OK</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <script>
+                                            function closeModal<?= $ii; ?>(){
+                                                $("#exampleModal<?= $ii; ?>").css("display", "none");
+                                            }
+                                            function showModal<?= $ii; ?>(){
+                                                $("#exampleModal<?= $ii; ?>").css("display", "block");
+                                            }
+                                        </script>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
-
                         <?= $pager->links() ?>
                     </div>
                 </div>
