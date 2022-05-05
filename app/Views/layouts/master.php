@@ -1,3 +1,186 @@
+<?php
+//added comment
+
+$menuArray = [
+    [
+        'name' => 'Dashboard',
+        'route_to' => 'home',
+        'iClass' => 'icon-home',
+        'tClass' => 'title',
+        'subMenu' => [],
+        'aClass' => '',
+        'aaClass' => '',
+        'href' => ''
+    ],
+    [
+        'name' => 'Signup',
+        'route_to' => 'user_registration_index',
+        'iClass' => 'icon-users',
+        'tClass' => 'title',
+        'subMenu' => [],
+        'aClass' => '',
+        'aaClass' => '',
+        'href' => ''
+
+    ],
+    [
+        'name' => 'Billing',
+        'route_to' => '/',
+        'iClass' => 'icon-cloud-upload',
+        'tClass' => 'title',
+        'subMenu' => [],
+        'aClass' => '',
+        'aaClass' => '',
+        'href' => ''
+    ],
+
+
+    //Practice Management
+    
+    [
+        'name' => 'Practice Management',
+        'route_to' => '',
+        'iClass' => 'icon-diamond',
+        'tClass' => 'title',
+        'aClass' => 'nav-link nav-toggle',
+        'aaClass' => 'arrow',
+        'href' => 'javascript:;',
+        
+       
+        'subMenu' => [
+            [
+
+                'name' => 'Prospective Practices',
+                'route_to' => 'prospective_practice_index',
+                'tClass' => 'title',
+                
+                
+            ],
+            [
+                'name' => 'Active Practices',
+                'route_to' => 'active_practice_index_active',
+                
+                'tClass' => 'title',
+            ],
+            [
+                'name' => 'Suspended Practices',
+                'route_to' => 'active_practice_index_suspended',
+                
+                'tClass' => 'title',
+            ],
+
+        ]
+    ],
+    //End of it
+
+    //System Administration
+    [
+        'name' => 'System Administration',
+        'route_to' => '',
+        'iClass' => 'icon-cloud-upload',
+        'tClass' => 'title',
+        'aClass' => 'nav-link nav-toggle',
+        'aaClass' => 'arrow',
+        'href' => 'javascript:;',
+        
+       
+        'subMenu' => [
+            [
+
+                'name' => 'Deployment Server',
+                'route_to' => 'server_index',
+                'tClass' => 'title',
+                
+                
+            ],
+            [
+                'name' => 'Database Template',
+                'route_to' => 'database_server_template_index',
+                
+                'tClass' => 'title',
+            ],
+           
+
+        ]
+    ],
+    //end of it
+
+     //API management
+     [
+        'name' => 'API Management',
+        'route_to' => '',
+        'iClass' => 'icon-diamond',
+        'tClass' => 'title',
+        'aClass' => 'nav-link nav-toggle',
+        'aaClass' => 'arrow',
+        'href' => 'javascript:;',
+        
+       
+        'subMenu' => [
+            [
+
+                'name' => 'Organization Management',
+                'route_to' => 'organization_index',
+                'tClass' => 'title',
+                
+                
+            ],
+            [
+                'name' => 'Scope Management',
+                'route_to' => 'scope_index',
+                
+                'tClass' => 'title',
+            ],
+            [
+                'name' => 'API Onboarding',
+                'route_to' => '/',
+                
+                'tClass' => 'title',
+            ],
+           
+
+        ]
+    ],
+    //end of it
+
+    //support
+    [
+        'name' => 'Support',
+        'route_to' => '',
+        'iClass' => 'icon-support',
+        'tClass' => 'title',
+        'aClass' => 'nav-link nav-toggle',
+        'aaClass' => 'arrow',
+        'href' => 'javascript:;',
+        
+       
+        'subMenu' => [
+            [
+
+                'name' => 'Contact Us',
+                'route_to' => 'contact_us',
+                'tClass' => 'title',
+                
+                
+            ],
+            
+           
+
+        ]
+    ],
+    //end of it
+
+
+
+];
+
+
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
@@ -143,18 +326,67 @@
                         <div class="sidebar-toggler"> </div>
                         <!-- END SIDEBAR TOGGLER BUTTON -->
                     </li>
+
+
+                    <?php
+                    foreach ( $menuArray as $menuRow){
+                        $aClass = (strlen($menuRow['aClass']) > 0) ? 'class='.$menuRow['aClass']."" : '';
+                    ?>
+
                     <li class="nav-item">
-                        <a href="<?= base_url(route_to('home')); ?>">
+                        <a href="<?= (strlen($menuRow['href']) > 0) ? 'javascript:;': base_url(route_to($menuRow['route_to'])); ?>" class='<?= $menuRow['aClass']?>'> 
+                            <i class="<?=$menuRow['iClass']?>"></i>
+                            <span class="<?=$menuRow['tClass']?>"><?=$menuRow['name']?></span>
+                            <span class='<?= $menuRow['aaClass']?>'></span>
+                        </a>
+                        
+                        <?php
+                         if (count ($menuRow['subMenu']) > 0){
+                             ?>
+                              <ul class="sub-menu">
+                                  <?php
+                                     foreach ( $menuRow['subMenu'] as $subMenuRow){
+                                    ?> 
+                                            <li class="nav-item">
+                                             <a href="<?= base_url(route_to($subMenuRow['route_to'])); ?>" class="nav-link ">
+                                           <span class="<?=$subMenuRow['tClass']?>"><?=$subMenuRow['name']?></span>
+                                              </a>
+                                           </li>
+                                    <?php
+                                     }    
+                                     ?>      
+                              </ul>
+                             <?php 
+                         }
+                        ?>
+                    </li>
+
+                <?php
+                }
+            ?>
+            
+                
+                     
+
+<!--
+                    <li class="nav-item">
+                        <a href="
+
+                        ">
                             <i class="icon-home"></i>
                             <span class="title">Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= base_url(route_to('user_registration_index')); ?>">
+                        <a href="
+                       
+                        ">
                             <i class="icon-users"></i>
                             <span class="title">Signup</span>
                         </a>
                     </li>
+                    
+
                     <li class="nav-item">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="icon-diamond"></i>
@@ -163,28 +395,33 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item">
-                                <a href="<?= base_url(route_to('prospective_practice_index')); ?>" class="nav-link ">
+                                <a href="" class="nav-link">
                                     <span class="title">Prospective Practices</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?= base_url(route_to('active_practice_index_active')); ?>" class="nav-link ">
+                                <a href="" class="nav-link ">
                                     <span class="title">Active Practices</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?= base_url(route_to('active_practice_index_suspended')); ?>" class="nav-link ">
+                                <a href="<" class="nav-link ">
                                     <span class="title">Suspended Practices</span>
                                 </a>
                             </li>
                         </ul>
                     </li>
+            -->
+
+                <!-- 
                     <li class="nav-item">
                         <a href="#">
                             <i class="icon-cloud-upload"></i>
                             <span class="title">Billing</span>
                         </a>
                     </li>
+                    
+
                     <li class="nav-item">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="icon-cloud-upload"></i>
@@ -193,17 +430,19 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item">
-                                <a href="<?= base_url(route_to('server_index')); ?>" class="nav-link ">
+                                <a href="" class="nav-link ">
                                     <span class="title">Deployment Server</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?= base_url(route_to('database_server_template_index')); ?>" class="nav-link ">
+                                <a href="" class="nav-link ">
                                     <span class="title">Database Template</span>
                                 </a>
                             </li>
                         </ul>
                     </li>
+
+           
                     <li class="nav-item">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="icon-diamond"></i>
@@ -212,12 +451,12 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item">
-                                <a href="<?= base_url(route_to('organization_index')); ?>" class="nav-link ">
+                                <a href="" class="nav-link ">
                                     <span class="title">Organization Management</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?= base_url(route_to('scope_index')); ?>" class="nav-link ">
+                                <a href="" class="nav-link ">
                                     <span class="title">Scope Management</span>
                                 </a>
                             </li>
@@ -228,6 +467,9 @@
                             </li>
                         </ul>
                     </li>
+ 
+
+
                     <li class="nav-item">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="icon-support"></i>
@@ -236,12 +478,14 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item">
-                                <a href="<?= base_url(route_to('contact_us')); ?>" class="nav-link ">
+                                <a href="" class="nav-link ">
                                     <span class="title">Contact us</span>
                                 </a>
                             </li>
                         </ul>
                     </li>
+
+            -->
                 </ul>
                 <!-- END SIDEBAR MENU -->
                 <!-- END SIDEBAR MENU -->

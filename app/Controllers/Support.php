@@ -45,6 +45,8 @@ class Support extends BaseController
 				])
 			]
 		);
+		
+		
 
 		$response = json_decode($response->getBody(), true);
 
