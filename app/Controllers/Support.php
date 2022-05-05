@@ -10,6 +10,8 @@ use Config\Services;
 use Exception;
 use GuzzleHttp\Client as HTTPClient;
 
+
+
 class Support extends BaseController
 {
     use ResponseTrait;
@@ -45,6 +47,8 @@ class Support extends BaseController
 				])
 			]
 		);
+		
+		
 
 		$response = json_decode($response->getBody(), true);
 

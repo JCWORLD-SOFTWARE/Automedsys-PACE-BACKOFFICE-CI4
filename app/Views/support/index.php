@@ -127,12 +127,14 @@
                         <table class="table table-bordered"  style="font-size: 12px;">
                             <thead>
                                 <tr>
+
+                                <th style="width: 100px; overflow: hidden">Date Created</th>
                                     <th style="width: 60px; overflow: hidden">Email Address</th>
                                     <th style="width: 80px; overflow: hidden">Firstname</th>
                                     <th style="width: 80px; overflow: hidden">Lastname</th>
                                     <th style="width: 85px; overflow: hidden">Phone number</th>
                                     <th style="width: 125px; overflow: hidden">Message</th>
-                                    <th style="width: 100px; overflow: hidden">Date Created</th>
+
                                     <th style="width: 100px; overflow: hidden">Action</th>
                                 </tr>
                             </thead>
@@ -144,17 +146,44 @@
                                         $color = ($ii % 2 === 0) ? "#ffffff" : "#efefef";
                                         ?>
                                         <tr style="background-color: <?= $color ?>;">
+
+                                        <td class="center" nowrap="" style="width: 100px; overflow: hidden"><?= date("dS M y \n h:i a", strtotime($practice["created_dt"])) ?></td>
+                                        
+                                      
                                             <td style="width: 60px; overflow: hidden"><?= $practice["emailAddress"] ?></td>
+
                                             <td style="width: 80px; overflow: hidden"><?= ucfirst($practice["firstName"]); ?></td>
                                             <td style="width: 80px; overflow: hidden"><?= ucfirst($practice["lastName"]); ?></td>
                                             <td style="width: 85px; overflow: hidden"><?= $practice["phoneNumber"] ?></td>
-                                            <td style="width: 125px; overflow: hidden"><?= $practice["message"] ?></td>
-                                            <td class="center" nowrap="" style="width: 100px; overflow: hidden"><?= date("d/m/Y h:i a", strtotime($practice["created_dt"])) ?></td>
+                                            <td style="width: 25px; height: 15px; overflow: hidden"><?php 
+                                            
+                                            $mess = $practice["message"];
+                                             
+                                            for($i = 0; $i < 35; $i++) {
+                                                print($mess[$i]);
+                                            }
+                                               if (strlen($mess) >= 35){
+                                                
+                                            print("...");
+                                        }
+                                        else{
+                                            print("");
+                                        }
+
+                                       
+                                            
+                                            ?>
+                                            
+                                        
+                                        </td>
                                             <td>
                                                 <button type="button" onclick="showModal<?= $ii; ?>()" class="btn btn-primary"><i class="fa fa-eye "></i></button>
                                             </td>
                                         </tr>
                                         <!-- Modal -->
+                                        <!-- Modal -->
+                                      
+
                                         <div class="modal" style="display: none; background: rgba(0, 0, 0, 0.5);" id="exampleModal<?= $ii; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
