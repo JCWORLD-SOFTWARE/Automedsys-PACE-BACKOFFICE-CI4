@@ -127,9 +127,6 @@
                         <table class="table table-bordered"  style="font-size: 12px;">
                             <thead>
                                 <tr>
-                             
-
-                                
 
                                 <th style="width: 100px; overflow: hidden">Date Created</th>
                                     <th style="width: 60px; overflow: hidden">Email Address</th>
@@ -184,6 +181,9 @@
                                             </td>
                                         </tr>
                                         <!-- Modal -->
+                                        <!-- Modal -->
+                                      
+
                                         <div class="modal" style="display: none; background: rgba(0, 0, 0, 0.5);" id="exampleModal<?= $ii; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
