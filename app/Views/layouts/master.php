@@ -1,5 +1,5 @@
 <?php
-//added comment
+//added comments
 
 $menuArray = [
     [
