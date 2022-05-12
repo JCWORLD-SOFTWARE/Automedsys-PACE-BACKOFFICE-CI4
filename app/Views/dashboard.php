@@ -85,11 +85,11 @@
             </div>
             <div class="details">
                 <div class="number">
-                    <a class="font-white" href="<?= base_url(route_to('server_index')); ?>">Servers</a>
+                    <a class="font-white" href="<?= base_url(route_to('server_index')); ?>">Support</a>
                 </div>
-                <div class="desc">Manage Servers</div>
+                <div class="desc">Contact Us</div>
             </div>
-            <a class="more" href="<?= base_url(route_to('server_index')); ?>"> View more
+            <a class="more" href="<?= base_url(route_to('contact_us')); ?>"> View More
                 <i class="m-icon-swapright m-icon-white"></i>
             </a>
         </div>
