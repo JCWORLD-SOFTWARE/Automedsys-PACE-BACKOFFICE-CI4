@@ -10,7 +10,8 @@ $menuArray = [
         'subMenu' => [],
         'aClass' => '',
         'aaClass' => '',
-        'href' => ''
+        'href' => 'index',
+        'liClass' => ''
     ],
     [
         'name' => 'Signup',
@@ -20,8 +21,8 @@ $menuArray = [
         'subMenu' => [],
         'aClass' => '',
         'aaClass' => '',
-        'href' => ''
-
+        'href' => 'user-registrations',
+        'liClass' => ''
     ],
     [
         'name' => 'Billing',
@@ -31,12 +32,10 @@ $menuArray = [
         'subMenu' => [],
         'aClass' => '',
         'aaClass' => '',
-        'href' => ''
+        'href' => 'billing',
+        'liClass' => ''
     ],
-
-
     //Practice Management
-    
     [
         'name' => 'Practice Management',
         'route_to' => '',
@@ -45,30 +44,26 @@ $menuArray = [
         'aClass' => 'nav-link nav-toggle',
         'aaClass' => 'arrow',
         'href' => 'javascript:;',
-        
-       
+        'liClass' => 'nav-item',
         'subMenu' => [
             [
-
                 'name' => 'Prospective Practices',
                 'route_to' => 'prospective_practice_index',
                 'tClass' => 'title',
-                
-                
+                'href' => 'prospective-practices'
             ],
             [
                 'name' => 'Active Practices',
                 'route_to' => 'active_practice_index_active',
-                
                 'tClass' => 'title',
+                'href' => 'active'
             ],
             [
                 'name' => 'Suspended Practices',
                 'route_to' => 'active_practice_index_suspended',
-                
                 'tClass' => 'title',
+                'href' => 'suspended'
             ],
-
         ]
     ],
     //End of it
@@ -82,25 +77,20 @@ $menuArray = [
         'aClass' => 'nav-link nav-toggle',
         'aaClass' => 'arrow',
         'href' => 'javascript:;',
-        
-       
+        'liClass' => 'nav-item',
         'subMenu' => [
             [
-
                 'name' => 'Deployment Server',
                 'route_to' => 'server_index',
-                'tClass' => 'title',
-                
-                
+                'tClass' => 'title',   
+                'href' => 'servers'
             ],
             [
                 'name' => 'Database Template',
                 'route_to' => 'database_server_template_index',
-                
                 'tClass' => 'title',
+                'href' => 'database-server-templates'
             ],
-           
-
         ]
     ],
     //end of it
@@ -114,31 +104,25 @@ $menuArray = [
         'aClass' => 'nav-link nav-toggle',
         'aaClass' => 'arrow',
         'href' => 'javascript:;',
-        
-       
+        'liClass' => 'nav-item',
         'subMenu' => [
             [
-
                 'name' => 'Organization Management',
                 'route_to' => 'organization_index',
                 'tClass' => 'title',
-                
-                
+                'href' => 'organizations'
             ],
             [
                 'name' => 'Scope Management',
                 'route_to' => 'scope_index',
-                
                 'tClass' => 'title',
+                'href' => 'scopes'
             ],
             [
                 'name' => 'API Onboarding',
                 'route_to' => '/',
-                
                 'tClass' => 'title',
             ],
-           
-
         ]
     ],
     //end of it
@@ -152,20 +136,14 @@ $menuArray = [
         'aClass' => 'nav-link nav-toggle',
         'aaClass' => 'arrow',
         'href' => 'javascript:;',
-        
-       
+        'liClass' => 'nav-item',
         'subMenu' => [
             [
-
                 'name' => 'Contact Us',
                 'route_to' => 'contact_us',
                 'tClass' => 'title',
-                
-                
+                'href' => 'contact_us'
             ],
-            
-           
-
         ]
     ],
     //end of it
@@ -326,50 +304,70 @@ $menuArray = [
                         <div class="sidebar-toggler"> </div>
                         <!-- END SIDEBAR TOGGLER BUTTON -->
                     </li>
-
-
                     <?php
-                    foreach ( $menuArray as $menuRow){
-                        $aClass = (strlen($menuRow['aClass']) > 0) ? 'class='.$menuRow['aClass']."" : '';
-                    ?>
-
-                    <li class="nav-item">
-                        <a href="<?= (strlen($menuRow['href']) > 0) ? 'javascript:;': base_url(route_to($menuRow['route_to'])); ?>" class='<?= $menuRow['aClass']?>'> 
-                            <i class="<?=$menuRow['iClass']?>"></i>
-                            <span class="<?=$menuRow['tClass']?>"><?=$menuRow['name']?></span>
-                            <span class='<?= $menuRow['aaClass']?>'></span>
-                        </a>
-                        
-                        <?php
-                         if (count ($menuRow['subMenu']) > 0){
-                             ?>
-                              <ul class="sub-menu">
-                                  <?php
-                                     foreach ( $menuRow['subMenu'] as $subMenuRow){
-                                    ?> 
-                                            <li class="nav-item">
-                                             <a href="<?= base_url(route_to($subMenuRow['route_to'])); ?>" class="nav-link ">
-                                           <span class="<?=$subMenuRow['tClass']?>"><?=$subMenuRow['name']?></span>
-                                              </a>
-                                           </li>
+                        $uri = pathinfo(basename($_SERVER['PHP_SELF']), PATHINFO_FILENAME); 
+                        foreach ( $menuArray as $menuRow){
+                            $aClass = (strlen($menuRow['aClass']) > 0) ? 'class='.$menuRow['aClass']."" : '';
+                            ?>
+                                <li class="<?= $menuRow['liClass'];?> <?php if($uri == $menuRow['href']){echo "active"; } ?>">
+                                    <a href="<?= (strlen($menuRow['subMenu']) > 0) ? 'javascript:;': base_url(route_to($menuRow['route_to'])); ?>" class='<?= $menuRow['aClass'];?>'> 
+                                        <i class="<?=$menuRow['iClass']?>"></i>
+                                        <span class="<?=$menuRow['tClass']?>"><?= $menuRow['name']; ?></span>
+                                        <span class='<?= $menuRow['aaClass']?>'></span>
+                                    </a>
                                     <?php
-                                     }    
-                                     ?>      
-                              </ul>
-                             <?php 
-                         }
-                        ?>
+                                        if (count ($menuRow['subMenu']) > 0){
+                                            ?>
+                                                <ul class="sub-menu">
+                                                    <?php
+                                                        foreach ( $menuRow['subMenu'] as $subMenuRow){
+                                                        ?> 
+                                                            <li class="nav-item <?php if($uri == $subMenuRow['href']){echo "active"; } ?>">
+                                                                <a href="<?= base_url(route_to($subMenuRow['route_to'])); ?>" class="nav-link">
+                                                                    <span class="<?=$subMenuRow['tClass']?>"><?=$subMenuRow['name']?></span>
+                                                                </a>
+                                                            </li>
+                                                        <?php
+                                                        }    
+                                                        ?>      
+                                                </ul>
+                                            <?php 
+                                        }
+                                    ?>
+                                </li>
+                            <?php
+                        }
+                    ?>
+            
+<!--
+     
+
+            <li class="nav-item">
+                        <a href="javascript:;"  class="nav-link nav-toggle">
+                            <i active='true' class="icon-cloud-upload"></i>
+                            <span class="title">System Admin
+                                 Test</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                        
+                            <li  class="nav-item">
+                                <a href=""  class="nav-link">
+                                    <span class="title">Deployment Server</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="" class="nav-link">
+                                    <span class="title">Database Template</span>
+                                </a>
+                            </li>
+
+                        </ul>
                     </li>
 
-                <?php
-                }
-            ?>
-            
-                
-                     
 
-<!--
-                    <li class="nav-item">
+               <li class="nav-item">
                         <a href="
 
                         ">
