@@ -78,6 +78,7 @@
             </a>
         </div>
     </div>
+    <!--comment-->
     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
         <div class="dashboard-stat red">
             <div class="visual">
@@ -85,11 +86,11 @@
             </div>
             <div class="details">
                 <div class="number">
-                    <a class="font-white" href="<?= base_url(route_to('server_index')); ?>">Servers</a>
+                    <a class="font-white" href="<?= base_url(route_to('server_index')); ?>">Support</a>
                 </div>
-                <div class="desc">Manage Servers</div>
+                <div class="desc">Contact Us</div>
             </div>
-            <a class="more" href="<?= base_url(route_to('server_index')); ?>"> View more
+            <a class="more" href="<?= base_url(route_to('contact_us')); ?>"> View More
                 <i class="m-icon-swapright m-icon-white"></i>
             </a>
         </div>
