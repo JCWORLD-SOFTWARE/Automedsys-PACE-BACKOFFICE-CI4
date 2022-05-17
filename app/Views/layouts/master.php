@@ -310,7 +310,10 @@ $menuArray = [
                             $aClass = (strlen($menuRow['aClass']) > 0) ? 'class='.$menuRow['aClass']."" : '';
                             ?>
                                 <li class="<?= $menuRow['liClass'];?> <?php if($uri == $menuRow['href']){echo "active"; } ?>">
-                                    <a href="<?= (strlen($menuRow['subMenu']) > 0) ? 'javascript:;': base_url(route_to($menuRow['route_to'])); ?>" class='<?= $menuRow['aClass'];?>'> 
+                                
+                              
+                                <a href="<?= (is_array($menuRow['subMenu']) &&  strlen($menuRow['subMenu']) > 0) ? 'javascript:;': base_url(route_to($menuRow['route_to'])); ?>" class='<?= $menuRow['aClass'];?>'> 
+
                                         <i class="<?=$menuRow['iClass']?>"></i>
                                         <span class="<?=$menuRow['tClass']?>"><?= $menuRow['name']; ?></span>
                                         <span class='<?= $menuRow['aaClass']?>'></span>
