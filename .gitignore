@@ -7,10 +7,14 @@
 .AppleDouble
 .LSOverride
 
+
+#Files excempted by Tobi
 apache_log
 app--old
 app--old1
 writable
+.env
+.env.qa
 
 # OS X Thumbnails
 ._*
