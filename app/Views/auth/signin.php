@@ -97,6 +97,11 @@
               echo $ip;
               ?>
            </div>
+
+           <div class="form-group" style="padding-bottom: 0px; font-size: large; font-weight: bolder; text-align: center;">
+           <span> ver. 1.0.11 </span>
+
+            </div>
         </form>
         <!-- END LOGIN FORM -->
     </div>
