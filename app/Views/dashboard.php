@@ -86,7 +86,7 @@
             </div>
             <div class="details">
                 <div class="number">
-                    <a class="font-white" href="<?= base_url(route_to('server_index')); ?>">Support</a>
+                    <a class="font-white" href="<?= base_url(route_to('contact_us')); ?>">Support</a>
                 </div>
                 <div class="desc">Contact Us</div>
             </div>
