@@ -38,12 +38,15 @@ $routes->get('/auth/logout', 'Login::logout', ['as' => 'logout']);
 
 $routes->get('/auth/login/google/oauth2', 'Login::initiateGoogleOauth2', ['as' => 'initiate_google_oauth']);
 
-//$routes->get('/auth/login/google/oauth2/callback', 'Login::handleGoogleOauth2Callback', ['as' => 'google_oauth_callback']);
+//uncomment This before pushing
+//$routes->get('/auth/login/google/oauth2/callback', 'Login::handleGoogleOauth2Callback', ['as' => 'google_oauth_callback2']);
 
+//comment This before pushing
+$routes->get('/auth/login/google/oauth2/callback', 'Login::handleGoogleOauth2Callback', ['as' => 'google_oauth_callback']);
 
-
-$routes->get('/auth/login/google/oauth2/callback', 'Login::handleGoogleOauth2Callback', ['as' => 'google_oauth_callback2']);
 $routes->get('/oauth', 'Login::handleGoogleOauth2Callback', ['as' => 'google_oauth_callback']);
+
+
 
 
 $routes->get('/servers', 'Server::index', ['filter' => 'auth', 'as' => 'server_index']);
@@ -55,7 +58,6 @@ $routes->post('/practice-requests/approve/(:alphanum)', 'PracticeRequest::approv
 $routes->get('/practice-requests/approve/(:segment)/success', 'PracticeRequest::showApprovalSuccess/$1', ['filter' => 'auth', 'as' => 'practice_request_approve_success_show']);
 
 $routes->get('/user-registrations', 'UserRegistration::index', ['filter' => 'auth', 'as' => 'user_registration_index']);
-$routes->get('/user-registrations/filter', 'UserRegistration::indexfiltered', ['filter' => 'auth', 'as' => 'user_registration_index_filtered']);
 $routes->get('/user-registrations/create', 'UserRegistration::create', ['filter' => 'auth', 'as' => 'user_registration_create']);
 $routes->post('/user-registrations/create', 'UserRegistration::store', ['filter' => 'auth', 'as' => 'user_registration_store']);
 $routes->get('/user-registrations/show/(:segment)', 'UserRegistration::show/$1', ['filter' => 'auth', 'as' => 'user_registration_show']);
