@@ -57,11 +57,29 @@ class Organization extends BaseController
 		} catch (Exception $exception) {
 		}
 
+		/* 
+		//Previous code here
 		$response = json_decode($response->getBody(), true);
 
 		$pager = service('pager');
 		$pager->setPath(route_to('organization_index'));
 		$pager->makeLinks($page, static::PER_PAGE, $response['ResponseData']['TotalCount']);
+*/
+
+//to make it work with no data
+//New code here
+$response = (!is_null($response) ) ? json_decode($response->getBody(), true) : $response;
+$pager = service('pager');
+$pager->setPath(route_to('organization_index'));
+
+if(!is_null($response) ){
+    $pager->makeLinks($page, static::PER_PAGE, 0);
+}
+else{
+    $pager->makeLinks($page, static::PER_PAGE, $response['ResponseData']['TotalCount']);
+}
+//replaced
+//Change made ends here
 
 		return view('organizations/index', [
 			'organizations' => $response['ResponseData']['Items'],
