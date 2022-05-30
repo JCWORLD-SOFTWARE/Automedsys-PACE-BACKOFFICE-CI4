@@ -1,4 +1,4 @@
-<?php
+P<?php
 
 namespace Config;
 
@@ -39,10 +39,10 @@ $routes->get('/auth/logout', 'Login::logout', ['as' => 'logout']);
 $routes->get('/auth/login/google/oauth2', 'Login::initiateGoogleOauth2', ['as' => 'initiate_google_oauth']);
 
 //uncomment This before pushing
-//$routes->get('/auth/login/google/oauth2/callback', 'Login::handleGoogleOauth2Callback', ['as' => 'google_oauth_callback2']);
+$routes->get('/auth/login/google/oauth2/callback', 'Login::handleGoogleOauth2Callback', ['as' => 'google_oauth_callback2']);
 
 //comment This before pushing
-$routes->get('/auth/login/google/oauth2/callback', 'Login::handleGoogleOauth2Callback', ['as' => 'google_oauth_callback']);
+//$routes->get('/auth/login/google/oauth2/callback', 'Login::handleGoogleOauth2Callback', ['as' => 'google_oauth_callback']);
 
 $routes->get('/oauth', 'Login::handleGoogleOauth2Callback', ['as' => 'google_oauth_callback']);
 
