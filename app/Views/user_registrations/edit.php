@@ -35,6 +35,7 @@
             </div>
             <div class="portlet-body form">
                 <form action="<?= base_url(route_to('user_registration_update', $user["UniqueId"])); ?>" method="POST" class="form-horizontal">
+                    <input type="hidden" id="UniqueId" value="<?=$user["UniqueId"]?>>" name="UniqueId">
                     <div class="form-body">
                         <div class="form-group">
                             <label class="col-md-3 control-label">Record ID</label>
@@ -190,10 +191,11 @@
             resendNotificationButton.html("Resending <br> notification...").prop("disabled", true);
             resendNotificationResponseContainer.html("");
             var email = $("#email").val();
+            var UniqueId = $("#UniqueId").val();
 
             $.ajax({
                     method: "POST",
-                    url: "/user-registrations/resend-notification/" + email,
+                    url: "/user-registrations/resend-notification/" + UniqueId,
                 })
                 .done(function(data) {
                     resendNotificationResponseContainer.html(`<span class="font-green-jungle">Notification resent successfully!</span>`);
