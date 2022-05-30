@@ -147,6 +147,8 @@
                                 <th>NPI</th>
                                 <th>Affiliated Practice</th>
                                 <th>Email Verified</th>
+                                <th>Date Verified</th>
+                              
                                 <th width="120">Edit / Delete</th>
                             </tr>
                         </thead>
@@ -161,7 +163,16 @@
                                     <td><?= $user["Telephone"] ?></td>
                                     <td><?= $user["ProviderNPI"] ? $user["ProviderNPI"] : "N/A" ?></td>
                                     <td><?= $user["Telephone"] ?></td>
-                                    <td>True</td>
+                                    <td>  <?php
+                                     $esm =  $user["Email_verified"]; 
+                                     if($esm == 1){
+                                         echo "True";
+                                     } else{
+                                        echo "False";
+                                     }  ?>  </td>
+
+                                    <td> <?= $user["Email_verified_dt"] ? $user["Email_verified_dt"] : "N/A"  ?> </td>
+                                    
                                     <td nowrap="">
                                         <a class="btn btn-sm blue" href="<?= base_url(route_to('user_registration_show', $user["UniqueId"])); ?>"><i class="fa fa-eye"></i></a>
                                         <a class="btn btn-sm green" href="<?= base_url(route_to('user_registration_edit', $user["UniqueId"])); ?>"><i class="fa fa-pencil"></i></a>
