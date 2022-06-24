@@ -75,6 +75,7 @@ class PracticeRequest extends BaseController
 		return $this->respond($data);
 	}
 
+	
 	public function approve(string $practiceId)
 	{
 		try {
@@ -121,32 +122,29 @@ class PracticeRequest extends BaseController
 			//exit;
 
 			
-if (isset($approvedPractice['PracticeCode'] ) && $approvedPractice['PracticeCode'] != '' ) {
+			if (isset($approvedPractice['PracticeCode'] ) && $approvedPractice['PracticeCode'] != '' ) {
 
 
-	$client->request(
-		'PUT',
-		"{$apiEndpointsConfig->baseUrl}/paceapi/v1/active/practices/{$approvedPractice['PracticeCode']}/deployment-email",
-		['headers' => ['Authorization' => "Bearer {$token}"]]
-	);
+				$client->request(
+					'PUT',
+					"{$apiEndpointsConfig->baseUrl}/paceapi/v1/active/practices/{$approvedPractice['PracticeCode']}/deployment-email",
+					['headers' => ['Authorization' => "Bearer {$token}"]]
+				);
 
-	//Redirect to the succces page here
-	//$this->showApprovalSuccessJs($approvedPractice);
-	session()->setFlashdata('success', 'Practice deployed successfully');
+				//Redirect to the succces page here
+				//$this->showApprovalSuccessJs($approvedPractice);
+				session()->setFlashdata('success', 'Practice deployed successfully');
 
-	return redirect()->route('practice_request_approve_success_show', [
-	 	base64_encode(json_encode($approvedPractice))
-	 ]);
+				return redirect()->route('practice_request_approve_success_show', [
+					base64_encode(json_encode($approvedPractice))
+				]);
 
-} else {
-	session()->setFlashdata('error', "<pre>{$exception->getMessage()}</pre>");
-			
-	//Redirect to the failure page here
-}
+			} else {
+				session()->setFlashdata('error', "<pre>{$exception->getMessage()}</pre>");
+						
+				//Redirect to the failure page here
+			}
 
-
-	
-			
 		} catch (Exception $exception) {
 			 session()->setFlashdata('error', "<pre>{$exception->getMessage()}</pre>");
 			// return redirect()->back();
@@ -162,6 +160,83 @@ if (isset($approvedPractice['PracticeCode'] ) && $approvedPractice['PracticeCode
 		// 	base64_encode(json_encode($approvedPractice))
 		// ]);
 	}
+
+	public function approveRest(string $practiceId) {
+		$token = ClientAuthenticator::getToken();
+		// $client = new HTTPClient();
+		$apiEndpointsConfig = config('ApiEndpoints');
+
+		$deploymentType = $this->request->getPost('deployment_type');
+		$databaseServerTemplates = AuxPaceClient::getDatabaseServerTemplateList();
+
+		$serverId = "0";
+		$parentTenantId = "0";
+		$databaseServerTemplate = ['server_id' => "0", 'template_id' => "0"];
+
+		if ($deploymentType === "dedicated_server") {
+			$databaseServerTemplate = current(array_filter($databaseServerTemplates, function ($dst) {
+				return (string) $dst['ID'] === $this->request->getPost('template');
+			}));
+
+			if (!$databaseServerTemplate) {
+				session()->setFlashdata('error', "Error fetching database server template");
+				return redirect()->back();
+			}
+		}
+		if ($deploymentType === "dedicated_server") {
+			$serverId = $this->request->getPost('server');
+		} else if ($deploymentType === "co_tenant") {
+			$parentTenantId = $this->request->getPost('parent_practice');
+		}
+		$approvedPractice = AuxPaceClient::approvePractice([
+			'PracticeId' => $practiceId,
+			'ServerId' => $serverId,
+			'ParentTenantId' => $parentTenantId,
+			'DatabaseServerId' => $databaseServerTemplate['server_id'],
+			'DatabaseTemplateId' => $databaseServerTemplate['template_id']
+		]);
+
+		// return $approvedPractice;
+
+		if (isset($approvedPractice['PracticeCode'] ) && $approvedPractice['PracticeCode'] != '' ){
+			
+			//​/paceapi​/v1​/paceaccount​/practices​/approve
+			$url = "{$apiEndpointsConfig->baseUrl}/paceapi/v1/paceaccount/practices/approve";
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, "$url");
+			curl_setopt( $ch, CURLOPT_HTTPHEADER, array(
+					'Content-Type: application/json', // for define content type that is json
+					'Authorization' => "Bearer {$token}",
+					'Content-length: 100' // content length for example 100 characters (can add by strlen($fields))
+				)
+			);
+			curl_setopt($ch, CURLOPT_PUT, true);
+			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
+			// curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //return as a variable
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $approvedPractice);
+			$response = curl_exec($ch);
+			curl_close($ch); 
+
+			// print_r($response);
+
+			session()->setFlashdata('success', 'Practice deployed successfully');
+
+			return redirect()->route('practice_request_approve_success_show', [
+				base64_encode(json_encode($approvedPractice))
+			]);
+		} else {
+			session()->setFlashdata('error', "Cannot allocate port number");
+			return redirect()->back();
+			// return redirect()->route('practice_request_approve_success_show', [
+			// 	base64_encode(json_encode($approvedPractice))
+			// ]);
+		}
+	}
+
+
+
+
+
 
 	public function showApprovalSuccessJs($PracticeData)
 	{
