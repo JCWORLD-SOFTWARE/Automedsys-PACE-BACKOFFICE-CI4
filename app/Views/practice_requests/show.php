@@ -121,7 +121,7 @@
                 </div>
             </div>
             <div class="portlet-body form">
-                <form action="<?= base_url(route_to('practice_request_approve', $application['ID'])) ?>" method="POST" class="horizontal-form">
+                <form action="<?= base_url(route_to('practice_request_approve_rest', $application['ID'])) ?>" method="POST" class="horizontal-form">
                     <div class="form-body">
                         <div class="row">
                             <div class="col-md-12 ">
@@ -183,6 +183,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!--added-->
                         <div id="parent-practices-form-section" class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -194,12 +195,20 @@
                         </div>
                     </div>
                     <div class="form-actions">
+                       
                         <button id="deploy-button" type="submit" class="btn green-jungle">
                             Deploy <i class="fa fa-cloud-upload"></i>
                         </button>
+
                         <button type="button" class="btn red">
                             Cancel <i class="fa fa-times"></i>
                         </button>
+
+                        <button id="deploy-rest" name="deploy-rest" type="submit" class="btn blue">
+                            Deploy REST <i class="fa fa-rocket"></i>
+                        </button>
+
+
                     </div>
                 </form>
             </div>
@@ -266,6 +275,7 @@
         var dedicatedServerFormSections = $('#database-form-section, #servers-form-section');
         var coTenantFormSections = $('#stamps-form-section, #parent-practices-form-section');
         var deployButton = $('#deploy-button');
+        var DeployRest = $('#deploy-rest');
 
         var selectedParentPractice = "";
 
@@ -281,6 +291,8 @@
             }
 
             deployButton.prop("disabled", isValidOptions);
+
+            deployRest.prop("disabled", isValidOptions);
         }
 
         function setPracticesSelectOption(practices) {
